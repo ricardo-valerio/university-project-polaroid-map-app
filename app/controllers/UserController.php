@@ -1,12 +1,49 @@
 <?php
 
-class UserController extends \Phalcon\Mvc\Controller
+class UserController extends ControllerBase
 {
 
-    public function indexAction()
+	/**
+	 * @route public
+	 *
+	 * show user profile
+	 */
+    public function indexAction($name)
     {
 
     }
+
+	/**
+	 * @route private
+	 */
+	public function profileAction()
+	{
+
+	}
+
+	/**
+	 * @route private
+	 */
+	public function accountAction()
+	{
+
+	}
+
+	/**
+	 * @route private
+	 */
+	public function placesAction()
+	{
+
+	}
+
+	/**
+	 * @route private
+	 */
+	public function routesAction()
+	{
+
+	}
 
 }
 

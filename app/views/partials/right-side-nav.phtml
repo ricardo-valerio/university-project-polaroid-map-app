@@ -1,0 +1,28 @@
+<aside class="right-off-canvas-menu">
+	<ul class="off-canvas-list">
+		<?php $USER_FULLNAME = "Ricardo Valério"; ?>
+		<li><label><?php echo $USER_FULLNAME; ?></label></li>
+		<li>
+			<a style="border: 1px solid rgb(38, 38, 38);
+						text-align: center;"
+			   class="th radius"
+			   href="<?php echo $this->url->get("user/profile"); ?>">
+				<?php $USER_EMAIL = "jricvalerio@gmail.com"; ?>
+				<img height="96" width="96"
+				     src="http://www.gravatar.com/avatar/<?php
+					     echo md5(strtolower(trim($USER_EMAIL))); ?>?s=96">
+			</a>
+		</li>
+		<br/><br/>
+		<li style="border-top: 1px solid #262626;"
+		    class="text-center"><?php echo $this->tag->linkTo("user/profile", 'My Profile <i style="margin-left: 12px;" class="fi-price-tag app-icons"></i>'); ?></li>
+		<li class="text-center"><?php echo $this->tag->linkTo("user/places", 'My Places <i style="margin-left: 14px;"  class="fi-marker app-icons"></i>'); ?>
+		</li>
+		<li class="text-center"><?php echo $this->tag->linkTo("user/routes", 'My Routes <i class="fi-map app-icons"></i>'); ?></li>
+		<li class="text-center"><?php echo $this->tag->linkTo("user/following", 'Following <i class="fi-torsos-all-female app-icons"></i>'); ?></li>
+		<li class="text-center"><?php echo $this->tag->linkTo("user/account", 'Manage Account <i class="fi-widget app-icons"></i>'); ?></li>
+		<br/><br/>
+		<li style="border-top: 1px solid #262626;"
+		    class="text-center"><?php echo $this->tag->linkTo("logout", 'Logout <i class="fi-shuffle app-icons"></i>'); ?></li>
+	</ul>
+</aside>

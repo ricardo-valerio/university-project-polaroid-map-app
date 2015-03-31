@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<?php echo $this->tag->getDoctype(); ?>
 <html class="no-js" lang="en">
 <head>
-		<title>Polaroid-Map-App</title>
+		<?php echo $this->tag->getTitle(); ?>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<!--[if lte IE 8]>
@@ -15,7 +15,6 @@
 		<?php echo $this->tag->javascriptInclude("js/vendor/modernizr.js"); ?>
 		<?php echo $this->tag->javascriptInclude("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", false); ?>
 </head>
-
 	<body>
 
 		<?php echo $this->getContent(); ?>

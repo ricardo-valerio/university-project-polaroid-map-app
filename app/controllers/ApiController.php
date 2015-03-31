@@ -1,9 +1,12 @@
 <?php
 
-class ApiController extends \Phalcon\Mvc\Controller
+class ApiController extends ControllerBase
 {
 
-    public function indexAction()
+	/**
+	 * @route private
+	 */
+	public function indexAction()
     {
 	    $this->view->disable();
 

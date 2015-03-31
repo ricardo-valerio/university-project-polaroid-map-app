@@ -3,14 +3,13 @@
 class IndexController extends ControllerBase
 {
 
+	/**
+	 * @route public
+	 */
 	public function indexAction()
 	{
-
-	}
-
-	public function mapAction()
-	{
-
+		$this->view->setTemplateAfter("main");
+		$this->tag->appendTitle(" | IndexController - indexAction");
 	}
 
 }

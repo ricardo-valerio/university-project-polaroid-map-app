@@ -1,14 +1,18 @@
 <?php
 
-class RouteController extends \Phalcon\Mvc\Controller
+class RouteController extends ControllerBase
 {
 
-    public function indexAction()
+	/**
+	 * @route private
+	 */
+	public function indexAction()
     {
 
     }
 
 	/**
+	 * @route private
 	 * criar uma route nova associada a photos
 	 */
 	public function createAction()
@@ -17,8 +21,9 @@ class RouteController extends \Phalcon\Mvc\Controller
 	}
 
 	/**
-	 * route detail
+	 * @route public
 	 *
+	 *  detail route
 	 * @param $id - id da route polaroid
 	 */
 	public function showAction($id)
@@ -26,11 +31,17 @@ class RouteController extends \Phalcon\Mvc\Controller
 
 	}
 
+	/**
+	 * @route private
+	 */
 	public function updateAction($id)
 	{
 
 	}
 
+	/**
+	 * @route private
+	 */
 	public function deleteAction($id)
 	{
 

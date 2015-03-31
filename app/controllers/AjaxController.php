@@ -1,9 +1,12 @@
 <?php
 
-class AjaxController extends \Phalcon\Mvc\Controller
+class AjaxController extends ControllerBase
 {
 
-    public function indexAction()
+	/**
+	 * @route private
+	 */
+	public function indexAction()
     {
 
     }

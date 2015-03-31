@@ -37,10 +37,12 @@ class Security extends Plugin
 
 			//Private area resources
 			$privateResources = array(
-				'companies'    => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'products'     => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'producttypes' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
-				'invoices'     => array('index', 'profile')
+				'ajax'     => array('index'),
+				'api'      => array('index'),
+				'polaroid' => array('index', 'create', 'update', 'delete'),
+				'route'    => array('index', 'create', 'update', 'delete'),
+				'session'  => array('logout'),
+				'user'     => array('profile', 'account', 'places', 'routes')
 			);
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
@@ -48,10 +50,12 @@ class Security extends Plugin
 
 			//Public area resources
 			$publicResources = array(
-				'index'   => array('index'),
-				'about'   => array('index'),
-				'session' => array('index', 'register', 'start', 'end'),
-				'contact' => array('index', 'send')
+				'index'    => array('index'),
+				'find'     => array('index', 'places', 'routes', 'users'),
+				'polaroid' => array('show'),
+				'route'    => array('show'),
+				'session'  => array('index', 'login', 'signUp'),
+				'user'     => array('index')
 			);
 			foreach ($publicResources as $resource => $actions) {
 				$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);

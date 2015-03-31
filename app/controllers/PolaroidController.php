@@ -1,14 +1,19 @@
 <?php
 
-class PolaroidController extends \Phalcon\Mvc\Controller
+class PolaroidController extends ControllerBase
 {
 
-    public function indexAction()
+	/**
+	 * @route private
+	 */
+	public function indexAction()
     {
 
     }
 
 	/**
+	 * @route private
+	 *
 	 * criar uma polaroid nova associada a um place
 	 */
 	public function createAction()
@@ -17,6 +22,8 @@ class PolaroidController extends \Phalcon\Mvc\Controller
 	}
 
 	/**
+	 * @route public
+	 *
 	 * photo detail
 	 *
 	 * @param $id - id da photo polaroid
@@ -26,11 +33,17 @@ class PolaroidController extends \Phalcon\Mvc\Controller
 
 	}
 
+	/**
+	 * @route private
+	 */
 	public function updateAction($id)
 	{
 
 	}
 
+	/**
+	 * @route private
+	 */
 	public function deleteAction($id)
 	{
 

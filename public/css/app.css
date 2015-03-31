@@ -7,3 +7,11 @@ html, body, #map-canvas {
     margin: 0px;
     padding: 0px;
 }
+
+.app-icons {
+    font-size: 25px;
+    float: left;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
