@@ -83,8 +83,8 @@ class Security extends Plugin
 	 */
 	public function beforeDispatch(Event $event, Dispatcher $dispatcher)
 	{
-
 		$auth = $this->session->get('auth');
+
 		if (!$auth) {
 			$role = 'Guests';
 		} else {
@@ -97,14 +97,13 @@ class Security extends Plugin
 		$acl = $this->getAcl();
 
 		$allowed = $acl->isAllowed($role, $controller, $action);
+
 		if ($allowed != Acl::ALLOW) {
 			$this->flash->error("You don't have access to this module");
-			$dispatcher->forward(
-				array(
+			$dispatcher->forward(array(
 					'controller' => 'index',
 					'action'     => 'index'
-				)
-			);
+			));
 
 			return FALSE;
 		}
