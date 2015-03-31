@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+		<title>Polaroid-Map-App</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<!--[if lte IE 8]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<?php echo $this->tag->stylesheetLink("css/foundation.css"); ?>
+		<?php echo $this->tag->stylesheetLink("css/foundation-icons.css"); ?>
+		<?php echo $this->tag->javascriptInclude("js/vendor/modernizr.js"); ?>
+		<?php echo $this->tag->javascriptInclude("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", false); ?>
+
+	<style>
+		html, body, #map-canvas {
+			/* VIEWPORT PERCENTAGES*/
+			/*http://stackoverflow.com/a/25829844*/
+			/*http://www.w3.org/TR/css3-values/#viewport-relative-lengths*/
+			/*http://caniuse.com/#feat=viewport-units*/
+			min-height: 100vh;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.twitter-typeahead .tt-hint {
+			display: block;
+			height: 34px;
+			padding: 6px 12px;
+			font-size: 14px;
+			line-height: 1.428571429;
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+
+		.twitter-typeahead .hint-small {
+			height: 30px;
+			padding: 5px 10px;
+			font-size: 12px;
+			border-radius: 3px;
+			line-height: 1.5;
+		}
+
+		.twitter-typeahead .hint-large {
+			height: 45px;
+			padding: 10px 16px;
+			font-size: 18px;
+			border-radius: 6px;
+			line-height: 1.33;
+		}
+
+		.twitter-typeahead {
+			width: 100%;
+		}
+
+		.tt-dropdown-menu {
+			width: 100%;
+		}
+
+		.tt-hint {
+			width: 100%;
+		}
+
+		.twitter-typeahead .tt-query,
+		.twitter-typeahead .tt-hint {
+			margin-bottom: 0;
+		}
+
+		.tt-hint {
+			display: block;
+			width: 100%;
+			height: 38px;
+			padding: 8px 12px;
+			font-size: 14px;
+			line-height: 1.428571429;
+			color: #999;
+			vertical-align: middle;
+			background-color: #ffffff;
+			border: 1px solid #cccccc;
+			border-radius: 4px;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+			transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		}
+
+		.tt-dropdown-menu {
+			min-width: 160px;
+			margin-top: 2px;
+			padding: 5px 0;
+			background-color: #ffffff;
+			border: 1px solid #cccccc;
+			border: 1px solid rgba(0, 0, 0, 0.15);
+			border-radius: 4px;
+			-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+			background-clip: padding-box;
+
+		}
+
+		.tt-suggestion {
+			display: block;
+			padding: 3px 20px;
+		}
+
+		.tt-suggestion.tt-is-under-cursor {
+			color: #fff;
+			background-color: #428bca;
+		}
+
+		.tt-suggestion.tt-is-under-cursor a {
+			color: #fff;
+		}
+
+		.tt-suggestion p {
+			margin: 0;
+		}
+
+		#users.form-control {
+			border-radius: 0;
+		}
+	</style>
+</head>
+
+	<body>
+
+		<?php echo $this->getContent(); ?>
+
+		<?php echo $this->tag->javascriptInclude("js/vendor/jquery.js"); ?>
+		<?php echo $this->tag->javascriptInclude("js/foundation/foundation.min.js"); ?>
+		<?php echo $this->tag->javascriptInclude("js/app.js"); ?>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>

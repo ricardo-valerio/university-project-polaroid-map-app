@@ -1,0 +1,147 @@
+<div class="off-canvas-wrap docs-wrap move-right" data-offcanvas="">
+	<div class="inner-wrap">
+		<nav class="tab-bar">
+			<section class="left-small">
+				<a aria-expanded="false"
+				   class="left-off-canvas-toggle menu-icon"><span></span></a>
+			</section>
+
+			<section class="middle tab-bar-section">
+					<div class="row collapse">
+						<div class="large-8 small-8 columns">
+							<form class="navbar-form navbar-left" role="search">
+								<div class="form-group">
+									<input style="width: 75%;"
+										   id="search-bar"
+									       type="search"
+									       name="search-bar"
+									       class="form-control"
+									       placeholder="Find people..."/>
+								</div>
+							</form>
+						</div>
+
+	<?php const LOGADO = false; ?>
+
+					<?php if (LOGADO): ?>
+						<div class="large-2 small-4 columns">
+							<a href="#" class="button small success">
+								Upload!</a>
+						</div>
+					<?php else: ?>
+						<div class="large-2 small-4 columns">
+							<a href="<?php echo $this->url->get("login"); ?>" class="button small
+							warning">
+								Login/SignUp!</a>
+						</div>
+					<?php endif ?>
+					</div>
+			</section>
+
+<!--panel para quando o user está logado-->
+		<?php if (LOGADO): ?>
+			<section class="right-small">
+				<a aria-expanded="false"
+				   class="right-off-canvas-toggle menu-icon"><span></span></a>
+			</section>
+		<?php endif ?>
+		</nav>
+
+		<aside class="left-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><label>Last Places</label></li>
+				<li><a href="#">The Psychohistorians</a></li>
+				<li><a href="#">The Mayors</a></li>
+				<li><a href="#">The Traders</a></li>
+				<li><a href="#">The Merchant Princes</a></li>
+				<li><a href="#">The General</a></li>
+				<li><a href="#">The Mule</a></li>
+				<li><a href="#">Search by the Mule</a></li>
+				<li><a href="#">Search by the Foundation</a></li>
+				<li><a href="#">The Merchant Princes</a></li>
+				<li><a href="#">The General</a></li>
+
+				<li><label>Last Routes</label></li>
+				<li><a href="#">The Psychohistorians</a></li>
+				<li><a href="#">The Encyclopedists</a></li>
+				<li><a href="#">The Mayors</a></li>
+				<li><a href="#">The Merchant Princes</a></li>
+				<li><a href="#">The General</a></li>
+				<li><a href="#">The Mule</a></li>
+				<li><a href="#">Search by the Mule</a></li>
+				<li><a href="#">Search by the Foundation</a></li>
+				<li><a href="#">The Merchant Princes</a></li>
+				<li><a href="#">The General</a></li>
+
+				<li><label>Most Liked Polaroids</label></li>
+				<li>
+					<a href="#"><?php echo "The Psychohistorians"; ?>
+						<span data-tooltip aria-haspopup="true"
+						      title="29 likes"
+						      class="right secondary round label has-tip">
+							<?php echo "29"; ?>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#"><?php echo "The Encyclopedists"; ?>
+						<span data-tooltip aria-haspopup="true"
+						      title="19 likes"
+						      class="right secondary round label has-tip">
+						      <?php echo "19"; ?>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#"><?php echo "The Mayors"; ?>
+						<span data-tooltip aria-haspopup="true"
+						      title="12 likes"
+						      class="right secondary round label has-tip">
+							<?php echo "12"; ?>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#"><?php echo "The Merchant Princes"; ?>
+						<span data-tooltip aria-haspopup="true"
+						      title="5 likes"
+						      class="right secondary round label has-tip">
+							<?php echo "5"; ?>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</aside>
+
+<!--para quando o user está logado-->
+	<?php if (LOGADO): ?>
+		<aside class="right-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><label><?php echo "Ricardo Valério"; ?></label></li>
+				<li>
+					<a style="border: 1px solid rgb(38, 38, 38);
+						text-align: center;"
+					   class="th radius"
+					   href="<?php echo $this->url->get("user/profile"); ?>">
+						<img height="96" width="96" src="http://www.gravatar.com/avatar/<?php
+							echo md5(strtolower(trim("jricvalerio@gmail.com
+							"))); ?>?s=96">
+					</a>
+				</li>
+				<li><?php echo $this->tag->linkTo("user/profile", "Profile"); ?></li>
+				<li><?php echo $this->tag->linkTo("user/places", "My Places"); ?></li>
+				<li><?php echo $this->tag->linkTo("user/routes", "My Routes"); ?></li>
+				<li><?php echo $this->tag->linkTo("user/following", "Following"); ?></li>
+				<li><?php echo $this->tag->linkTo("user/account", "Account"); ?></li>
+			</ul>
+		</aside>
+	<?php endif ?>
+
+		<section class="main-section">
+			<div id="map-canvas"></div>
+		</section>
+
+		<!--		<a class="exit-off-canvas"></a>-->
+
+	</div>
+</div>
