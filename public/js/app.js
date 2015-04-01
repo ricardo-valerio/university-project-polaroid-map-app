@@ -21,7 +21,25 @@ function initialize() {
 
     };
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+
+    /**
+     *  é importante que esta variável (map) seja global, isto é, que esteja
+     * definida sem a palvra reservada "var" para permitir mudar
+     * a posição do mapa programaticamente com uma simples chamada
+     * a um dos métodos da API:
+     *
+     * map.setCenter(new google.maps.LatLng(-25.363882,131.044922))
+     *
+     * ou ainda:
+     *
+     * map.panTo(new google.maps.LatLng(-25.363882,131.044922))
+     *
+     * sendo que a ultima das duas faz a meu ver uma pequena animação
+     * no momento da transição para o ponto
+     *
+     * @type {google.maps.Map}
+     */
+    map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
     setMarkers(map, places);
