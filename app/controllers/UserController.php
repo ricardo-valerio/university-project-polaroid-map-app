@@ -63,5 +63,12 @@ class UserController extends ControllerBase
 		$this->view->setTemplateAfter("main");
 
 	}
+
+	public function likedAction()
+	{
+		$this->tag->appendTitle(" | UserController - likedAction");
+		$this->view->setTemplateAfter("main");
+
+	}
 }
 

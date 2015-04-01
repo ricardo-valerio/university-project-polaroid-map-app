@@ -58,6 +58,18 @@
 		"action"     => "routes"
 	));
 
+	$router->add("/i-am-following", array(
+
+		"controller" => "user",
+		"action"     => "following"
+	));
+
+	$router->add("/i-liked", array(
+
+		"controller" => "user",
+		"action"     => "like"
+	));
+
 	$router->add("/logout", array(
 
 		"controller" => "session",

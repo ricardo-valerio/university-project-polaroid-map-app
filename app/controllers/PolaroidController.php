@@ -9,6 +9,8 @@ class PolaroidController extends ControllerBase
 	public function indexAction()
     {
 	    $this->tag->appendTitle(" | PolaroidController - indexAction");
+	    $this->view->setTemplateAfter("main");
+
     }
 
 	/**
@@ -19,6 +21,8 @@ class PolaroidController extends ControllerBase
 	public function createAction()
 	{
 		$this->tag->appendTitle(" | PolaroidController - createAction");
+		$this->view->setTemplateAfter("main");
+
 	}
 
 	/**
@@ -40,6 +44,7 @@ class PolaroidController extends ControllerBase
 	public function updateAction($id = null)
 	{
 		$this->tag->appendTitle(" | PolaroidController - updateAction");
+
 	}
 
 	/**
