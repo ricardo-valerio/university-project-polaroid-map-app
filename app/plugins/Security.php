@@ -37,12 +37,10 @@ class Security extends Plugin
 
 			//Private area resources
 			$privateResources = array(
-				'ajax'     => array('index'),
-				'api'      => array('index'),
 				'polaroid' => array('index', 'create', 'update', 'delete'),
 				'route'    => array('index', 'create', 'update', 'delete'),
 				'session'  => array('logout'),
-				'user'     => array('profile', 'account', 'places', 'routes')
+				'user'     => array('profile', 'account', 'places', 'routes', 'liked', 'following')
 			);
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
@@ -64,7 +62,9 @@ class Security extends Plugin
 			//Grant access to public areas to both users and guests
 			foreach ($roles as $role) {
 				foreach ($publicResources as $resource => $actions) {
-					$acl->allow($role->getName(), $resource, '*');
+					foreach ($actions as $action){
+						$acl->allow($role->getName(), $resource, $action);
+					}
 				}
 			}
 
@@ -78,6 +78,10 @@ class Security extends Plugin
 			//The acl is stored in session, APC would be useful here too
 			$this->persistent->acl = $acl;
 		}
+
+		var_dump($this->persistent->acl);
+
+		die;
 
 		return $this->persistent->acl;
 	}
@@ -103,7 +107,9 @@ class Security extends Plugin
 		$allowed = $acl->isAllowed($role, $controller, $action);
 
 		if ($allowed != Acl::ALLOW) {
-			$this->flashSession->error("You don't have access to this module");
+			$this->flash->error("You don't have access to this module"
+				. $controller . " | " . $action );
+
 			$this->dispatcher->forward(array(
 					'controller' => 'index',
 					'action'     => 'index'
@@ -113,7 +119,6 @@ class Security extends Plugin
 			return false;
 		}
 
-		return;
 	}
 
 }

@@ -44,6 +44,7 @@ $di->set('dispatcher', function () use ($di) {
 $di->set('router', function () {
 
 	$router = new Phalcon\Mvc\Router();
+	$router->removeExtraSlashes(true);
 
 	require 'routes.php';
 
@@ -133,13 +134,13 @@ $di->set('session', function () {
 /**
  * Register the flash service with custom CSS classes
  */
-//$di->set('flash', function () {
-//	return new Phalcon\Flash\Direct(array(
-//		'error'   => 'alert-box alert radius',
-//		'success' => 'alert-box success radius',
-//		'notice'  => 'alert-box info radius'
-//	));
-//});
+$di->set('flash', function () {
+	return new Phalcon\Flash\Direct(array(
+		'error'   => 'alert-box alert radius',
+		'success' => 'alert-box success radius',
+		'notice'  => 'alert-box info radius'
+	));
+});
 
 /**
  * Registar o flashSession para poder guardar flash messagens entre requests

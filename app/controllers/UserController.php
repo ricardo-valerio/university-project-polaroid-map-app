@@ -6,7 +6,7 @@ class UserController extends ControllerBase
 	/**
 	 * @route public
 	 *
-	 * show user profile
+	 * show user profile for other users
 	 */
     public function indexAction($name = null)
     {
@@ -21,7 +21,7 @@ class UserController extends ControllerBase
 	public function profileAction()
 	{
 		$this->tag->appendTitle(" | UserController - profileAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 
 	}
 
@@ -31,7 +31,7 @@ class UserController extends ControllerBase
 	public function accountAction()
 	{
 		$this->tag->appendTitle(" | UserController - accountAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 
 	}
 
@@ -41,7 +41,7 @@ class UserController extends ControllerBase
 	public function placesAction()
 	{
 		$this->tag->appendTitle(" | UserController - placesAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 
 	}
 
@@ -51,7 +51,7 @@ class UserController extends ControllerBase
 	public function routesAction()
 	{
 		$this->tag->appendTitle(" | UserController - routesAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 	}
 
 	/**
@@ -60,14 +60,14 @@ class UserController extends ControllerBase
 	public function followingAction()
 	{
 		$this->tag->appendTitle(" | UserController - followingAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 
 	}
 
 	public function likedAction()
 	{
 		$this->tag->appendTitle(" | UserController - likedAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("user-main");
 
 	}
 }

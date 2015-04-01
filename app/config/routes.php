@@ -67,7 +67,7 @@
 	$router->add("/i-liked", array(
 
 		"controller" => "user",
-		"action"     => "like"
+		"action"     => "liked"
 	));
 
 	$router->add("/logout", array(
