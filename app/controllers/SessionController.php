@@ -42,9 +42,9 @@
 			}
 
 			$this->flashSession->error('Wrong email/password');
-			return $this->response->redirect("sign-in-up");
+			return $this->response->redirect("/sign-in-up");
 		}
-		return $this->response->redirect("sign-in-up");
+		return $this->response->redirect("/sign-in-up");
 	}
 
 	/**
@@ -65,8 +65,11 @@
 	 */
 	public function logoutAction()
 	{
-		$this->session->remove('auth');
-		return $this->response->redirect("");
+		if ($this->session->has("auth")) {
+			$this->session->remove('auth');
+			return $this->response->redirect("");
+		}
+		return $this->response->redirect("/sign-in-up");
 	}
 
 	/**
@@ -113,7 +116,7 @@
 				$this->flashSession->success('Thanks for sign-up, please log-in to
 				start creating polaroids!');
 
-				return $this->response->redirect("sign-in-up");
+				return $this->response->redirect("/sign-in-up");
 			}
 		}
 

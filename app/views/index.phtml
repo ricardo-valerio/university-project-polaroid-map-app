@@ -7,22 +7,22 @@
 		<!--[if lte IE 8]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<?php echo $this->tag->stylesheetLink("css/normalize.css"); ?>
-		<?php echo $this->tag->stylesheetLink("css/foundation.css"); ?>
-		<?php echo $this->tag->stylesheetLink("css/foundation-icons.css"); ?>
-		<?php echo $this->tag->stylesheetLink("css/app.css"); ?>
+		<?php echo $this->tag->stylesheetLink("/css/normalize.css"); ?>
+		<?php echo $this->tag->stylesheetLink("/css/foundation.css"); ?>
+		<?php echo $this->tag->stylesheetLink("/css/foundation-icons.css"); ?>
+		<?php echo $this->tag->stylesheetLink("/css/app.css"); ?>
 
-		<?php echo $this->tag->javascriptInclude("js/vendor/modernizr.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/vendor/modernizr.js"); ?>
 		<?php echo $this->tag->javascriptInclude("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", false); ?>
 </head>
 	<body>
 
 		<?php echo $this->getContent(); ?>
 
-		<?php echo $this->tag->javascriptInclude("js/vendor/jquery.js"); ?>
-		<?php echo $this->tag->javascriptInclude("js/foundation/foundation.min.js"); ?>
-		<?php echo $this->tag->javascriptInclude("js/foundation/foundation.abide.js"); ?>
-		<?php echo $this->tag->javascriptInclude("js/app.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/vendor/jquery.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.min.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.abide.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/app.js"); ?>
 		<script>
 			$(document).foundation();
 		</script>

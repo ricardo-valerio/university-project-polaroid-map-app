@@ -6,14 +6,33 @@ class UserController extends ControllerBase
 	/**
 	 * @route public
 	 *
-	 * show user profile for other users
+	 * list all public people online
 	 */
-    public function indexAction($name = null)
+    public function indexAction()
     {
 	    $this->tag->appendTitle(" | UserController - indexAction");
 	    $this->view->setTemplateAfter("main");
-
     }
+
+	/**
+	 * @route public
+	 *
+	 * show user profile for other users
+	 */
+	public function showAction($user_id = NULL, $user_name = NULL)
+	{
+		$this->tag->appendTitle(" | UserController - indexAction");
+		$this->view->setTemplateAfter("main");
+
+		if ($user_id != NULL && is_int((int)$user_id)) {
+//			$this->view->setVar("user_id", $user_id);
+			$this->view->setVar("user_id", $this->dispatcher->getParam("user_id", "int"));
+			if ($user_name != NULL && is_string($user_name)) {
+//			    $this->view->setVar("user_name", $user_name);
+				$this->view->setVar("user_name", $this->dispatcher->getParam("user_name", "string"));
+			}
+		}
+	}
 
 	/**
 	 * @route private

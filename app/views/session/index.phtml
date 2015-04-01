@@ -4,13 +4,13 @@
 
 <ul class="breadcrumbs">
 	<li><a href="<?php echo $this->url->get(""); ?>">Home</a></li>
-	<li class="current"><a href="#">Sign In/ SignUp</a></li>
+	<li class="current"><a href="#">Sign In | SignUp</a></li>
 </ul>
 
 <div class="row">
 	<div class="small-6 columns">
 		<h2>Login</h2>
-		<?php echo $this->tag->form(array('session/login', "method" => "post")); ?>
+		<?php echo $this->tag->form(array('/session/login', "method" => "post")); ?>
 			<fieldset>
 				<label>Email/Username:
 					<input type="text"
@@ -42,8 +42,12 @@
 			<li>Advantage C</li>
 		</ul>
 		<div class="text-center">
-			<?php echo $this->tag->linkTo(array('sign-up', 'Sign Up!',
-			                                    'class' => 'button small success')); ?>
+			<?php echo $this->tag->linkTo(array(
+							'/sign-up',
+							'Sign Up!',
+							'class' => 'button small success'
+						));
+			?>
 		</div>
 	</div>
 </div>

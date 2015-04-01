@@ -9,7 +9,8 @@
 
 		"controller" => "index",
 		"action"     => "index"
-	));
+	))->setName("root");;
+
 
 	$router->add("/sign-in-up", array(
 
@@ -31,9 +32,28 @@
 
 
 	/***********************************************
-	 *  ROUTES PRIVADAS PARA OS USERS
+	 *  ROUTES PÚBLICAS PARA OS USERS
 	 ***********************************************/
 
+	$router->add("/people-online",
+		array(
+			"controller" => "user",
+			"action"     => "index"
+		)
+	);
+
+	$router->add("/user/:int/:params",
+		array(
+			"controller" => "user",
+			"action"     => "show",
+			"user_id"    => 1,
+			"user_name"  => 2
+		)
+	);
+
+	/***********************************************
+	 *  ROUTES PRIVADAS PARA OS USERS
+	 ***********************************************/
 	$router->add("/my-profile", array(
 
 		"controller" => "user",

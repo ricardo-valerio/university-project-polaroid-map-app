@@ -45,14 +45,16 @@
 			<?php $this->partial("partials/left-side-nav"); ?>
 		</aside>
 
-		<!--para quando o user está logado-->
+
 		<?php if ($LOGADO): ?>
 			<?php $this->partial("partials/right-side-nav"); ?>
 		<?php endif ?>
 
+
 		<section class="main-section">
 			<?php echo $this->getContent(); ?>
 		</section>
+
 
 		<!--		<a class="exit-off-canvas"></a>-->
 

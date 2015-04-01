@@ -39,7 +39,6 @@ class Security extends Plugin
 			$privateResources = array(
 				'polaroid' => array('index', 'create', 'update', 'delete'),
 				'route'    => array('index', 'create', 'update', 'delete'),
-				'session'  => array('logout'),
 				'user'     => array('profile', 'account', 'places', 'routes', 'liked', 'following')
 			);
 			foreach ($privateResources as $resource => $actions) {
@@ -48,17 +47,24 @@ class Security extends Plugin
 
 			//Public area resources
 			$publicResources = array(
+				'polaroid-map-app'    => array('index'),
 				'index'    => array('index'),
 				'find'     => array('index', 'places', 'routes', 'users'),
 				'polaroid' => array('show'),
 				'route'    => array('show'),
-				'session'  => array('index', 'login', 'signUp'),
-				'user'     => array('index')
+				'session'  => array('index', 'login', 'signUp', 'logout'),
+				'user'     => array('index', 'show')
 			);
 			foreach ($publicResources as $resource => $actions) {
 				$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
 			}
 
+			/**
+			 * finalmente consegui resolver o problema das permissões
+			 *
+			 * http://forum.phalconphp.com/discussion/2315/acl-problem
+			 *
+			 */
 			//Grant access to public areas to both users and guests
 			foreach ($roles as $role) {
 				foreach ($publicResources as $resource => $actions) {
@@ -79,9 +85,9 @@ class Security extends Plugin
 			$this->persistent->acl = $acl;
 		}
 
-		var_dump($this->persistent->acl);
-
-		die;
+//		var_dump($this->persistent->acl);
+//
+//		die;
 
 		return $this->persistent->acl;
 	}
@@ -107,13 +113,15 @@ class Security extends Plugin
 		$allowed = $acl->isAllowed($role, $controller, $action);
 
 		if ($allowed != Acl::ALLOW) {
-			$this->flash->error("You don't have access to this module"
+			$this->flashSession->error("You don't have access to this module "
 				. $controller . " | " . $action );
 
-			$this->dispatcher->forward(array(
-					'controller' => 'index',
-					'action'     => 'index'
-			));
+//			$this->dispatcher->forward(array(
+//					'controller' => 'index',
+//					'action'     => 'index'
+//			));
+
+			$this->response->redirect("/sign-in-up");
 
 			//Returning "false" we tell to the dispatcher to stop the current operation
 			return false;
