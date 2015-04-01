@@ -42,12 +42,13 @@
 		)
 	);
 
-	$router->add("/user/:int/:params",
+	// user/123
+	// user/123/rivalerio23
+	$router->add("/user/{user_id}/:params",
 		array(
 			"controller" => "user",
 			"action"     => "show",
-			"user_id"    => 1,
-			"user_name"  => 2
+			"params"     => 1
 		)
 	);
 

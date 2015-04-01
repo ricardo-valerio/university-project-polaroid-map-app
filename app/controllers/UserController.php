@@ -19,18 +19,15 @@ class UserController extends ControllerBase
 	 *
 	 * show user profile for other users
 	 */
-	public function showAction($user_id = NULL, $user_name = NULL)
+	public function showAction()
 	{
 		$this->tag->appendTitle(" | UserController - indexAction");
 		$this->view->setTemplateAfter("main");
 
-		if ($user_id != NULL && is_int((int)$user_id)) {
-//			$this->view->setVar("user_id", $user_id);
-			$this->view->setVar("user_id", $this->dispatcher->getParam("user_id", "int"));
-			if ($user_name != NULL && is_string($user_name)) {
-//			    $this->view->setVar("user_name", $user_name);
-				$this->view->setVar("user_name", $this->dispatcher->getParam("user_name", "string"));
-			}
+		$user_id = $this->dispatcher->getParam("user_id", "int");
+
+		if ($user_id != NULL) {
+			$this->view->setVar("user_id", $user_id);
 		}
 	}
 
