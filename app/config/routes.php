@@ -98,7 +98,7 @@
 	 *  ROUTES PRIVADAS PARA POLAROIDS
 	 ***********************************************/
 
-	$router->add("/create/polaroid", array(
+	$router->add("/create-polaroid", array(
 
 		"controller" => "polaroid",
 		"action"     => "create"

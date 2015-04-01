@@ -36,7 +36,6 @@ class UserController extends ControllerBase
 			return $this->response->redirect("/people-online");
 		}
 
-
 	}
 
 	/**
