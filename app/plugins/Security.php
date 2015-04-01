@@ -68,7 +68,7 @@ class Security extends Plugin
 				}
 			}
 
-			//Grant acess to private area to role Users
+			//Grant access to private area to role Users
 			foreach ($privateResources as $resource => $actions) {
 				foreach ($actions as $action) {
 					$acl->allow('Users', $resource, $action);
@@ -103,15 +103,17 @@ class Security extends Plugin
 		$allowed = $acl->isAllowed($role, $controller, $action);
 
 		if ($allowed != Acl::ALLOW) {
-			$this->flash->error("You don't have access to this module");
-			$dispatcher->forward(array(
+			$this->flashSession->error("You don't have access to this module");
+			$this->dispatcher->forward(array(
 					'controller' => 'index',
 					'action'     => 'index'
 			));
 
-			return FALSE;
+			//Returning "false" we tell to the dispatcher to stop the current operation
+			return false;
 		}
 
+		return;
 	}
 
 }

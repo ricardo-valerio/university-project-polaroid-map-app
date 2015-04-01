@@ -8,7 +8,7 @@ class PolaroidController extends ControllerBase
 	 */
 	public function indexAction()
     {
-
+	    $this->tag->appendTitle(" | PolaroidController - indexAction");
     }
 
 	/**
@@ -18,7 +18,7 @@ class PolaroidController extends ControllerBase
 	 */
 	public function createAction()
 	{
-
+		$this->tag->appendTitle(" | PolaroidController - createAction");
 	}
 
 	/**
@@ -28,25 +28,26 @@ class PolaroidController extends ControllerBase
 	 *
 	 * @param $id - id da photo polaroid
 	 */
-	public function showAction($id)
+	public function showAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | PolaroidController - showAction");
+		$this->view->setTemplateAfter("main");
 	}
 
 	/**
 	 * @route private
 	 */
-	public function updateAction($id)
+	public function updateAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | PolaroidController - updateAction");
 	}
 
 	/**
 	 * @route private
 	 */
-	public function deleteAction($id)
+	public function deleteAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | PolaroidController - deleteAction");
 	}
 }
 

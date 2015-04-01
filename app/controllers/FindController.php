@@ -8,8 +8,8 @@ class FindController extends ControllerBase
 	 */
 	public function indexAction()
     {
-		$this->view->setTemplateAfter("main");
 	    $this->tag->appendTitle(" | FindController - indexAction");
+	    $this->view->setTemplateAfter("main");
     }
 
 	/**
@@ -17,6 +17,8 @@ class FindController extends ControllerBase
 	 */
 	public function placesAction()
 	{
+		$this->tag->appendTitle(" | FindController - placesAction");
+		$this->view->setTemplateAfter("main");
 
 	}
 
@@ -25,7 +27,8 @@ class FindController extends ControllerBase
 	 */
 	public function routesAction()
 	{
-
+		$this->tag->appendTitle(" | FindController - routesAction");
+		$this->view->setTemplateAfter("main");
 	}
 
 	/**
@@ -33,7 +36,8 @@ class FindController extends ControllerBase
 	 */
 	public function usersAction()
 	{
-
+		$this->tag->appendTitle(" | FindController - usersAction");
+		$this->view->setTemplateAfter("main");
 	}
 }
 

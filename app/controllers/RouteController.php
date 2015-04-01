@@ -8,7 +8,7 @@ class RouteController extends ControllerBase
 	 */
 	public function indexAction()
     {
-
+	    $this->tag->appendTitle(" | RouteController - indexAction");
     }
 
 	/**
@@ -17,7 +17,7 @@ class RouteController extends ControllerBase
 	 */
 	public function createAction()
 	{
-
+		$this->tag->appendTitle(" | RouteController - createAction");
 	}
 
 	/**
@@ -26,25 +26,26 @@ class RouteController extends ControllerBase
 	 *  detail route
 	 * @param $id - id da route polaroid
 	 */
-	public function showAction($id)
+	public function showAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | RouteController - showAction");
+		$this->view->setTemplateAfter("main");
 	}
 
 	/**
 	 * @route private
 	 */
-	public function updateAction($id)
+	public function updateAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | RouteController - updateAction");
 	}
 
 	/**
 	 * @route private
 	 */
-	public function deleteAction($id)
+	public function deleteAction($id = null)
 	{
-
+		$this->tag->appendTitle(" | RouteController - deleteAction");
 	}
 }
 

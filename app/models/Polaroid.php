@@ -15,4 +15,10 @@ class Polaroid extends \Phalcon\Mvc\Model
      */
     public $polaroid;
 
+    /**
+     *
+     * @var integer
+     */
+    public $number_of_likes;
+
 }

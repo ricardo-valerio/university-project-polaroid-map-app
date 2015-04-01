@@ -1,0 +1,51 @@
+<div class="fixed">
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name"><h1><?php echo $this->tag->linkTo("", "Polaroid
+			Map App"); ?></h1></li>
+<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+			<li class="toggle-topbar menu-icon"><a
+					href="#"><span></span></a></li>
+		</ul>
+		<section class="top-bar-section">
+			<!-- Right Nav Section -->
+			<ul class="right">
+				<li class="active"><?php echo $this->tag->linkTo("", "Go to
+				the map!"); ?></li>
+				<li><a data-reveal-id="aboutModal" href="#">About</a></li>
+			</ul>
+		</section>
+	</nav>
+</div>
+
+<!-- Reveal Modals begin -->
+<div id="aboutModal" class="reveal-modal" data-reveal
+     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+	<h2 id="firstModalTitle">This is a modal.</h2>
+
+	<p>Reveal makes these very easy to summon and dismiss. The close button is
+	   simply an anchor with a unicode character icon and a class of <code>close-reveal-modal</code>.
+	   Clicking anywhere outside the modal will also dismiss it.</p>
+
+	<p>Finally, if your modal summons another Reveal modal, the plugin will
+	   handle that for you gracefully.</p>
+
+	<p><a href="#" data-reveal-id="moreInfoModal" class="secondary
+	button">Second Modal...</a>
+	</p>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="moreInfoModal" class="reveal-modal" data-reveal
+     aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
+	<h2 id="secondModalTitle">This is a second modal.</h2>
+
+	<p>See? It just slides into place after the other first modal. Very handy
+	   when you need subsequent dialogs, or when a modal option impacts or
+	   requires another decision.</p>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+
+<?php echo $this->getContent(); ?>
+

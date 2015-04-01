@@ -1,7 +1,5 @@
 <?php
 
-	$router = new Phalcon\Mvc\Router();
-
 	/***********************************************
 	 *  ROUTES PÚBLICAS
 	 ***********************************************/
@@ -19,49 +17,17 @@
 		"action"     => "index"
 	));
 
-	$router->add("/login", array(
-
-		"controller" => "session",
-		"action"     => "login"
-	));
-
 	$router->add("/sign-up", array(
 
 		"controller" => "session",
 		"action"     => "signUp"
 	));
 
-
-	// Exemplos:
-	//            /find/places
-	//            /find/routes
-	//            /find/users
-
-	$router->add("/find/:action", array(
+	$router->add("/find", array(
 
 		"controller" => "find",
-		"action"     => 2
+		"action"     => "index"
 	));
-
-	// Exemplos:
-	//            /find/places/<country>
-	//            /find/places/<city>
-	//            /find/places/<user-name>
-
-	//            /find/routes/<country>
-	//            /find/routes/<city>
-	//            /find/routes/<user-name>
-
-	//            /find/users/<country>
-	//            /find/users/<city>
-
-	$router->add("/find/:action/:params", array(
-
-			"controller" => "find",
-			"action"     => 2,
-			"params"     => 3
-	));
-
 
 
 	/***********************************************

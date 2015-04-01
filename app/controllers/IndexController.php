@@ -8,8 +8,9 @@ class IndexController extends ControllerBase
 	 */
 	public function indexAction()
 	{
-		$this->view->setTemplateAfter("main");
 		$this->tag->appendTitle(" | IndexController - indexAction");
+		$this->view->setTemplateAfter("main");
+
 	}
 
 }

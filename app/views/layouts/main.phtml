@@ -1,4 +1,7 @@
-<div class="off-canvas-wrap docs-wrap move-right" data-offcanvas="">
+<?php $LOGADO = $this->session->has("auth"); ?>
+
+<div class="off-canvas-wrap docs-wrap move-right"
+     data-offcanvas="">
 	<div class="inner-wrap">
 		<nav class="tab-bar">
 			<section class="left-small">
@@ -22,9 +25,7 @@
 						</form>
 					</div>
 
-					<?php const LOGADO = FALSE; ?>
-
-					<?php if (LOGADO): ?>
+					<?php if ($LOGADO): ?>
 						<?php $this->partial("partials/create-polaroid-button"); ?>
 					<?php else: ?>
 						<?php $this->partial("partials/sign-in-up-button"); ?>
@@ -32,8 +33,7 @@
 				</div>
 			</section>
 
-			<!--panel para quando o user está logado-->
-			<?php if (LOGADO): ?>
+			<?php if ($LOGADO): ?>
 				<section class="right-small">
 					<a aria-expanded="false"
 					   class="right-off-canvas-toggle menu-icon"><span></span></a>
@@ -46,7 +46,7 @@
 		</aside>
 
 		<!--para quando o user está logado-->
-		<?php if (LOGADO): ?>
+		<?php if ($LOGADO): ?>
 			<?php $this->partial("partials/right-side-nav"); ?>
 		<?php endif ?>
 

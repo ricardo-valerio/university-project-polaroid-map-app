@@ -5,8 +5,12 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+
+
+error_reporting(E_ALL);
+
+try {
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -14,10 +18,39 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 $di = new FactoryDefault();
 
 /**
+ * We register the events manager
+ */
+$di->set('dispatcher', function () use ($di) {
+
+	$eventsManager = $di->getShared('eventsManager');
+
+	$security = new Security($di);
+
+	/**
+	 * We listen for events in the dispatcher using the Security plugin
+	 */
+	$eventsManager->attach('dispatch', $security);
+
+	$dispatcher = new Phalcon\Mvc\Dispatcher();
+	$dispatcher->setEventsManager($eventsManager);
+
+	return $dispatcher;
+
+});
+
+/**
  * Load router from external file
  */
 $di->set('router', function () {
+
+	$router = new Phalcon\Mvc\Router();
+
 	require 'routes.php';
+
+	// Use $_SERVER['REQUEST_URI'] (NGINX)
+	if (!isset($_GET['_url'])) {
+		$router->setUriSource(Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI);
+	}
 
 	return $router;
 });
@@ -72,12 +105,19 @@ $di->set('db', function () use ($config) {
     ));
 });
 
-/**
- * If the configuration specify the use of metadata adapter use it or use memory otherwise
- */
-$di->set('modelsMetadata', function () {
-    return new MetaDataAdapter();
-});
+	/**
+	 * If the configuration specify the use of metadata adapter use it or use memory otherwise
+	 */
+	$di->set('modelsMetadata', function () use ($config) {
+		if (isset($config->models->metadata)) {
+			$metaDataConfig  = $config->models->metadata;
+			$metadataAdapter = 'Phalcon\Mvc\Model\Metadata\\' . $metaDataConfig->adapter;
+
+			return new $metadataAdapter();
+		}
+
+		return new Phalcon\Mvc\Model\Metadata\Memory();
+	});
 
 /**
  * Start the session the first time some component request the session service
@@ -91,40 +131,29 @@ $di->set('session', function () {
 
 
 /**
- * We register the events manager
+ * Register the flash service with custom CSS classes
  */
-$di->set('dispatcher', function () use ($di) {
+//$di->set('flash', function () {
+//	return new Phalcon\Flash\Direct(array(
+//		'error'   => 'alert-box alert radius',
+//		'success' => 'alert-box success radius',
+//		'notice'  => 'alert-box info radius'
+//	));
+//});
 
-	$eventsManager = $di->getShared('eventsManager');
-
-	$security = new Security($di);
-
-	/**
-	 * We listen for events in the dispatcher using the Security plugin
-	 */
-	$eventsManager->attach('dispatch', $security);
-
-	$dispatcher = new Phalcon\Mvc\Dispatcher();
-	$dispatcher->setEventsManager($eventsManager);
-
-	return $dispatcher;
+/**
+ * Registar o flashSession para poder guardar flash messagens entre requests
+ */
+$di->set('flashSession', function () {
+	return new \Phalcon\Flash\Session(array(
+     'error'   => 'alert-box alert radius',
+     'success' => 'alert-box success radius',
+     'notice'  => 'alert-box info radius'
+ ));
 });
 
-
-	/**
-	 * Register the flash service with custom CSS classes
-	 */
-	$di->set('flash', function () {
-		return new Phalcon\Flash\Direct(array(
-			'error'   => 'alert-box alert radius',
-			'success' => 'alert-box success radius',
-			'notice'  => 'alert-box info radius'
-		));
-	});
-
-	/**
-	 * Register a user component
-	 */
-	$di->set('elements', function () {
-		return new Elements();
-	});
+} catch (Phalcon\Exception $e) {
+	echo $e->getMessage();
+} catch (PDOException $e){
+	echo $e->getMessage();
+}
