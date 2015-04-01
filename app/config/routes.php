@@ -4,13 +4,12 @@
 	 *  ROUTES PÚBLICAS
 	 ***********************************************/
 
-	// root
+	// root route
 	$router->add("/", array(
 
 		"controller" => "index",
 		"action"     => "index"
 	))->setName("root");;
-
 
 	$router->add("/sign-in-up", array(
 
@@ -31,10 +30,6 @@
 	));
 
 
-	/***********************************************
-	 *  ROUTES PÚBLICAS PARA OS USERS
-	 ***********************************************/
-
 	$router->add("/people-online",
 		array(
 			"controller" => "user",
@@ -53,8 +48,9 @@
 	);
 
 	/***********************************************
-	 *  ROUTES PRIVADAS PARA OS USERS
+	 *  ROUTES PRIVADAS PARA USERS
 	 ***********************************************/
+
 	$router->add("/my-profile", array(
 
 		"controller" => "user",
@@ -109,7 +105,7 @@
 	));
 
 	/***********************************************
-	 *  ROUTES PRIVADAS PARA  ROUTES
+	 *  ROUTES PRIVADAS PARA ROUTES
 	 ***********************************************/
 
 	$router->add("/create/route", array(

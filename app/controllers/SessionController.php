@@ -86,8 +86,8 @@
 			&& $this->security->checkToken()) {
 
 			$name           = $this->request->getPost('user_full_name', array('string', 'striptags'));
-			$username       = $this->request->getPost('user_name', 'alphanum');
-			$email          = $this->request->getPost('user_email', 'email');
+			$username       = $this->request->getPost('user_name', array('striptags', 'alphanum'));
+			$email          = $this->request->getPost('user_email', array('lower', 'email'));
 			$password       = $this->request->getPost('user_password');
 			$repeatPassword = $this->request->getPost('user_password_confirmation');
 			
@@ -95,7 +95,6 @@
 
 			if ($password != $repeatPassword) {
 				$this->flashSession->error('Passwords are different');
-
 				return false;
 			}
 

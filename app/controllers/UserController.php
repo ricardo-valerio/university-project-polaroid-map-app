@@ -26,9 +26,17 @@ class UserController extends ControllerBase
 
 		$user_id = $this->dispatcher->getParam("user_id", "int");
 
-		if ($user_id != NULL) {
-			$this->view->setVar("user_id", $user_id);
+		if ($user_id != NULL)
+		{
+			return $this->view->setVar("user_id", $user_id);
+
+		}else
+		{
+			$this->flashSession->error("O id não existe ou não é válido");
+			return $this->response->redirect("/people-online");
 		}
+
+
 	}
 
 	/**
