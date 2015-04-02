@@ -23,13 +23,6 @@
 		"action"     => "signUp"
 	));
 
-	$router->add("/find", array(
-
-		"controller" => "find",
-		"action"     => "index"
-	));
-
-
 	$router->add("/people-online",
 		array(
 			"controller" => "user",
@@ -108,7 +101,7 @@
 	 *  ROUTES PRIVADAS PARA ROUTES
 	 ***********************************************/
 
-	$router->add("/create/route", array(
+	$router->add("/create-route", array(
 
 		"controller" => "route",
 		"action"     => "create"

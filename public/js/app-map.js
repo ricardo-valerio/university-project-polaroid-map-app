@@ -6,7 +6,7 @@ function initialize() {
         mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.LEFT_BOTTOM
+            position: google.maps.ControlPosition.TOP_LEFT
         },
         zoomControl: true,
         zoomControlOptions: {
@@ -28,24 +28,27 @@ function initialize() {
      * a posição do mapa programaticamente com uma simples chamada
      * a um dos métodos da API:
      *
-     * map.setCenter(new google.maps.LatLng(-25.363882,131.044922))
+     * map.setCenter(new google.maps.LatLng(-25.363882,131.044922));
      *
      * ou ainda:
      *
-     * map.panTo(new google.maps.LatLng(-25.363882,131.044922))
+     * map.panTo(new google.maps.LatLng(-25.363882,131.044922));
      *
      * sendo que a ultima das duas faz a meu ver uma pequena animação
      * no momento da transição para o ponto
      *
+     * foi ainda alterada para ter o prefixo "window"
+     * http://stackoverflow.com/questions/4862193/javascript-global-variables
+     *
      * @type {google.maps.Map}
      */
-    map = new google.maps.Map(document.getElementById('map-canvas'),
+    window.map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
     setMarkers(map, places);
 }
 
-
+// substituir este objecto por uma chamada JSON ao Apicontroller
 var places = [
     ['Torre de Belém',
         38.691584,
