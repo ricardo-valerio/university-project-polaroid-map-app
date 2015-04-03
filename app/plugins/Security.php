@@ -48,7 +48,7 @@ class Security extends Plugin
 			//Public area resources
 			$publicResources = array(
 				'polaroid-map-app'    => array('index'),
-				'api'      => array('places', 'routes', 'likes', 'map'),
+				'api'      => array('places', 'routes', 'polaroidsLikes', 'routesLikes', 'map', 'tests'),
 				'index'    => array('index'),
 				'find'     => array('index', 'places', 'routes', 'users'),
 				'polaroid' => array('show'),

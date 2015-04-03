@@ -15,19 +15,21 @@ class ApiController extends ControllerBase
 		if ($this->request->hasQuery("country")) {
 			$country   = $this->request->getQuery("country", "string");
 			// TODO: bind params
-			$places = Places::find("country = '$country'");
+			$places = Polaroids::find("country = '$country'");
 		}else{
-			$places = Places::find(array(
-				"order" => "datetime_added DESC"
+			$places = Polaroids::find(array(
+				"order" => "datetime_created DESC"
 //				"limit" => 5
 			));
 		}
 
 		foreach($places as $place) {
 		    $data[] = array(
-			    'place'  => $place->place,
-			    'lat'    => $place->lat,
-			    'lon'    => $place->lon
+			    'id'           => $place->id,
+			    'title'        => $place->title,
+			    'lat'          => $place->lat,
+			    'lon'          => $place->lon,
+			    'description'  => $place->description
 		    );
 		}
 
@@ -40,22 +42,23 @@ class ApiController extends ControllerBase
 
 		foreach ($routes as $route) {
 			$data[] = array(
-				'id'    => $route->id,
-				'route' => $route->route
+				'id'          => $route->id,
+				'title'       => $route->title,
+				'description' => $route->description
 			);
 		}
 
 		echo json_encode($data);
 	}
 
-	public function likesAction()
+	public function polaroidsLikesAction()
 	{
-		$polaroids = Polaroid::find();
+		$polaroids = Polaroids::find();
 
 		foreach ($polaroids as $polaroid) {
 			$data[] = array(
 				'id'              => $polaroid->id,
-				'polaroid'        => $polaroid->polaroid,
+				'title'           => $polaroid->title,
 				'number_of_likes' => $polaroid->number_of_likes
 			);
 		}
@@ -63,9 +66,25 @@ class ApiController extends ControllerBase
 		echo json_encode($data);
 	}
 
+	public function routesLikesAction()
+	{
+		$routes = Routes::find();
+
+		foreach ($routes as $route) {
+			$data[] = array(
+				'id'              => $route->id,
+				'title'           => $route->title,
+				'number_of_likes' => $route->number_of_likes
+			);
+		}
+
+		echo json_encode($data);
+	}
+
+
 	public function mapAction()
 	{
-		$places = Places::find(array(
+		$places = Polaroids::find(array(
 			"group" => "lat_lon_id"
 		));
 
@@ -78,7 +97,7 @@ class ApiController extends ControllerBase
 					"lon"     => $place->lon,
 					"country" => $place->country
 				),
-				"photo_places" => $this->getPhotoPlacesOfGivenLatLongId($place->lat_lon_id)
+				"polaroids" => $this->getPolaroidsOfGivenLatLongId($place->lat_lon_id)
 			);
 
 		}
@@ -90,18 +109,23 @@ class ApiController extends ControllerBase
 	 * @return array com os places das photos relativamente
 	 * à lat_lon_id passada como argumento
 	 */
-	private function getPhotoPlacesOfGivenLatLongId($id)
+	private function getPolaroidsOfGivenLatLongId($id)
 	{
-		foreach (Places::find("lat_lon_id = '$id'") as $p) {
+		foreach (Polaroids::find("lat_lon_id = '$id'") as $p) {
 			$array[] = array(
-				"id"                => $p->id,
-				"place"             => $p->place,
-				"place_image"       => $p->image_hash,
-				"place_description" => $p->description,
-				"datetime_create"   => $p->datetime_added
+				"id"                   => $p->id,
+				"title"                => $p->title,
+				"polaroid_description" => $p->description,
+				"polaroid_image"       => $p->photo_hash_file_name,
+				"datetime_created"     => $p->datetime_created
 			);
 		}
 		return $array;
+	}
+
+	public function testsAction()
+	{
+
 	}
 }
 

@@ -40,6 +40,20 @@
 		)
 	);
 
+	$router->add("/api/routes-likes",
+		array(
+			"controller" => "api",
+			"action"     => "routesLikes"
+		)
+	);
+
+	$router->add("/api/polaroids-likes",
+		array(
+			"controller" => "api",
+			"action"     => "polaroidsLikes"
+		)
+	);
+
 	/***********************************************
 	 *  ROUTES PRIVADAS PARA USERS
 	 ***********************************************/
