@@ -9,6 +9,10 @@ class AjaxController extends ControllerBase
 	public function indexAction()
     {
 
+//	    $users = Users::find(array(
+//		    "conditions" => "name LIKE '%" . $this->request->getQuery("q", "string") . "%'"
+//	    ));
+
     }
 
 }

@@ -12,24 +12,17 @@ class ApiController extends ControllerBase
 	 */
 	public function placesAction()
     {
-	    
-//	    $users = Users::find(array(
-//		    "conditions" => "name LIKE '%" . $this->request->getQuery("q", "string") . "%'"
-//	    ));
-
 		if ($this->request->hasQuery("country")) {
 			$country   = $this->request->getQuery("country", "string");
 			// TODO: bind params
 			$places = Places::find("country = '$country'");
 		}else{
 			$places = Places::find(array(
-				"order" => "datetime_added DESC",
-				"limit" => 5
+				"order" => "datetime_added DESC"
+//				"limit" => 5
 			));
 		}
 
-		$data = array();
-	    
 		foreach($places as $place) {
 		    $data[] = array(
 			    'place'  => $place->place,
@@ -43,10 +36,7 @@ class ApiController extends ControllerBase
 
 	public function routesAction()
 	{
-
 		$routes = Routes::find();
-
-		$data = array();
 
 		foreach ($routes as $route) {
 			$data[] = array(
@@ -62,8 +52,6 @@ class ApiController extends ControllerBase
 	{
 		$polaroids = Polaroid::find();
 
-		$data = array();
-
 		foreach ($polaroids as $polaroid) {
 			$data[] = array(
 				'id'              => $polaroid->id,
@@ -73,6 +61,47 @@ class ApiController extends ControllerBase
 		}
 
 		echo json_encode($data);
+	}
+
+	public function mapAction()
+	{
+		$places = Places::find(array(
+			"group" => "lat_lon_id"
+		));
+
+		foreach($places as $place){
+
+			$data[] = array(
+				"lat_lon_id" => $place->lat_lon_id,
+				"geo_info" => array(
+					"lat"     => $place->lat,
+					"lon"     => $place->lon,
+					"country" => $place->country
+				),
+				"photo_places" => $this->getPhotoPlacesOfGivenLatLongId($place->lat_lon_id)
+			);
+
+		}
+
+		echo json_encode($data);
+	}
+
+	/**
+	 * @return array com os places das photos relativamente
+	 * à lat_lon_id passada como argumento
+	 */
+	private function getPhotoPlacesOfGivenLatLongId($id)
+	{
+		foreach (Places::find("lat_lon_id = '$id'") as $p) {
+			$array[] = array(
+				"id"                => $p->id,
+				"place"             => $p->place,
+				"place_image"       => $p->image_hash,
+				"place_description" => $p->description,
+				"datetime_create"   => $p->datetime_added
+			);
+		}
+		return $array;
 	}
 }
 
