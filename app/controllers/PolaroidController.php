@@ -3,13 +3,17 @@
 class PolaroidController extends ControllerBase
 {
 
+	public function initialize()
+	{
+		$this->view->setTemplateAfter("session-nav-bar");
+
+	}
 	/**
 	 * @route private
 	 */
 	public function indexAction()
     {
 	    $this->tag->appendTitle(" | PolaroidController - indexAction");
-	    $this->view->setTemplateAfter("main");
 
     }
 
@@ -21,7 +25,6 @@ class PolaroidController extends ControllerBase
 	public function createAction()
 	{
 		$this->tag->appendTitle(" | PolaroidController - createAction");
-		$this->view->setTemplateAfter("main");
 
 	}
 
@@ -35,7 +38,6 @@ class PolaroidController extends ControllerBase
 	public function showAction($id = null)
 	{
 		$this->tag->appendTitle(" | PolaroidController - showAction");
-		$this->view->setTemplateAfter("main");
 	}
 
 	/**

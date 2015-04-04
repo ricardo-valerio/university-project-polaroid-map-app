@@ -111,7 +111,12 @@ class ApiController extends ControllerBase
 	 */
 	private function getPolaroidsOfGivenLatLongId($id)
 	{
-		foreach (Polaroids::find("lat_lon_id = '$id'") as $p) {
+		$pl = Polaroids::find(array(
+			"conditions" => "lat_lon_id = '$id'",
+			"order"      => "datetime_created DESC"
+		));
+
+		foreach ( $pl as $p) {
 			$array[] = array(
 				"id"                   => $p->id,
 				"title"                => $p->title,

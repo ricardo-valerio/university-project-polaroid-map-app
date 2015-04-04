@@ -15,8 +15,6 @@ $(document).ready(function () {
 
     /*********************************************************/
 
-
-
     (function () {
         setInterval(function () {
 
@@ -27,7 +25,7 @@ $(document).ready(function () {
 
                 //polaroid-map-app/api?country=USA
 
-                $.getJSON("http://localhost:8080/polaroid-map-app/api/places" /*, { country: "USA"} */)
+                $.getJSON("/polaroid-map-app/api/places" /*, { country: "USA"} */)
                     .done(function (data) {
 
                         $.each(data, function (i, item) {
@@ -37,7 +35,7 @@ $(document).ready(function () {
                                 "data-lon": data[i].lon
                             });
 
-                            $(".ajax-change-last-place > a").eq(i).text(data[i].place);
+                            $(".ajax-change-last-place > a").eq(i).text(data[i].title);
 
                         });
                     });
@@ -46,7 +44,7 @@ $(document).ready(function () {
                 //   var err = textStatus + ", " + error;
                 //   console.log( "Request Failed: " + err );
                 // });
-                setTimeout(pullServerForLastPlaces, 60000);
+                setTimeout(pullServerForLastPlaces, 120000);
             }());
 
 
@@ -54,14 +52,14 @@ $(document).ready(function () {
 
                 console.log('ROUTES - pullServerForLastRoutes');
 
-                $.getJSON("http://localhost:8080/polaroid-map-app/api/routes")
+                $.getJSON("/polaroid-map-app/api/routes")
                     .done(function (data) {
 
                         $.each(data, function (i, item) {
 
                             $(".ajax-change-last-route > a").eq(i)
                                 .attr('href', "/polaroid-map-app/route/show/" + data[i].id)
-                                .text(data[i].route);
+                                .text(data[i].title);
 
                         });
                     });
@@ -70,7 +68,7 @@ $(document).ready(function () {
                 //   var err = textStatus + ", " + error;
                 //   console.log( "Request Failed: " + err );
                 // });
-                setTimeout(pullServerForLastRoutes, 60000);
+                setTimeout(pullServerForLastRoutes, 120000);
             }());
 
 
@@ -78,18 +76,14 @@ $(document).ready(function () {
 
                 console.log('LIKES - pullServerForLastLikes');
 
-                $.getJSON("http://localhost:8080/polaroid-map-app/api/likes")
+                $.getJSON("/polaroid-map-app/api/polaroids-likes")
                     .done(function (data) {
 
                         $.each(data, function (i, item) {
 
                             $(".ajax-change-last-like > a").eq(i)
                                 .attr('href', "/polaroid-map-app/polaroid/show/" + data[i].id)
-                                .html(data[i].polaroid
-                                     + '<span data-tooltip="" aria-haspopup="true"'
-                                     +' title="' + data[i].number_of_likes
-                                     + ' likes" class="right secondary round label has-tip">'
-                                     + data[i].number_of_likes + '</span>');
+                                .html(data[i].title);
 
                         });
                     });
@@ -98,9 +92,8 @@ $(document).ready(function () {
                 //   var err = textStatus + ", " + error;
                 //   console.log( "Request Failed: " + err );
                 // });
-                setTimeout(pullServerForLastRoutes, 60000);
+                setTimeout(pullServerForLastRoutes, 120000);
             }());
-
 
         }, 10000);
     })();

@@ -75,7 +75,7 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $online;
+    public $active;
     public function validation()
     {
 

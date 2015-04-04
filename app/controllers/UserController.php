@@ -22,7 +22,7 @@ class UserController extends ControllerBase
 	public function showAction()
 	{
 		$this->tag->appendTitle(" | UserController - indexAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("session-nav-bar");
 
 		$user_id = $this->dispatcher->getParam("user_id", "int");
 
@@ -45,7 +45,6 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - profileAction");
 		$this->view->setTemplateAfter("user-main");
-
 	}
 
 	/**

@@ -29,7 +29,7 @@ class RouteController extends ControllerBase
 	public function showAction($id = null)
 	{
 		$this->tag->appendTitle(" | RouteController - showAction");
-		$this->view->setTemplateAfter("main");
+		$this->view->setTemplateAfter("session-nav-bar");
 	}
 
 	/**
