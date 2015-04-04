@@ -38,7 +38,9 @@ class ApiController extends ControllerBase
 
 	public function routesAction()
 	{
-		$routes = Routes::find();
+		$routes = Routes::find(array(
+			"order" => "datetime_created DESC"
+		));
 
 		foreach ($routes as $route) {
 			$data[] = array(
@@ -53,7 +55,10 @@ class ApiController extends ControllerBase
 
 	public function polaroidsLikesAction()
 	{
-		$polaroids = Polaroids::find();
+
+		$polaroids = Polaroids::find(array(
+				"order" => "number_of_likes DESC"
+		));
 
 		foreach ($polaroids as $polaroid) {
 			$data[] = array(

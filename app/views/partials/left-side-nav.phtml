@@ -1,38 +1,29 @@
 <ul class="off-canvas-list">
-	<li><label>Last Places</label></li>
-	<li data-lat="37.427474" data-lon="-122.169719"
-	    class="ajax-change-last-place"><a href="">The Psychohistorians</a></li>
-	<li data-lat="37.427474" data-lon="-122.169719"
-	    class="ajax-change-last-place"><a href="">The Mayors</a></li>
-	<li data-lat="37.427474" data-lon="-122.169719"
-	    class="ajax-change-last-place"><a href="">The Traders</a></li>
-	<li data-lat="37.427474" data-lon="-122.169719"
-	    class="ajax-change-last-place"><a href="">The Merchant Princes</a></li>
-	<li data-lat="37.427474" data-lon="-122.169719"
-	    class="ajax-change-last-place"><a href="">The General</a></li>
+
+	<li><label>Last Polaroids</label></li>
+	<?php foreach ($last_polaroids as $last_polaroid ): ?>
+		<li data-lat="<?php echo $last_polaroid->lat; ?>"
+		    data-lon="<?php echo $last_polaroid->lon; ?>" class="ajax-change-last-place">
+			<a href=""><?php echo $last_polaroid->title; ?></a>
+		</li>
+	<?php endforeach ?>
+
 
 	<li><label>Last Routes</label></li>
-
-	<li class="ajax-change-last-route"><a href="">The Psychohistorians</a></li>
-	<li class="ajax-change-last-route"><a href="">The Encyclopedists</a></li>
-	<li class="ajax-change-last-route"><a href="">The Mayors</a></li>
-	<li class="ajax-change-last-route"><a href="">The Merchant Princes</a></li>
-	<li class="ajax-change-last-route"><a href="">The General</a></li>
-	<li class="ajax-change-last-route"><a href="">The Mule</a></li>
-	<li class="ajax-change-last-route"><a href="">Search by the Mule</a></li>
+	<?php foreach ($last_routes as $last_route): ?>
+		<li class="ajax-change-last-route">
+			<?php echo $this->tag->linkTo("/route/show/". $last_route->id,
+				$last_route->title ); ?>
+		</li>
+	<?php endforeach ?>
 
 
 	<li><label>Most Liked Polaroids</label></li>
-	<li class="ajax-change-last-like">
-		<a href="">The Psychohistorians</a>
-	</li>
-	<li class="ajax-change-last-like">
-		<a href="">The Encyclopedists</a>
-	</li>
-	<li class="ajax-change-last-like">
-		<a href="">The Mayors</a>
-	</li>
-	<li class="ajax-change-last-like">
-		<a href="">The Merchant Princes</a>
-	</li>
+	<?php foreach ($liked_polaroids as $liked_polaroid): ?>
+		<li class="ajax-change-last-like">
+			<?php echo $this->tag->linkTo("/polaroid/show/" . $liked_polaroid->id,
+				$liked_polaroid->title); ?>
+		</li>
+	<?php endforeach ?>
+
 </ul>
