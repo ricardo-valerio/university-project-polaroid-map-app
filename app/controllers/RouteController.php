@@ -30,6 +30,19 @@ class RouteController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | RouteController - showAction");
 		$this->view->setTemplateAfter("session-nav-bar");
+
+		$route_id = $this->dispatcher->getParam("route_id", "int");
+
+		if ($route_id != NULL) {
+			// ir à base de dados buscar toda a info da route
+
+			// passar o result set retornado para a view
+			return $this->view->setVar("route_id", $route_id);
+
+		} else {
+			$this->flashSession->error("O id não existe ou não é válido");
+		}
+
 	}
 
 	/**

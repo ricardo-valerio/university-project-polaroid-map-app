@@ -23,36 +23,45 @@
 		"action"     => "signUp"
 	));
 
-	$router->add("/people-online",
-		array(
+	$router->add("/people-online", array(
+
 			"controller" => "user",
 			"action"     => "index"
-		)
-	);
+	));
 
 	// user/123
 	// user/123/rivalerio23
-	$router->add("/user/{user_id}/:params",
-		array(
+	$router->add("/user/{user_id}/:params", array(
 			"controller" => "user",
 			"action"     => "show",
 			"params"     => 1
-		)
-	);
+	));
 
-	$router->add("/api/routes-likes",
-		array(
+	// polaroid/123
+	// polaroid/123/san-francisco-trip
+	$router->add("/polaroid/{polaroid_id}/:params", array(
+		"controller" => "polaroid",
+		"action"     => "show",
+		"params"     => 1
+	));
+
+	// route/123
+	// route/123/route-in-san-francisco
+	$router->add("/route/{route_id}/:params", array(
+		"controller" => "route",
+		"action"     => "show",
+		"params"     => 1
+	));
+
+	$router->add("/api/routes-likes", array(
 			"controller" => "api",
 			"action"     => "routesLikes"
-		)
-	);
+	));
 
-	$router->add("/api/polaroids-likes",
-		array(
+	$router->add("/api/polaroids-likes", array(
 			"controller" => "api",
 			"action"     => "polaroidsLikes"
-		)
-	);
+	));
 
 	/***********************************************
 	 *  ROUTES PRIVADAS PARA USERS

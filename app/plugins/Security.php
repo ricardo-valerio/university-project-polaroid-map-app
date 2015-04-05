@@ -37,7 +37,7 @@ class Security extends Plugin
 
 			//Private area resources
 			$privateResources = array(
-				'polaroid' => array('index', 'create', 'update', 'delete'),
+				'polaroid' => array('index', 'create', 'update', 'delete', 'comment'),
 				'route'    => array('index', 'create', 'update', 'delete'),
 				'user'     => array('profile', 'account', 'places', 'routes', 'liked', 'following')
 			);

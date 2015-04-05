@@ -90,8 +90,6 @@
 			$email          = $this->request->getPost('user_email', array('lower', 'email'));
 			$password       = $this->request->getPost('user_password');
 			$repeatPassword = $this->request->getPost('user_password_confirmation');
-			
-			var_dump($this->request->getPost());
 
 			if ($password != $repeatPassword) {
 				$this->flashSession->error('Passwords are different');

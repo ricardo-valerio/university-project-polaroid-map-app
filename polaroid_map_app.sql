@@ -11,7 +11,7 @@
  Target Server Version : 50623
  File Encoding         : utf-8
 
- Date: 04/04/2015 02:45:53 AM
+ Date: 04/05/2015 06:41:53 AM
 */
 
 SET NAMES utf8;
@@ -77,7 +77,7 @@ CREATE TABLE `polaroids` (
 --  Records of `polaroids`
 -- ----------------------------
 BEGIN;
-INSERT INTO `polaroids` VALUES ('1', '37.427474|-122.169719', '37.427474', '-122.169719', 'My trip at Standford University', 'look at this place, so awesome!', 'standford-university.jpg', '0', 'USA', '2015-04-03 17:23:47', '2015-04-04 02:07:20', '1'), ('2', '37.7577|-122.4376', '37.7577', '-122.4376', 'Trip in San Francisco', 'I love this city. \"If you\'re going to SF, make sure to wear some flowers in your hair\"', 'san-francisco.jpg', '0', 'USA', '2015-04-03 17:25:26', '2015-04-03 18:39:08', '1'), ('3', '38.693597|-9.205712', '38.693597', '-9.205712', 'Padrão dos Descobrimentos', 'Uau, nunca vi um barquinho em pedra tão lindo caramba!', 'padrao-dos-descobrimentos.jpg', '0', 'Portugal', '2015-04-03 17:26:32', '2015-04-03 18:39:11', '2'), ('4', '38.689633|-9.17711', '38.689633', '-9.17711', 'Museu da Carris', 'Museu Lindo xD', 'museu-da-carris.jpg', '0', 'Portugal', '2015-04-03 18:25:25', '2015-04-03 19:54:16', '2'), ('5', '38.689633|-9.17711', '38.689633', '-9.17711', 'ponte 25 de Abril e o Cristo Rei', 'Uau, que coisa mai linda!', 'ponte-25-abril.jpg', '0', 'Portugal', '2015-04-03 19:53:05', '2015-04-03 19:54:20', '2'), ('6', '38.689633|-9.17711', '38.689633', '-9.17711', 'Cristo Rei', 'Louvado seja Deus xD', 'cristo-rei.jpg', '0', 'Portugal', '2015-04-03 20:07:32', '2015-04-03 20:07:32', '2');
+INSERT INTO `polaroids` VALUES ('1', '37.427474|-122.169719', '37.427474', '-122.169719', 'My trip at Standford University', 'look at this place, so awesome!', 'standford-university.jpg', '10', 'USA', '2015-04-03 17:23:47', '2015-04-04 03:08:36', '1'), ('2', '37.7577|-122.4376', '37.7577', '-122.4376', 'Trip in San Francisco', 'I love this city. \"If you\'re going to SF, make sure to wear some flowers in your hair\"', 'san-francisco.jpg', '6', 'USA', '2015-04-03 17:25:26', '2015-04-04 03:08:38', '1'), ('3', '38.693597|-9.205712', '38.693597', '-9.205712', 'Padrão dos Descobrimentos', 'Uau, nunca vi um barquinho em pedra tão lindo caramba!', 'padrao-dos-descobrimentos.jpg', '8', 'Portugal', '2015-04-03 17:26:32', '2015-04-04 03:20:36', '2'), ('4', '38.689633|-9.17711', '38.689633', '-9.17711', 'Museu da Carris', 'Museu Lindo xD', 'museu-da-carris.jpg', '3', 'Portugal', '2015-04-03 18:25:25', '2015-04-04 03:08:40', '2'), ('5', '38.689633|-9.17711', '38.689633', '-9.17711', 'ponte 25 de Abril e o Cristo Rei', 'Uau, que coisa mai linda!', 'ponte-25-abril.jpg', '2', 'Portugal', '2015-04-03 19:53:05', '2015-04-04 03:08:41', '2'), ('6', '38.689633|-9.17711', '38.689633', '-9.17711', 'Cristo Rei', 'Louvado seja Deus xD', 'cristo-rei.jpg', '1', 'Portugal', '2015-04-03 20:07:32', '2015-04-04 03:08:42', '2');
 COMMIT;
 
 -- ----------------------------
@@ -161,6 +161,40 @@ CREATE TABLE `user_is_following` (
   KEY `id_user_who_is_followed` (`id_user_who_is_followed`),
   CONSTRAINT `id_user_who_follows` FOREIGN KEY (`id_user_who_follows`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `id_user_who_is_followed` FOREIGN KEY (`id_user_who_is_followed`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `user_likes_polaroid`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_likes_polaroid`;
+CREATE TABLE `user_likes_polaroid` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int(10) unsigned NOT NULL,
+  `id_polaroid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `id_user_2` (`id_user`),
+  KEY `id_polaroid` (`id_polaroid`),
+  CONSTRAINT `id_polaroid_like_fk` FOREIGN KEY (`id_polaroid`) REFERENCES `polaroids` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `user_likes_route`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_likes_route`;
+CREATE TABLE `user_likes_route` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) unsigned NOT NULL,
+  `id_route` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `id_user_2` (`id_user`),
+  KEY `id_user_3` (`id_user`),
+  KEY `id_user_4` (`id_user`),
+  KEY `id_route` (`id_route`),
+  CONSTRAINT `fk_id_route_like_fk` FOREIGN KEY (`id_route`) REFERENCES `routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
