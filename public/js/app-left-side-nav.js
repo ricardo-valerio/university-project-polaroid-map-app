@@ -58,7 +58,8 @@ $(document).ready(function () {
                         $.each(data, function (i, item) {
 
                             $(".ajax-change-last-route > a").eq(i)
-                                .attr('href', "/polaroid-map-app/route/show/" + data[i].id)
+                                .attr('href', "/polaroid-map-app/route/"
+                                + data[i].id + "/" + data[i].title)
                                 .text(data[i].title);
 
                         });
@@ -82,7 +83,8 @@ $(document).ready(function () {
                         $.each(data, function (i, item) {
 
                             $(".ajax-change-last-like > a").eq(i)
-                                .attr('href', "/polaroid-map-app/polaroid/show/" + data[i].id)
+                                .attr('href', "/polaroid-map-app/polaroid/"
+                                + data[i].id + "/" + data[i].title)
                                 .html(data[i].title);
 
                         });
