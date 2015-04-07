@@ -36,10 +36,15 @@ class PolaroidController extends ControllerBase
 			var_dump($_POST);
 			print_r(pathinfo($this->request->getPost("polaroid_location")));
 
-			$content = file_get_contents($this->request->getPost("polaroid_location"));
-			file_put_contents("http://localhost:8080/polaroid-map-app/create-polaroid/public/img/", $content);
+//			$content = file_get_contents($this->request->getPost("polaroid_location"));
+			if(copy($this->request->getPost("polaroid_location"), "http://localhost:8080/polaroid-map-app/create-polaroid/public/img/bazinga.jpg")){
+				echo "guardado com sucesso";
+			}else{
+				echo "chapeu";
+			}
 
-			echo '<img src="public/img/">'. pathinfo($this->request->getPost("polaroid_location"))["basename"];
+//			file_put_contents("http://localhost:8080/polaroid-map-app/public/img/", $content);
+
 
 		}
 	}

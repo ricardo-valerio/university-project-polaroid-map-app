@@ -53,9 +53,12 @@
 <h2>Bazinga!</h2>
 <!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
 <p>
+<!--	   proxylocal 8080 --host polaroid-map-app   -->
 	<input type='image' src='http://images.aviary.com/images/edit-photo.png'
           value='Edit photo'
           onclick="return launchEditor('polaroid_to_edit',
-          'http://upload.wikimedia.org/wikipedia/commons/6/6e/Jer%C3%B3nimos_April_2009-4.jpg')
+          'http://polaroid-map-app.t.proxylocal.com/' +
+          'polaroid-map-app/public/img/places/' +
+          'mosteiro-dos-jeronimos.jpg')
           ;"/>
 </p>
