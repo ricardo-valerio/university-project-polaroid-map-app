@@ -10,8 +10,13 @@
 <div class="row">
 	<div class="small-6 columns">
 		<h2>Login</h2>
-		<?php echo $this->tag->form(array('/session/login', "method" => "post")); ?>
-			<fieldset>
+	<?php if ($this->request->hasQuery("return_to")): ?>
+		<?php echo $this->tag->form(array('/session/login?return_to=' .
+		                                  $this->request->getQuery("return_to"), "method" => "post")); ?>
+	<?php else: ?>
+		<?php echo $this->tag->form(array('/session/login' , "method" => "post")); ?>
+	<?php endif ?>
+		<fieldset>
 				<label>Email/Username:
 					<input type="text"
 					       placeholder="email or username"

@@ -38,3 +38,9 @@ https://github.com /zurb/ foundation /issues/2462
     text-align: center;
     background-color: beige;
 }
+
+/********************************************************/
+/* para o plugin editor de photos, remover o icon da adobe xD*/
+#avpw_logo {
+    display: none !important;
+}

@@ -5,8 +5,8 @@ class PolaroidController extends ControllerBase
 
 	public function initialize()
 	{
+		parent::initialize();
 		$this->view->setTemplateAfter("session-nav-bar");
-
 	}
 	/**
 	 * @route private
@@ -26,6 +26,22 @@ class PolaroidController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | PolaroidController - createAction");
 
+		if ($this->request->isPost() 
+			&& $this->request->hasPost("polaroid_location")
+			&& $this->security->checkToken()) {
+
+			$this->view->disable();
+
+
+			var_dump($_POST);
+			print_r(pathinfo($this->request->getPost("polaroid_location")));
+
+			$content = file_get_contents($this->request->getPost("polaroid_location"));
+			file_put_contents("http://localhost:8080/polaroid-map-app/create-polaroid/public/img/", $content);
+
+			echo '<img src="public/img/">'. pathinfo($this->request->getPost("polaroid_location"))["basename"];
+
+		}
 	}
 
 	/**
@@ -77,7 +93,7 @@ class PolaroidController extends ControllerBase
 	public function commentAction()
 	{
 		if ($this->request->isPost()
-			&& $this->request->hasPost("user_password")
+			&& $this->request->hasPost("polaroid_id")
 			&& $this->security->checkToken()
 		) {
 

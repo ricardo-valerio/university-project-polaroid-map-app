@@ -1,3 +1,61 @@
 <h1 class="headers-provisorios">PolaroidController - createAction</h1>
 
 <?php $this->flashSession->output(); ?>
+
+
+<div class="row panel">
+	<form action="<?php echo $this->url->get("/create-polaroid"); ?>" accept-charset="utf-8" method="post">
+
+		<div class="row text-center">
+			<div style="background-color: white;"
+			     class="large-6 small-12 medium-6 text-center small-centered columns panel">
+
+				<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey() ?>"
+				       value="<?php echo $this->security->getToken() ?>">
+
+				<img id="polaroid_to_edit"
+				     src="public/img/places/mosteiro-dos-jeronimos.jpg">
+
+				<input id="polaroid_location"
+				       name="polaroid_location"
+				       type="hidden" value="public/img/places/mosteiro-dos-jeronimos.jpg"/>
+				<!--	<img style="max-height: 500; max-width: 500;"-->
+<!--				     src="http://placehold.it/500x500&amp;text=Polaroid">-->
+
+				<div class="panel">
+					<input type="text"
+					       id="polaroid_title"
+					       name="polaroid_title"
+					       placeholder="insert the polaroid's title..."/>
+					<!--				<h5 class="subheader">Risus ligula, aliquam nec fermentum vitae,-->
+					<!--				                      sollicitudin eget urna. Donec dignissim-->
+					<!--				                      nibh fermentum odio ornare sagittis.</h5>-->
+					<hr/>
+						<textarea style="resize: none;"
+						          name="polaroid_description"
+						          id="polaroid_description"
+						          placeholder="insert the polaroid's description..."
+						          cols="30"
+						          rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<input type="submit" class="button success"
+			       value="Upload Polaroid"/>
+		</div>
+	</form>
+</div>
+
+<!-- ooojojojjo -->
+
+<h2>Bazinga!</h2>
+<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+<p>
+	<input type='image' src='http://images.aviary.com/images/edit-photo.png'
+          value='Edit photo'
+          onclick="return launchEditor('polaroid_to_edit',
+          'http://upload.wikimedia.org/wikipedia/commons/6/6e/Jer%C3%B3nimos_April_2009-4.jpg')
+          ;"/>
+</p>

@@ -1,1 +1,148 @@
 <h1 class="headers-provisorios">UserController - accountAction</h1>
+
+<div class="row panel">
+	<div class="row panel">
+
+		<ul class="tabs" data-tab="" role="tablist"
+		    data-options="deep_linking: true">
+			<li class="tab-title active" role="presentational">
+				<a  href="#personal-info"
+				    role="tab"
+				    tabindex="0"
+					aria-selected="true"
+					controls="tabs-deeplink-1">Personal Info
+				</a>
+			</li>
+			<li class="tab-title" role="presentational">
+				<a  href="#settings"
+					role="tab"
+					tabindex="0"
+					aria-selected="false"
+					controls="tabs-deeplink-2">Account Settings
+				</a>
+			</li>
+<!--			<li class="tab-title active" role="presentational"><a-->
+<!--					href="#tabs-deeplink-3" role="tab" tabindex="-1"-->
+<!--					aria-selected="true" controls="tabs-deeplink-3">Tab 3</a>-->
+<!--			</li>-->
+		</ul>
+
+	</div>
+
+	<div class="tabs-content">
+			<section tabindex="0" id="personal-info" role="tabpanel"
+			         aria-hidden="false" class="content active">
+				<h3>Personal Info</h3>
+
+				<p id="tabs-deeplink-content-1">
+
+				<form action="" method="post">
+					<div class="row">
+						<div class="large-12 columns">
+							<label>Full Name:
+								<input type="text"
+								       placeholder=""
+										value="<?php echo "Ricardo Valério";
+										?>"/>
+							</label>
+						</div>
+					</div>
+					<div class="row collapse">
+						<div class="small-3 large-2 columns">
+							<span style="background-color: #007095; color:
+							white;"
+							      class="prefix">facebook.com/</span>
+						</div>
+						<div class="small-9 large-10 columns">
+				<input type="text" placeholder="Enter your facebook username...">
+						</div>
+					</div>
+					<div class="row collapse">
+						<div class="small-3 large-2 columns">
+							<span style="background-color: #007095; color:
+							white;" class="prefix">twitter.com/</span>
+						</div>
+						<div class="small-9 large-10 columns">
+				<input type="text" placeholder="Enter your twitter username...">
+						</div>
+					</div>
+					<div class="row collapse">
+						<div class="small-3 large-2 columns">
+							<span style="background-color: #007095; color:
+							white;" class="prefix">plus.google.com/</span>
+						</div>
+						<div class="small-9 large-10 columns">
+				<input type="text" placeholder="Enter your google plus username...">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="large-12 columns">
+							<label>Country:
+								<select>
+									<option value="portugal">Portugal</option>
+									<option selected value="usa">USA</option>
+									<option value="brazil">Brazil</option>
+									<option value="france">France</option>
+								</select>
+							</label>
+						</div>
+					</div>
+					<input class="button expand success" type="submit"
+					       value="Submit"/>
+				</form>
+				</p>
+			</section>
+			<section tabindex="0" id="settings" role="tabpanel"
+			         aria-hidden="true" class="content">
+				<h3>Account Settings</h3>
+
+				<p id="tabs-deeplink-content-2">
+
+				<form action="" method="post">
+						<div class="row collapse">
+						<div class="small-3 large-2 columns">
+							<span style="background-color: #007095; color:
+							white;" class="prefix">New Password:</span>
+						</div>
+						<div class="small-9 large-10 columns">
+							<input type="password" name="password" value="">
+						</div>
+					</div>
+
+					<div class="row collapse">
+						<div class="small-3 large-2 columns">
+							<span style="background-color: #007095; color:
+							white;" class="prefix">Confirmed Password:</span>
+						</div>
+						<div class="small-9 large-10 columns">
+							<input type="password" name="confirmed_password"
+							       value="">
+						</div>
+					</div>
+
+				<input class="button expand success" type="submit"
+				       value="Submit"/>
+
+				</form>
+
+				<br/>
+				<br/>
+
+				<h3>Danger Zone:</h3>
+				<a class="button expand alert" href="#">Delete Account</a>
+
+				</p>
+			</section>
+<!--			<section id="tabs-deeplink-3" role="tabpanel" aria-hidden="false"-->
+<!--			         class="content active">-->
+<!--				<h2>Third Panel Header</h2>-->
+<!---->
+<!--				<p id="tabs-deeplink-content-3"> Third panel content goes-->
+<!--				                                 here...</p>-->
+<!--			</section>-->
+		</div>
+</div>
+
+
+

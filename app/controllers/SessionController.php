@@ -28,16 +28,14 @@
 			$password = $this->request->getPost('user_password');
 			$password = sha1($password);
 
-			$user = Users::findFirst("email='$email' AND password='$password' AND active='Y'");
+			$user = Users::findFirst("(email='$email' OR username='$username')
+									 AND password='$password' AND active='Y'");
 
 			if ($user != false) {
 				$this->_registerSession($user);
-				return $this->response->redirect("");
-			}
-
-			$user = Users::findFirst("username='$username' AND password='$password' AND active='Y'");
-			if ($user != false) {
-				$this->_registerSession($user);
+				if ($this->request->hasQuery("return_to")) {
+					return $this->response->redirect($this->request->getQuery("return_to"));
+				}
 				return $this->response->redirect("");
 			}
 
@@ -85,7 +83,7 @@
 			&& $this->request->hasPost("user_password")
 			&& $this->security->checkToken()) {
 
-			$name           = $this->request->getPost('user_full_name', array('string', 'striptags'));
+			$fullname       = $this->request->getPost('user_full_name', array('string', 'striptags'));
 			$username       = $this->request->getPost('user_name', array('striptags', 'alphanum'));
 			$email          = $this->request->getPost('user_email', array('lower', 'email'));
 			$password       = $this->request->getPost('user_password');
@@ -99,10 +97,9 @@
 			$user             = new Users();
 			$user->username   = $username;
 			$user->password   = sha1($password);
-			$user->name       = $name;
+			$user->full_name  = $fullname;
 			$user->email      = $email;
-			$user->created_at = new Phalcon\Db\RawValue('now()');
-			$user->active     = 'Y';
+
 			if ($user->save() == false) {
 				foreach ($user->getMessages() as $message) {
 					$this->flashSession->error((string)$message);

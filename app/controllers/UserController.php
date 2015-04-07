@@ -11,7 +11,7 @@ class UserController extends ControllerBase
     public function indexAction()
     {
 	    $this->tag->appendTitle(" | UserController - indexAction");
-	    $this->view->setTemplateAfter("main");
+	    $this->view->setTemplateAfter("user-main");
     }
 
 	/**
@@ -45,6 +45,7 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - profileAction");
 		$this->view->setTemplateAfter("user-main");
+
 	}
 
 	/**
