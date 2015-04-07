@@ -36,7 +36,7 @@
 				if ($this->request->hasQuery("return_to")) {
 					return $this->response->redirect($this->request->getQuery("return_to"));
 				}
-				return $this->response->redirect("");
+				return $this->response->redirect("/");
 			}
 
 			$this->flashSession->error('Wrong email/password');
@@ -65,7 +65,7 @@
 	{
 		if ($this->session->has("auth")) {
 			$this->session->remove('auth');
-			return $this->response->redirect("");
+			return $this->response->redirect("/");
 		}
 		return $this->response->redirect("/sign-in-up");
 	}
