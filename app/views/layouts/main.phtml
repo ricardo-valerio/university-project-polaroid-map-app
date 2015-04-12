@@ -16,10 +16,11 @@
 								<form>
 									<div class="row collapse">
 										<div class="large-10 small-8 columns">
-					<input type="text"
-					       id="search-bar"
-					       name="search-bar"
-					       placeholder="Find polaroids, routes and people...">
+<!--					<input type="text"-->
+<!--					       id="search-bar"-->
+<!--					       name="search-bar"-->
+<!--					       placeholder="Find polaroids, routes and people...">-->
+											<?php $this->partial("partials/search-bar"); ?>
 										</div>
 <!--										<div class="large-2 small-3 columns">-->
 <!--											<a href="#"-->
@@ -56,7 +57,11 @@
 
 
 		<section class="main-section">
+
+			<?php $this->partial("partials/search-bar-results"); ?>
+
 			<?php echo $this->getContent(); ?>
+
 		</section>
 
 

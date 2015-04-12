@@ -44,28 +44,11 @@ $(document).ready(function () {
 
                 for (var j = 0; j < place.polaroids.length; j++) {
 
-                    /**
-                     * tentat colocar grid de 3 colunas
-                     */
-                    // se j for igual 3n  [0, 3, 6, 9, ...]
-                    //if (j == 3 * j) { contentString += '<div class="row">'; }
-
-                    //contentString +=
-                    //    '<div class="small-12 large-4 columns">'
-                    //        + '<h5>' + place.polaroids[j].title + '</h5>'
-                    //        + '<img src="/polaroid-map-app/public/img/places/'
-                    //        + place.polaroids[j].polaroid_image
-                    //        + '" alt="' + place.polaroids[j].title + '" height="100" width="100"/>'
-                    //    + '</div>';
-
-                    // se j for igual 3n  [0, 3, 6, 9, ...]
-                    //if (j == 3 * j) { contentString += '</div>'; }
-
                     contentString +=
                         '<div id="content">'
                         + '<h1 id="firstHeading" class="firstHeading">'
                         + place.polaroids[j].title
-                        + '</h1>'+ '<img src="/polaroid-map-app/img/places/'+ place.polaroids[j].polaroid_image
+                        + '</h1>'+ '<img src="/polaroid-map-app/img/polaroids/'+ place.polaroids[j].polaroid_image
                         +'" alt="'+ place.polaroids[j].title
                         +'" height="100" width="100"/>'
                         + '<div id="bodyContent">'+ place.polaroids[j].polaroid_description
@@ -79,7 +62,7 @@ $(document).ready(function () {
                     position: myLatLng,
                     map: window.map,
                     icon: {
-                        url: "/polaroid-map-app/public/img/markers/blue.png",
+                        url: "/polaroid-map-app/public/img/markers/pink.png",
                         size: new google.maps.Size(30, 30),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(0, 30)

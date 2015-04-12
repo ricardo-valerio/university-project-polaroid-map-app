@@ -1,8 +1,39 @@
 <div style="height: 45px;"
      class="large-4 small-1 columns">
-	<a style="height: 45px;" href="<?php echo $this->url->get("/create-polaroid"); ?>"
+	<a data-reveal-id="create-polaroid-modal" style="height: 45px;" href="<?php echo
+	$this->url->get
+	("/create-polaroid"); ?>"
 	   class="button small success"
 	   title="Create Polaroid!">
 		<i style="margin-left: 0px;" class="fi-camera app-icons"></i>
 	</a>
+</div>
+
+
+<div id="create-polaroid-modal" class="reveal-modal" data-reveal
+     aria-labelledby="create-polaroid-title" aria-hidden="true" role="dialog">
+
+	<h2 class="text-center" id="create-polaroid-title">Upload your awesome photo
+	                                         dude!</h2>
+
+	<form action="<?php echo $this->url->get("/upload-photo");?>"
+	      method="post"
+	      accept-charset="utf-8"
+	      enctype="multipart/form-data">
+
+		<br/><br/>
+
+		<input class="text-center" type="file" name="uploaded_photo" id="uploaded_photo"
+		       accept="image/jpeg, image/png" />
+
+		<input type="hidden"
+		       name="<?php echo $this->security->getTokenKey() ?>"
+		       value="<?php echo $this->security->getToken() ?>">
+
+		<br/><br/>
+
+		<input class="button expand success" type="submit" value="Upload"/>
+	</form>
+
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

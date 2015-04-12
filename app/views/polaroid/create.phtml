@@ -2,7 +2,6 @@
 
 <?php $this->flashSession->output(); ?>
 
-
 <div class="row panel">
 	<form action="<?php echo $this->url->get("/create-polaroid"); ?>" accept-charset="utf-8" method="post">
 
@@ -15,26 +14,30 @@
 				       value="<?php echo $this->security->getToken() ?>">
 
 				<img id="polaroid_to_edit"
-				     src="public/img/places/mosteiro-dos-jeronimos.jpg">
+				     src="public/img/polaroids/<?php echo $this->session->get("photo_name");?>">
+
+				<input type='image' src='http://images.aviary.com/images/edit-photo.png'
+				       value='Edit photo'
+				       onclick="return launchEditor('polaroid_to_edit',
+					       'http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/public/img/polaroids/<?php echo $this->session->get("photo_name"); ?>');"/>
 
 				<input id="polaroid_location"
 				       name="polaroid_location"
-				       type="hidden" value="public/img/places/mosteiro-dos-jeronimos.jpg"/>
-				<!--	<img style="max-height: 500; max-width: 500;"-->
-<!--				     src="http://placehold.it/500x500&amp;text=Polaroid">-->
+				       type="hidden"
+				       value="public/img/polaroids/<?php echo $this->session->get("photo_name");?>"/>
 
 				<div class="panel">
 					<input type="text"
 					       id="polaroid_title"
 					       name="polaroid_title"
+					       class="text-center"
 					       placeholder="insert the polaroid's title..."/>
-					<!--				<h5 class="subheader">Risus ligula, aliquam nec fermentum vitae,-->
-					<!--				                      sollicitudin eget urna. Donec dignissim-->
-					<!--				                      nibh fermentum odio ornare sagittis.</h5>-->
+
 					<hr/>
 						<textarea style="resize: none;"
 						          name="polaroid_description"
 						          id="polaroid_description"
+						          class="text-center"
 						          placeholder="insert the polaroid's description..."
 						          cols="30"
 						          rows="5"></textarea>
@@ -47,18 +50,3 @@
 		</div>
 	</form>
 </div>
-
-<!-- ooojojojjo -->
-
-<h2>Bazinga!</h2>
-<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
-<p>
-<!--	   proxylocal 8080 --host polaroid-map-app   -->
-	<input type='image' src='http://images.aviary.com/images/edit-photo.png'
-          value='Edit photo'
-          onclick="return launchEditor('polaroid_to_edit',
-          'http://polaroid-map-app.t.proxylocal.com/' +
-          'polaroid-map-app/public/img/places/' +
-          'mosteiro-dos-jeronimos.jpg')
-          ;"/>
-</p>

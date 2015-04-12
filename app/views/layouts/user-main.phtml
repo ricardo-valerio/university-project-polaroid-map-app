@@ -13,14 +13,11 @@
 				<div class="row collapse">
 					<div style="height: 45px;" class="large-6 small-10
 						columns">
-						<form class="navbar-form navbar-left" role="search">
-							<div class="form-group">
-								<input style="width: 75%;"
-								       id="search-bar"
-								       type="search"
-								       name="search-bar"
-								       class="form-control"
-								       placeholder="Find people..."/>
+						<form>
+							<div class="row collapse">
+								<div class="large-10 small-8 columns">
+									<?php $this->partial("partials/search-bar"); ?>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -51,7 +48,11 @@
 		<?php endif ?>
 
 		<section class="main-section">
+
+			<?php $this->partial("partials/search-bar-results"); ?>
+
 			<?php echo $this->getContent(); ?>
+
 		</section>
 
 		<!--		<a class="exit-off-canvas"></a>-->

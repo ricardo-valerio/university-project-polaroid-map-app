@@ -29,6 +29,18 @@
 			"action"     => "index"
 	));
 
+	$router->add("/find", array(
+
+		"controller" => "find",
+		"action"     => "index"
+	));
+
+	$router->add("/upload-photo", array(
+
+		"controller" => "polaroid",
+		"action"     => "upload"
+	));
+
 	// user/123
 	// user/123/rivalerio23
 	$router->add("/user/{user_id}/:params", array(

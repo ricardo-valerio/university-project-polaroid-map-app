@@ -1,0 +1,22 @@
+<div id="tihidOutput" class="tihidOutput"
+     style="display: none; position: absolute; z-index: 1200;">
+	<ul class="ul1">
+		<!-- Results Div -->
+		<div class="liResults"></div>
+		<li class="liSeeMore" id="seeMore">
+			<a href="#">
+				<!-- Add url to user's profile page i.e profile.php?id=100 -->
+				<div class="div11">
+					See more results for <span class="info"></span>
+				</div>
+			</a>
+		</li>
+		<li class="hide">
+			<div class="hide1">
+				<span class="span10">Retrieving suggestions</span>
+				<img
+					src="<?php echo $this->url->get("/public/img/misc/ajax-loader.gif"); ?>"/>
+			</div>
+		</li>
+	</ul>
+</div>

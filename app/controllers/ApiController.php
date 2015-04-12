@@ -121,7 +121,7 @@ class ApiController extends ControllerBase
 			"order"      => "datetime_created DESC"
 		));
 
-		foreach ( $pl as $p) {
+		foreach ($pl as $p) {
 			$array[] = array(
 				"id"                   => $p->id,
 				"title"                => $p->title,
@@ -133,9 +133,60 @@ class ApiController extends ControllerBase
 		return $array;
 	}
 
-	public function testsAction()
+	public function testsAction($q = null)
 	{
+		if (is_null($q)) {
+			return json_encode(array());
+		}
 
+
+		$data["find_more_text_filtered"] = $this->escaper->escapeHtml($q);
+
+		$users = Users::find(array(
+			"conditions" => "full_name LIKE '%" . $q . "%'",
+			"limit"      => 3
+		));
+
+		foreach ($users as $user) {
+			$data["users"][] = array(
+				"id"         => $user->id,
+				"full_name"  => $user->full_name,
+				"avatar"     => "http://www.gravatar.com/avatar/". md5(strtolower(trim($user->email))),
+				"country"    => $user->country
+			);
+		}
+
+
+		$polaroids = Polaroids::find(array(
+			"conditions" => "title LIKE '%" . $q . "%'",
+			"limit"      => 3
+		));
+
+		foreach ($polaroids as $polaroid) {
+			$data["polaroids"][] = array(
+				"id"                  => $polaroid->id,
+				"title"               => $polaroid->title,
+				"hash_photo_location" => "public/img/polaroids/". $polaroid->photo_hash_file_name,
+				"user_id"             => $polaroid->users->id,
+				"user_full_name"      => $polaroid->users->full_name
+			);
+		}
+
+
+		$routes = Routes::find(array(
+			"conditions" => "title LIKE '%" . $q . "%'",
+			"limit"      => 3
+		));
+
+		foreach ($routes as $route) {
+			$data["routes"][] = array(
+				"id"              => $route->id,
+				"title"           => $route->title,
+				"user_id"         => $route->id_user
+			);
+		}
+
+		echo json_encode($data);
 	}
 }
 
