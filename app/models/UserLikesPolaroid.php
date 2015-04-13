@@ -20,10 +20,6 @@ class UserLikesPolaroid extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $id_polaroid;
-
-    /**
-     * Initialize method for model.
-     */
     public function initialize()
     {
         $this->belongsTo('id_polaroid', 'Polaroids', 'id', array('alias' => 'Polaroids'));

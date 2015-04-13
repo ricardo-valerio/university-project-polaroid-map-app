@@ -2,17 +2,24 @@
 
 <?php $this->flashSession->output(); ?>
 
-<?php if (isset($polaroid_id)): ?>
-	<?php echo "Polaroid id: ", $polaroid_id, "<br>"; ?>
-<?php endif ?>
-
 <div class="row panel">
 	<div class="row">
-		<div class="small-6 columns">
-			<i class="fi-social-zurb"></i> rivalerio90
+		<div class="small-6 columns text-left">
+			<a href="<?php echo $this->url->get("/user/" .
+				$polaroid_info->users->id . "/" .
+				$polaroid_info->users->username); ?>">
+				<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_info->users->email))); ?>?s=40"
+					alt="<?php echo $polaroid_info->users->username; ?> photo.
+					."/>
+			</a>
+			<a href="<?php echo $this->url->get("/user/" .
+				$polaroid_info->users->id . "/" .
+				$polaroid_info->users->username); ?>">
+				<?php echo $polaroid_info->users->username; ?></a>
 		</div>
 		<div class="small-6 columns text-right">
-			154 Likes
+			<span id="numberOfLikes"><?php echo $polaroid_info->number_of_likes;
+				?></span> Likes
 		</div>
 	</div>
 	<div class="row">
@@ -20,14 +27,12 @@
 		     class="large-6 small-12 medium-6 text-center small-centered columns
 		     panel">
 			<div class="panel">
-				<img src="http://placehold.it/500x500&amp;text=Polaroid">
+				<img src="<?php echo $this->url->get("/public/img/polaroids/" . $polaroid_info->photo_hash_file_name); ?>"/>
 			</div>
 
 			<div class="panel">
-				<h3>Header</h3>
-				<h5 class="subheader">Risus ligula, aliquam nec fermentum vitae,
-				                      sollicitudin eget urna. Donec dignissim
-				                      nibh fermentum odio ornare sagittis.</h5>
+				<h3><?php echo $polaroid_info->title; ?></h3>
+				<h5 class="subheader"><?php echo $polaroid_info->description; ?></h5>
 			</div>
 		</div>
 	</div>
@@ -38,16 +43,29 @@
 	<div class="row panel">
 		<ul class="button-group even-2">
 			<li>
-				<a data-reveal-id="comment-polaroid" href="#" class="button">
+				<a data-reveal-id="comment-polaroid" href="" class="button">
 					<i style="font-size: 20px;"
 					   class="fi-comment"></i> Comment
 				</a>
 			</li>
 			<li>
-				<a href="#" class="button">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Like
-				</a>
+				<form action="<?php echo ("/polaroid-map-app/like-polaroid");?>" method="post">
+
+					<input type="hidden"
+					       name="<?php echo $this->security->getTokenKey(); ?>"
+					       value="<?php echo $this->security->getToken(); ?>">
+
+					<input type="hidden" name="polaroid_id"
+					       value="<?php echo $polaroid_info->id;
+					       ?>"/>
+
+					<button type="submit" id="likePolaroidButton"
+					        class="button">
+						<i style="font-size: 20px;"
+						   class="fi-like"></i> Like
+					</button>
+				</form>
+
 			</li>
 		</ul>
 	</div>
@@ -55,24 +73,27 @@
 
 	<div id="comment-polaroid" class="reveal-modal" data-reveal
 	     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-		<h2 id="firstModalTitle">Comment this out...</h2>
+		<h2 class="text-center" id="firstModalTitle">&nbsp;</h2>
 
-		<form action="<?php echo $this->url->get("/polaroid/comment"); ?>"
+		<form action="<?php echo $this->url->get("/comment-polaroid"); ?>"
 		      method="post">
 
-			<textarea name="comment_polaroid"
+			<textarea class="text-center"
+				      style="resize: none; font-size: 2em;"
+					  name="comment_polaroid"
 			          id="comment_textarea"
 			          cols="30"
-			          rows="10"
+			          rows="3"
 			          placeholder="what are you thinking about this polaroid?"></textarea>
 
-			<input type="hidden" name="polaroid_id" value="<?php //echo $id_da_polaroid; ?>"/>
+			<input type="hidden" name="polaroid_id" value="<?php echo $polaroid_info->id;
+			?>"/>
 
 			<input type="hidden"
-			       name="<?php echo $this->security->getTokenKey() ?>"
-			       value="<?php echo $this->security->getToken() ?>">
+			       name="<?php echo $this->security->getTokenKey(); ?>"
+			       value="<?php echo $this->security->getToken(); ?>">
 
-			<input class="button" type="submit" value="Submit comment"/>
+			<input class="button expand success" type="submit" value="Post"/>
 		</form>
 
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
@@ -98,180 +119,73 @@
 
 <div class="row panel">
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+	<?php if (count($polaroid_comments) == 0): ?>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+		<h3 class="text-center">Be the first to comment this polaroid!</h3>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+	<?php else: ?>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+		<?php foreach ($polaroid_comments as $polaroid_comment): ?>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+<!-- $polaroid_info->users->id -->
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+			<?php if ($polaroid_comment->users->id == $polaroid_info->users->id): ?>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+				<div style="background-color: beige;" class="row panel">
+					<div class="small-10 columns">
+						<p>
+							<strong>
+								<a href="<?php echo $this->url->get("/user/" .
+									$polaroid_comment->users->id . "/" .
+									$polaroid_comment->users->username); ?>">
+									<?php echo $polaroid_comment->users->username; ?></a>
+								said:
+							</strong>
+						</p>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+						<p>
+							<?php echo $polaroid_comment->comment; ?>
+						</p>
+					</div>
+					<div class="small-2 columns">
+						<a href="<?php echo $this->url->get("/user/" .
+							$polaroid_comment->users->id . "/" .
+							$polaroid_comment->users->username); ?>">
+							<img
+								src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_comment->users->email))); ?>?s=80"
+								alt="<?php echo $polaroid_comment->users->username; ?> comment."/>
+						</a>
+					</div>
+				</div>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+			<?php else: ?>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+				<div class="row panel">
+					<div class="small-2 columns">
+						<a href="<?php echo $this->url->get("/user/".
+							$polaroid_comment->users->id ."/".
+							$polaroid_comment->users->username); ?>">
+							<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_comment->users->email)));?>?s=80" alt="<?php echo $polaroid_comment->users->username; ?> comment."/>
+						</a>
+					</div>
+					<div class="small-10 columns">
+						<p>
+							<strong>
+								<a href="<?php echo $this->url->get("/user/" .
+									$polaroid_comment->users->id . "/" .
+									$polaroid_comment->users->username); ?>">
+								<?php echo $polaroid_comment->users->username;?></a> said:
+							</strong>
+						</p>
+						<p>
+							<?php echo $polaroid_comment->comment; ?>
+						</p>
+					</div>
+				</div>
 
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
+			<?php endif ?>
 
+		<?php endforeach ?>
+
+	<?php endif ?>
 </div>

@@ -6,32 +6,28 @@
 	<div class="large-4 columns text-center panel">
 		<div class="row text-center">
 			<div class="large-6 text-left small-6 columns">
-				<h4>rivalerio90</h4>
+				<h4><?php echo $user_info->username; ?> </h4>
 			</div>
 			<div class="large-6 small-6 text-right columns">
 				<i class="fi-flag"></i>
 			</div>
 		</div>
-		<img src="http://placehold.it/250x250&amp;text=Thumbnail">
+		<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user_info->email))); ?>?s=250">
 	</div>
 	<div class="large-8 columns">
 		<div class="panel radius">
 			<div class="row">
-				<div class="large-6 columns">
-					<h4>Header</h4>
+				<div class="large-12 columns">
+					<h4><?php echo $user_info->full_name; ?></h4>
 					<hr>
-					<h5 class="subheader">Risus ligula, aliquam nec fermentum
-					                      vitae, sollicitudin eget urna. Donec
-					                      dignissim nibh fermentum odio ornare
-					                      sagittis.</h5>
-				</div>
-				<div class="large-6 columns">
-					<p>Suspendisse ultrices ornare tempor. Aenean eget ultricies
-					   libero. Phasellus non ipsum eros. Vivamus
-					   at dignissim massa. Aenean dolor libero, blandit quis
-					   interdum et, malesuada nec ligula. Nullam erat
-					   erat, eleifend sed pulvinar ac. Suspendisse ultrices
-					   ornare tempor. Aenean eget ultricies libero.</p>
+					<h5 class="subheader">
+						<?php echo $user_info->facebook_username; ?> |
+						<?php echo $user_info->twitter_username; ?> |
+						<?php echo $user_info->google_plus_username; ?>
+						<p>
+						<?php echo $user_info->bio; ?>
+						</p>
+					</h5>
 				</div>
 			</div>
 		</div>
@@ -58,102 +54,32 @@
 
 <!-- modal para as polaroids-->
 <div id="show-user-polaroids" class="reveal-modal" data-reveal
-     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-	<h2 id="firstModalTitle">Ricardo's Polaroids</h2>
+     aria-labelledby="Polaroids" aria-hidden="true" role="dialog">
+	<h2 class="text-center" id="Polaroids"><?php echo $user_info->username;?>'s Polaroids!</h2>
 
-	<div class="row">
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+		<div class="row text-center">
 
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+		<?php foreach ($user_polaroids as $user_polaroid): ?>
 
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+			<a href="<?php echo $this->url->get("/polaroid/" .
+				$user_polaroid->id ."/".
+				$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
+				<div class="large-3 small-12 medium-6 columns panel">
+					<img src="public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
+					<div class="panel">
+						<p><?php echo $user_polaroid->title; ?> </p>
+					</div>
+				</div>
+			</a>
 
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-		<div class="large-3 small-6 columns panel">
-			<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-			<div class="panel">
-				<p>Description</p>
-			</div>
-		</div>
-	</div>
+			<?php
+			$counter = 0;
+			if ($counter++ == 3 ) {
+				echo "</div><div class='row'>";
+				$counter = 0;
+			}
+			?>
+		<?php endforeach ?>
 
 	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
@@ -161,293 +87,27 @@
 
 <!-- modal para as routes -->
 <div id="show-user-routes" class="reveal-modal" data-reveal
-     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-	<h2 id="firstModalTitle">Ricardo's Routes</h2>
+     aria-labelledby="Routes" aria-hidden="true" role="dialog">
+	<h2 class="text-center" id="Routes"><?php echo $user_info->username; ?>'s Routes</h2>
 
-	<div class="panel">
-		<h4>Get in touch!</h4>
+	<?php foreach ($user_routes as $user_route): ?>
 
-		<div class="row">
-			<div class="large-9 columns">
-				<p>We'd love to hear from you, you attractive person you.</p>
-			</div>
-			<div class="large-3 columns">
-				<a href="#" class="radius button right">Contact Us</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="panel">
-		<h4>Get in touch!</h4>
-
-		<div class="row">
-			<div class="large-9 columns">
-				<p>We'd love to hear from you, you attractive person you.</p>
-			</div>
-			<div class="large-3 columns">
-				<a href="#" class="radius button right">Contact Us</a>
+		<div class="panel">
+			<h4><?php echo $user_route->title; ?></h4>
+			<div class="row">
+				<div class="large-9 columns">
+					<p><?php echo $user_route->description; ?></p>
+				</div>
+				<div class="large-3 columns">
+					<a href="<?php echo $this->url->get("/route/". $user_route->id ."/".
+						$this->tag->friendlyTitle($user_route->title, "-"));?>"
+					   class="radius button right"><i
+							class="fi-eye"></i></a>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="panel">
-		<h4>Get in touch!</h4>
-
-		<div class="row">
-			<div class="large-9 columns">
-				<p>We'd love to hear from you, you attractive person you.</p>
-			</div>
-			<div class="large-3 columns">
-				<a href="#" class="radius button right">Contact Us</a>
-			</div>
-		</div>
-	</div>
+	<?php endforeach ?>
 
 	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
-
-<?php if ($this->session->has("auth")): ?>
-
-	<div class="row panel">
-		<ul class="button-group even-2">
-			<li>
-				<a data-reveal-id="comment-user" href="#"
-				   class="button warning">
-					<i style="font-size: 20px;"
-					   class="fi-comment"></i> Comment
-				</a>
-			</li>
-			<li>
-				<a href="#" class="button success">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Follow
-				</a>
-			</li>
-		</ul>
-	</div>
-
-
-	<div id="comment-user" class="reveal-modal" data-reveal
-	     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-		<h2 id="firstModalTitle">Comment this out...</h2>
-
-		<form action="<?php echo $this->url->get("/user/comment"); ?>"
-		      method="post">
-
-			<textarea name="comment_polaroid"
-			          id="comment_textarea"
-			          cols="30"
-			          rows="10"
-			          placeholder="what are you thinking about this user?"></textarea>
-
-			<input type="hidden" name="user_id"
-			       value="<?php //echo $id_do user; ?>"/>
-
-			<input type="hidden"
-			       name="<?php echo $this->security->getTokenKey() ?>"
-			       value="<?php echo $this->security->getToken() ?>">
-
-			<input class="button" type="submit" value="Submit comment"/>
-		</form>
-
-		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-	</div>
-
-<?php else: ?>
-
-	<div class="row text-center">
-		<ul class="button-group even-1">
-			<li>
-				<a href="<?php echo $this->url->get("/sign-in-up?return_to="
-					. $this->router->getRewriteUri()); ?>"
-				   class="button">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Login to comment and Follow!
-				</a>
-			</li>
-		</ul>
-	</div>
-
-<?php endif ?>
-
-
-
-<div class="row panel">
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
-	<div class="row panel">
-		<div class="small-2 columns"><img
-				src="http://placehold.it/80x80&amp;text=[img]"></div>
-		<div class="small-10 columns">
-			<p>
-				<strong>Some Person said:</strong>
-				Bacon ipsum dolor sit amet nulla
-				ham qui sint exercitation eiusmod
-				commodo, chuck duis velit. Aute in
-				reprehenderit, dolore aliqua non
-				est magna in labore pig pork
-				biltong.
-			</p>
-		</div>
-	</div>
-
 </div>

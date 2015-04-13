@@ -20,10 +20,6 @@ class UserLikesRoute extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $id_route;
-
-    /**
-     * Initialize method for model.
-     */
     public function initialize()
     {
         $this->belongsTo('id_route', 'Routes', 'id', array('alias' => 'Routes'));

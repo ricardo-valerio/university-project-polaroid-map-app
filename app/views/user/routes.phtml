@@ -1,40 +1,22 @@
 <h1 class="headers-provisorios">UserController - routesAction</h1>
 
-<div class="panel">
-	<h4>Get in touch!</h4>
 
-	<div class="row">
-		<div class="large-9 columns">
-			<p>We'd love to hear from you, you attractive person you.</p>
-		</div>
-		<div class="large-3 columns">
-			<a href="#" class="radius button right">Contact Us</a>
+<?php foreach ($user_routes as $user_route): ?>
+
+	<div class="row panel">
+		<h4><?php echo $user_route->title; ?></h4>
+
+		<div class="row">
+			<div class="large-9 columns">
+				<p><?php echo $user_route->description; ?></p>
+			</div>
+			<div class="large-3 columns">
+				<a href="<?php echo $this->url->get("/route/" . $user_route->id . "/" .
+					$this->tag->friendlyTitle($user_route->title, "-")); ?>"
+				   class="radius button right"><i
+						class="fi-eye"></i></a>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div class="panel">
-	<h4>Get in touch!</h4>
-
-	<div class="row">
-		<div class="large-9 columns">
-			<p>We'd love to hear from you, you attractive person you.</p>
-		</div>
-		<div class="large-3 columns">
-			<a href="#" class="radius button right">Contact Us</a>
-		</div>
-	</div>
-</div>
-
-<div class="panel">
-	<h4>Get in touch!</h4>
-
-	<div class="row">
-		<div class="large-9 columns">
-			<p>We'd love to hear from you, you attractive person you.</p>
-		</div>
-		<div class="large-3 columns">
-			<a href="#" class="radius button right">Contact Us</a>
-		</div>
-	</div>
-</div>
+<?php endforeach ?>

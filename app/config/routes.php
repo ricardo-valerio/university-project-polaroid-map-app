@@ -25,8 +25,8 @@
 
 	$router->add("/people-online", array(
 
-			"controller" => "user",
-			"action"     => "index"
+		"controller" => "user",
+		"action"     => "index"
 	));
 
 	$router->add("/find", array(
@@ -44,35 +44,58 @@
 	// user/123
 	// user/123/rivalerio23
 	$router->add("/user/{user_id}/:params", array(
-			"controller" => "user",
-			"action"     => "show",
-			"params"     => 1
+
+		"controller" => "user",
+		"action"     => "show",
+		"params"     => 1
 	));
 
 	// polaroid/123
 	// polaroid/123/san-francisco-trip
 	$router->add("/polaroid/{polaroid_id}/:params", array(
+
 		"controller" => "polaroid",
 		"action"     => "show",
 		"params"     => 1
 	));
 
+	$router->add("/like-polaroid", array(
+
+		"controller" => "polaroid",
+		"action"     => "like"
+	));
+
+	$router->add("/comment/", array(
+
+		"controller" => "polaroid",
+		"action"     => "like"
+	));
+
+	$router->add("/comment-polaroid", array(
+
+		"controller" => "polaroid",
+		"action"     => "comment"
+	));
+
 	// route/123
 	// route/123/route-in-san-francisco
 	$router->add("/route/{route_id}/:params", array(
+
 		"controller" => "route",
 		"action"     => "show",
 		"params"     => 1
 	));
 
 	$router->add("/api/routes-likes", array(
-			"controller" => "api",
-			"action"     => "routesLikes"
+
+		"controller" => "api",
+		"action"     => "routesLikes"
 	));
 
 	$router->add("/api/polaroids-likes", array(
-			"controller" => "api",
-			"action"     => "polaroidsLikes"
+
+		"controller" => "api",
+		"action"     => "polaroidsLikes"
 	));
 
 	/***********************************************

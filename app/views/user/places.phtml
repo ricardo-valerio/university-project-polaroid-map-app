@@ -1,65 +1,29 @@
 <h1 class="headers-provisorios">UserController - placesAction</h1>
 
+<div class="row text-center">
 
-<div class="row">
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+	<?php foreach ($user_polaroids as $user_polaroid): ?>
 
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+		<a href="<?php echo $this->url->get("/polaroid/" .
+			$user_polaroid->id . "/" .
+			$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
+			<div class="large-3 small-12 medium-6 columns panel">
+				<img
+					src="public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
 
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+				<div class="panel">
+					<p><?php echo $user_polaroid->title; ?> </p>
+				</div>
+			</div>
+		</a>
 
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
+		<?php
+		$counter = 0;
+		if ($counter++ == 3) {
+			echo "</div><div class='row'>";
+			$counter = 0;
+		}
+		?>
+	<?php endforeach ?>
 
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
-	<div class="large-3 small-6 columns panel">
-		<img src="http://placehold.it/500x500&amp;text=Thumbnail">
-
-		<div class="panel">
-			<p>Description</p>
-		</div>
-	</div>
 </div>

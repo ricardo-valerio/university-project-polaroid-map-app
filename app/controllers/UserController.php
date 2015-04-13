@@ -46,6 +46,19 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - profileAction");
 		$this->view->setTemplateAfter("user-main");
 
+
+		$this->view->setVars(array(
+			"user_info"      => Users::findFirst($this->session->get("auth")["id"]),
+			"user_polaroids" => Polaroids::find(array(
+					"conditions" => "id_user = ". $this->session->get("auth")["id"],
+					"order"      => "datetime_created DESC"
+				)),
+			"user_routes" => Routes::find(array(
+				"conditions" => "id_user = " . $this->session->get("auth")["id"],
+				"order"      => "datetime_created DESC"
+			))
+		));
+
 	}
 
 	/**
@@ -66,6 +79,13 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - placesAction");
 		$this->view->setTemplateAfter("user-main");
 
+		$this->view->setVars(array(
+			"user_polaroids" => Polaroids::find(array(
+				"conditions" => "id_user = " . $this->session->get("auth")["id"],
+				"order"      => "datetime_created DESC"
+			))
+		));
+
 	}
 
 	/**
@@ -75,6 +95,13 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - routesAction");
 		$this->view->setTemplateAfter("user-main");
+
+		$this->view->setVars(array(
+			"user_routes"    => Routes::find(array(
+				"conditions" => "id_user = " . $this->session->get("auth")["id"],
+				"order"      => "datetime_created DESC"
+			))
+		));
 	}
 
 	/**
@@ -87,6 +114,9 @@ class UserController extends ControllerBase
 
 	}
 
+	/**
+	 * @route private
+	 */
 	public function likedAction()
 	{
 		$this->tag->appendTitle(" | UserController - likedAction");

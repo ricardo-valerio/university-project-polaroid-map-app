@@ -1,8 +1,9 @@
 
-$(function () {
+$(document).ready(function () {
 
     $(".tihidSearchBar").on("keyup", function (e) {
         var textQ = $(this).val();
+        console.log(textQ);
         // Search results dropdown
         $("#tihidOutput").fadeIn("fast");
         // Show Loading

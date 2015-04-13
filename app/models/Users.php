@@ -76,6 +76,12 @@ class Users extends \Phalcon\Mvc\Model
      * @var string
      */
     public $active;
+
+    /**
+     *
+     * @var string
+     */
+    public $bio;
     public function validation()
     {
 

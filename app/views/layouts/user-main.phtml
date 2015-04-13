@@ -1,28 +1,30 @@
-<?php $LOGADO = $this->session->has("auth"); ?>
-
 <div class="off-canvas-wrap docs-wrap move-left"
      data-offcanvas="">
 	<div class="inner-wrap">
 		<nav class="tab-bar">
-<!--			<section class="left-small">-->
-<!--				<a aria-expanded="false"-->
-<!--				   class="left-off-canvas-toggle menu-icon"><span></span></a>-->
-<!--			</section>-->
+
+			<section class="top-bar-section">
+				<!-- Right Nav Section -->
+				<ul class="left">
+					<li class="active">
+						<a href="<?php echo $this->url->get("/");
+						?>">Mapppp!</a>
+					</li>
+				</ul>
+			</section>
 
 			<section class="middle tab-bar-section">
 				<div class="row collapse">
 					<div style="height: 45px;" class="large-6 small-10
 						columns">
-						<form>
 							<div class="row collapse">
 								<div class="large-10 small-8 columns">
 									<?php $this->partial("partials/search-bar"); ?>
 								</div>
 							</div>
-						</form>
 					</div>
 
-					<?php if ($LOGADO): ?>
+					<?php if ($this->session->has("auth")): ?>
 						<?php $this->partial("partials/create-polaroid-button"); ?>
 					<?php else: ?>
 						<?php $this->partial("partials/sign-in-up-button"); ?>
@@ -30,7 +32,7 @@
 				</div>
 			</section>
 
-			<?php if ($LOGADO): ?>
+			<?php if ($this->session->has("auth")): ?>
 				<section class="right-small">
 					<a aria-expanded="false"
 					   class="right-off-canvas-toggle menu-icon"><span></span></a>
@@ -38,12 +40,8 @@
 			<?php endif ?>
 		</nav>
 
-<!--		<aside class="left-off-canvas-menu">-->
-<!--			--><?php //$this->partial("partials/left-side-nav"); ?>
-<!--		</aside>-->
 
-		<!--para quando o user está logado-->
-		<?php if ($LOGADO): ?>
+		<?php if ($this->session->has("auth")): ?>
 			<?php $this->partial("partials/right-side-nav"); ?>
 		<?php endif ?>
 
@@ -54,8 +52,6 @@
 			<?php echo $this->getContent(); ?>
 
 		</section>
-
-		<!--		<a class="exit-off-canvas"></a>-->
 
 	</div>
 </div>

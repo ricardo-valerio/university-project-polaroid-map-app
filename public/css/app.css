@@ -125,13 +125,14 @@ i {
     margin-right: 1.1rem;
 }
 
-.li1 .a1:hover {
-    color: white;
+.ul1 .li1:hover {
+    background-color: #444444;
+    color: #fff;
 }
 
-.ul1 li:hover {
-    background: #444444;
-    color: #fff;
+.ul1 .li1:hover > .a1 {
+    background-color: #444444;
+    color: white;
 }
 
 .selected {
@@ -234,4 +235,11 @@ i {
     margin-left: 12px;
     position: relative;
     top: 4px;
+}
+
+/******/
+
+.alert-box {
+    text-align: center;
+    font-size: 1.7em;
 }

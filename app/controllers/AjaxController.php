@@ -113,7 +113,7 @@ class AjaxController extends ControllerBase
 						?>
 						<li class="li1">
 							<a href="user/<?php echo $user->id, "/",
-							$this->tag->friendlyTitle($user->full_name, "-"); ?>"
+							$this->tag->friendlyTitle($user->username, "-"); ?>"
 							   class="a1">
 			                <span class="span1">
 				                <img class="img1"

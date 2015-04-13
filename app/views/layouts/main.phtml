@@ -1,5 +1,3 @@
-<?php $LOGADO = $this->session->has("auth"); ?>
-
 <div class="off-canvas-wrap docs-wrap move-right"
      data-offcanvas="">
 	<div style="height: 100%; height: 100vh;" class="inner-wrap">
@@ -13,24 +11,14 @@
 				<div class="row collapse">
 					<div style="height: 45px;" class="large-6 small-10
 						columns">
-								<form>
-									<div class="row collapse">
-										<div class="large-10 small-8 columns">
-<!--					<input type="text"-->
-<!--					       id="search-bar"-->
-<!--					       name="search-bar"-->
-<!--					       placeholder="Find polaroids, routes and people...">-->
-											<?php $this->partial("partials/search-bar"); ?>
-										</div>
-<!--										<div class="large-2 small-3 columns">-->
-<!--											<a href="#"-->
-<!--											   class="postfix button expand">Search</a>-->
-<!--										</div>-->
-									</div>
-								</form>
+						<div class="row collapse">
+							<div class="large-10 small-8 columns">
+								<?php $this->partial("partials/search-bar"); ?>
+							</div>
+						</div>
 					</div>
 
-					<?php if ($LOGADO): ?>
+					<?php if ($this->session->has("auth")): ?>
 						<?php $this->partial("partials/create-polaroid-button"); ?>
 					<?php else: ?>
 						<?php $this->partial("partials/sign-in-up-button"); ?>
@@ -38,7 +26,7 @@
 				</div>
 			</section>
 
-			<?php if ($LOGADO): ?>
+			<?php if ($this->session->has("auth")): ?>
 				<section class="right-small">
 					<a aria-expanded="false"
 					   class="right-off-canvas-toggle menu-icon"><span></span></a>
@@ -51,7 +39,7 @@
 		</aside>
 
 
-		<?php if ($LOGADO): ?>
+		<?php if ($this->session->has("auth")): ?>
 			<?php $this->partial("partials/right-side-nav"); ?>
 		<?php endif ?>
 
@@ -63,9 +51,6 @@
 			<?php echo $this->getContent(); ?>
 
 		</section>
-
-
-		<!--		<a class="exit-off-canvas"></a>-->
 
 	</div>
 </div>
