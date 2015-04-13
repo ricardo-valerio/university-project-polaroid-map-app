@@ -889,14 +889,17 @@
 
 				<p id="tabs-deeplink-content-2">
 
-				<form action="" method="post">
-						<div class="row collapse">
+				<form action="#bazinga" method="post">
+					<div class="row collapse">
 						<div class="small-3 large-2 columns">
 							<span style="background-color: #007095; color:
 							white;" class="prefix">New Password:</span>
 						</div>
 						<div class="small-9 large-10 columns">
-							<input type="password" name="password" value="">
+							<input class="text-center"
+							       style="font-size: 2em;"
+							       type="password"
+							       name="new_password" value="" />
 						</div>
 					</div>
 
@@ -906,14 +909,50 @@
 							white;" class="prefix">Confirm Password:</span>
 						</div>
 						<div class="small-9 large-10 columns">
-							<input type="password" name="confirmed_password"
-							       value="">
+							<input class="text-center"
+							       style="font-size: 2em;"
+							       type="password"
+							       name="confirmed_new_password"
+							       value="" />
 						</div>
 					</div>
 
 					<br/><br/>
-				<input class="button expand success" type="submit"
-				       value="Update Password"/>
+					<a href="#"
+					   class="button success expand"
+					   data-reveal-id="updatePassWord">Update Password</a>
+
+					<div id="updatePassWord"
+					     class="reveal-modal"
+					     data-reveal
+					     aria-labelledby="modalUpdateTitle"
+					     aria-hidden="true"
+					     role="dialog">
+
+							<h2 id="modalUpdateTitle">
+								Enter your current Password
+							</h2>
+
+							<div class=" lead row collapse">
+								<div class="small-3 large-2 columns">
+								<span style="background-color: #007095; color:
+								white;" class="prefix">Confirm Password:</span>
+								</div>
+								<div class="small-9 large-10 columns">
+									<input class="text-center"
+									       style="font-size: 2em;"
+									       type="password"
+									       name="current_password"
+									       value="" />
+								</div>
+							</div>
+
+								<input class="button expand success"
+								       type="submit"
+								       value="Submit"/>
+						<a class="close-reveal-modal" aria-label="Close">
+							&#215;</a>
+					</div>
 
 				</form>
 
