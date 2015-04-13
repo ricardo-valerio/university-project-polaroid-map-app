@@ -13,7 +13,10 @@
 		<?php echo $this->tag->stylesheetLink("/css/app.css"); ?>
 
 		<?php echo $this->tag->javascriptInclude("/js/vendor/modernizr.js"); ?>
-		<?php echo $this->tag->javascriptInclude("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", false); ?>
+		<?php if ($this->assets->collection('header')->count()): ?>
+			<?php $this->assets->outputJs('header'); ?>
+		<?php endif ?>
+
 </head>
 	<body>
 
@@ -23,11 +26,11 @@
 		<?php echo $this->tag->javascriptInclude("/js/vendor/jquery.js"); ?>
 		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.min.js"); ?>
 		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.abide.js"); ?>
-		<?php echo $this->tag->javascriptInclude("/js/app-main-map.js"); ?>
-		<?php echo $this->tag->javascriptInclude("/js/app-left-side-nav.js"); ?>
-		<?php echo $this->tag->javascriptInclude("http://feather.aviary.com/imaging/v1/editor.js", FALSE); ?>
-		<?php echo $this->tag->javascriptInclude("/js/app-polaroid-creation.js"); ?>
 		<?php echo $this->tag->javascriptInclude("/js/app-search-bar.js"); ?>
+
+		<?php if ($this->assets->collection('footer')->count()): ?>
+			<?php $this->assets->outputJs('footer'); ?>
+		<?php endif ?>
 
 		<script>
 			$(document).foundation();

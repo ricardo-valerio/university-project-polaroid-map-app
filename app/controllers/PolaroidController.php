@@ -115,6 +115,11 @@ class PolaroidController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | PolaroidController - createAction");
 
+		$this->assets
+			->collection('footer')
+				->addJs("http://feather.aviary.com/imaging/v1/editor.js")
+				->addJs("/js/app-polaroid-creation.js");
+
 		if ($this->request->isPost()
 			&& $this->request->hasPost("polaroid_location")
 			&& $this->security->checkToken()
