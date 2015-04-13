@@ -112,6 +112,8 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - followingAction");
 		$this->view->setTemplateAfter("user-main");
 
+		$following = UserIsFollowing::find("id_user_who_follows = ". $this->session->get("auth")["id"] );
+		$this->view->setVar("following", $following);
 	}
 
 	/**
