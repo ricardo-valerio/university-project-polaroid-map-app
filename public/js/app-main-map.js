@@ -28,7 +28,7 @@ $(document).ready(function () {
         .done(function (data) {
 
             var places = data;
-            console.log(places);
+            //console.log(places);
 
             var shape = {
                 coords: [1, 1, 1, 20, 18, 20, 18, 1],
