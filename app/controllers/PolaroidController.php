@@ -28,6 +28,11 @@ class PolaroidController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | PolaroidController - showAction");
 
+		$this->assets
+			->collection('header')
+			->addJs("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", FALSE);
+
+
 		$polaroid_id = $this->dispatcher->getParam("polaroid_id", "int");
 
 		if ($polaroid_id != NULL)
@@ -115,10 +120,20 @@ class PolaroidController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | PolaroidController - createAction");
 
+
+		if(!$this->session->has("photo_name"))
+			$this->response->redirect("/");
+
+
+		$this->assets
+			->collection('header')
+			->addJs("https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places", FALSE);
+
 		$this->assets
 			->collection('footer')
 				->addJs("http://feather.aviary.com/imaging/v1/editor.js")
 				->addJs("/js/app-polaroid-creation.js");
+
 
 		if ($this->request->isPost()
 			&& $this->request->hasPost("polaroid_location")

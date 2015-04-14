@@ -3,7 +3,7 @@
 <?php $this->flashSession->output(); ?>
 
 <div class="row panel">
-	<div class="row">
+	<div class="row panel">
 		<div class="small-6 columns text-left">
 			<a href="<?php echo $this->url->get("/user/" .
 				$polaroid_info->users->id . "/" .
@@ -23,9 +23,10 @@
 		</div>
 	</div>
 	<div class="row">
+		<!-- large-6 small-12 medium-6 text-center small-centered columns
+		panel -->
 		<div style="background-color: white;"
-		     class="large-6 small-12 medium-6 text-center small-centered columns
-		     panel">
+		     class="large-6 columns panel">
 			<div class="panel">
 				<img src="<?php echo $this->url->get("/public/img/polaroids/" . $polaroid_info->photo_hash_file_name); ?>"/>
 			</div>
@@ -34,6 +35,10 @@
 				<h3><?php echo $polaroid_info->title; ?></h3>
 				<h5 class="subheader"><?php echo $polaroid_info->description; ?></h5>
 			</div>
+		</div>
+		<div style="background-color: white;"
+		     class="large-6 columns panel">
+			<div id="map-canvas"></div>
 		</div>
 	</div>
 </div>
@@ -127,8 +132,6 @@
 
 		<?php foreach ($polaroid_comments as $polaroid_comment): ?>
 
-<!-- $polaroid_info->users->id -->
-
 			<?php if ($polaroid_comment->users->id == $polaroid_info->users->id): ?>
 
 				<div style="background-color: beige;" class="row panel">
@@ -189,3 +192,26 @@
 
 	<?php endif ?>
 </div>
+
+<script>
+	function initialize()
+	{
+		var myLatlng = new google.maps.LatLng(<?php echo $polaroid_info->lat;?>,
+											  <?php echo $polaroid_info->lon;?>);
+
+		var mapOptions = {
+			zoom: 11,
+			center: myLatlng,
+			disableDefaultUI: true
+		};
+
+		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		var marker = new google.maps.Marker({
+		position: myLatlng,
+		map: map,
+		title: "<?php echo $polaroid_info->title; ?>"
+		});
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>

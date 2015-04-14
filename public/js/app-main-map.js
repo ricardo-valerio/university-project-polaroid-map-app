@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var mapOptions = {
-        zoom: 10,
+        zoom: 3,
         center: new google.maps.LatLng(38.691584, -9.215977),
         mapTypeControl: true,
         mapTypeControlOptions: {
