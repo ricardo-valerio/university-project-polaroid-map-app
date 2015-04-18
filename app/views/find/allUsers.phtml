@@ -1,0 +1,24 @@
+<h1 class="headers-provisorios">FindController - allUsersAction</h1>
+
+<?php $this->flashSession->output(); ?>
+
+
+
+<?php foreach ($page->items as $item): ?>
+	<ul>
+		<li><?php echo $item->id; ?></li>
+		<li><?php echo $item->username; ?></li>
+		<li><?php echo $item->full_name; ?></li>
+	</ul>
+<?php endforeach ?>
+
+
+<?php echo $this->tag->linkTo("/find-users/", "First") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-users/". $page->before, "Previous") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-users/". $page->next, "Next") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-users/". $page->last, "Last"); ?>
+
+<br/><br/>
+<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
+<br/>
+<?php echo "There are a total of items of ", $page->total_items; ?>

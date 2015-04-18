@@ -43,6 +43,7 @@ $(document).ready(function () {
                     }
 
                     $(".liResults").html(htmlContent);
+                    $("#findMoreLink").attr("href", "find/all/" + responseJson.search_query);
                     //        // Hide Loading
                     $(".hide").hide();
 

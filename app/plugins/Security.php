@@ -51,7 +51,7 @@ class Security extends Plugin
 				'api'      => array('places', 'routes', 'polaroidsLikes', 'routesLikes', 'map', 'tests'),
 				'ajax'     => array('index', 'searchBar'),
 				'index'    => array('index'),
-				'find'     => array('index', 'places', 'routes', 'users'),
+				'find'     => array('index', 'polaroids', 'routes', 'users', 'all', 'allUsers', 'allPolaroids', 'allRoutes'),
 				'polaroid' => array('show', 'upload'),
 				'route'    => array('show'),
 				'session'  => array('index', 'login', 'signUp', 'logout'),

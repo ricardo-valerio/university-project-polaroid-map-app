@@ -105,6 +105,7 @@ class Users extends \Phalcon\Mvc\Model
         $this->belongsTo('id_country', 'Countries', 'id', array('alias' => 'Countries'));
         $this->hasMany('id', 'PolaroidComments', 'id_user', NULL);
         $this->hasMany('id', 'Polaroids', 'id_user', NULL);
+        $this->hasMany('id', 'Routes', 'id_user', NULL);
         $this->hasMany('id', 'RouteComments', 'id_user', NULL);
         $this->belongsTo('id_country', 'Countries', 'id', NULL);
     }

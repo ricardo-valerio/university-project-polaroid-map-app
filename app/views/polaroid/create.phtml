@@ -3,7 +3,10 @@
 <?php $this->flashSession->output(); ?>
 
 <div class="row panel">
-	<form action="<?php echo $this->url->get("/create-polaroid"); ?>" accept-charset="utf-8" method="post">
+<!--	<form action="--><?php //echo $this->url->get("/create-polaroid"); ?><!--" accept-charset="utf-8" method="post">-->
+	<form action="http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/create-polaroid"
+	      accept-charset="utf-8"
+	      method="post">
 
 		<div class="row text-center">
 
@@ -49,9 +52,10 @@
 			     class="large-6 columns panel">
 				<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 				<div id="map-canvas"></div>
-				<input type="text" name="lat_lon_id" id="lat_lon_id"/>
-				<input type="text" name="lat" id="lat"/>
-				<input type="text" name="lon" id="lon"/>
+				<input type="hidden" name="lat_lon_id" id="lat_lon_id"/>
+				<input type="hidden" name="lat" id="lat"/>
+				<input type="hidden" name="lon" id="lon"/>
+				<input type="hidden" name="polaroid_country" id="polaroid_country"/>
 			</div>
 		</div>
 		<div class="row text-center">
@@ -121,11 +125,24 @@ function initialize() {
 				position: place.geometry.location
 			});
 
+			/**
+			 * encontrar o país onde está o marker e colocar num dos inputs
+			 */
+			for (var i = 0; i < place.address_components.length; i++) {
+				if(place.address_components[i].types[0] == "country"
+				   || place.address_components[i].types[1] == "country")
+					document.getElementById("polaroid_country").value = place
+						.address_components[i].long_name;
+//				console.log("Country: " + place.address_components[i].long_name);
+			}
 
 //			console.log("Location: " + place.geometry.location);
 //			console.log("Lat: " + place.geometry.location.lat());
 //			console.log("Lat: " + place.geometry.location.lng());
 
+			/**
+			 * colocar a lat e lon do marker nos inputs
+			 */
 			document.getElementById("lat_lon_id").value = place.geometry.location.lat() + "|" +
 														  place.geometry.location.lng();
 
@@ -139,6 +156,10 @@ function initialize() {
 
 		map_here.fitBounds(bounds);
 
+		/**
+		 * listener para quando o marker é movido
+		 * e de seguida mudar as posições da lat e lon
+		 */
 		google.maps.event.addListener(window.myMarker, 'dragend', function (evt) {
 //			console.log("O marker foi movido!");
 			document.getElementById("lat_lon_id").value = evt.latLng.lat() + "|" +

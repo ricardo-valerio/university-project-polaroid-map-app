@@ -44,12 +44,14 @@ class Routes extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $number_of_likes;
+
     public function initialize()
     {
         $this->hasMany('id', 'Route_comments', 'id_route', array('alias' => 'Route_comments'));
         $this->hasMany('id', 'Route_has_polaroid', 'id_route', array('alias' => 'Route_has_polaroid'));
         $this->hasMany('id', 'RouteComments', 'id_route', NULL);
         $this->hasMany('id', 'RouteHasPolaroid', 'id_route', NULL);
+	    $this->belongsTo('id_user', 'Users', 'id', array('alias' => 'Users'));
     }
 
 }

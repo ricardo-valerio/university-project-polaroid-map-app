@@ -29,10 +29,25 @@
 		"action"     => "index"
 	));
 
-	$router->add("/find", array(
+	$router->add("/find-users/:params", array(
 
 		"controller" => "find",
-		"action"     => "index"
+		"action"     => "allUsers",
+		"params"     => 1
+	));
+
+	$router->add("/find-polaroids/:params", array(
+
+		"controller" => "find",
+		"action"     => "allPolaroids",
+		"params"     => 1
+	));
+
+	$router->add("/find-routes/:params", array(
+
+		"controller" => "find",
+		"action"     => "allRoutes",
+		"params"     => 1
 	));
 
 	$router->add("/upload-photo", array(

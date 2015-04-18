@@ -1,0 +1,28 @@
+<h1 class="headers-provisorios">FindController - allPolaroidsAction</h1>
+
+<?php $this->flashSession->output(); ?>
+
+
+<?php foreach ($page->items as $item): ?>
+	<ul>
+		<li><?php echo $item->id; ?></li>
+		<li><?php echo $item->title; ?></li>
+		<li><?php echo $item->description; ?></li>
+		<li><?php echo $item->photo_hash_file_name; ?></li>
+		<li><?php echo $item->number_of_likes; ?></li>
+		<li><?php echo $item->country; ?></li>
+		<li><?php echo $item->id_user; ?></li>
+		<li><?php echo $item->users->username; ?></li>
+	</ul>
+<?php endforeach ?>
+
+
+<?php echo $this->tag->linkTo("/find-polaroids/", "First") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-polaroids/". $page->before, "Previous") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-polaroids/". $page->next, "Next") . " | "; ?>
+<?php echo $this->tag->linkTo("/find-polaroids/". $page->last, "Last"); ?>
+
+<br/><br/>
+<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
+<br/>
+<?php echo "There are a total of items of ", $page->total_items; ?>

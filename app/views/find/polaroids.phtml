@@ -1,8 +1,7 @@
-<h1 class="headers-provisorios">FindController - routesAction</h1>
+<h1 class="headers-provisorios">FindController - polaroidsAction</h1>
 
 
 <?php $this->flashSession->output(); ?>
-
 
 <?php if (isset($searched_query)): ?>
 	<?php echo $searched_query; ?>
@@ -13,17 +12,19 @@
 		<li><?php echo $item->id; ?></li>
 		<li><?php echo $item->title; ?></li>
 		<li><?php echo $item->description; ?></li>
+		<li><?php echo $item->photo_hash_file_name; ?></li>
 		<li><?php echo $item->number_of_likes; ?></li>
+		<li><?php echo $item->country; ?></li>
 		<li><?php echo $item->id_user; ?></li>
 		<li><?php echo $item->users->username; ?></li>
 	</ul>
 <?php endforeach ?>
 
 
-<?php echo $this->tag->linkTo("/find/routes/". $searched_query, "First") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/routes/". $searched_query . "/" . $page->before, "Previous") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/routes/". $searched_query . "/" . $page->next, "Next") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/routes/". $searched_query . "/" . $page->last, "Last"); ?>
+<?php echo $this->tag->linkTo("/find/polaroids/". $searched_query, "First") ." | "; ?>
+<?php echo $this->tag->linkTo("/find/polaroids/". $searched_query ."/". $page->before, "Previous") ." | "; ?>
+<?php echo $this->tag->linkTo("/find/polaroids/". $searched_query ."/". $page->next, "Next") ." | "; ?>
+<?php echo $this->tag->linkTo("/find/polaroids/". $searched_query ."/". $page->last, "Last"); ?>
 
 <br/><br/>
 <?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
