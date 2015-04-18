@@ -129,10 +129,10 @@
 		"action"     => "account"
 	));
 
-	$router->add("/my-places", array(
+	$router->add("/my-polaroids", array(
 
 		"controller" => "user",
-		"action"     => "places"
+		"action"     => "polaroids"
 	));
 
 	$router->add("/my-routes", array(

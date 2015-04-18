@@ -97,9 +97,13 @@ class PolaroidController extends ControllerBase
 				$photo_new_name = sha1($uploaded_photo[0]->getName() . microtime())
 						 . "." . $uploaded_photo[0]->getExtension();
 
-				$uploaded_photo[0]->moveTo("img/polaroids/" . $photo_new_name );
+				$uploaded_photo[0]->moveTo("img/polaroids/" . $photo_new_name);
 
 				// guardar em persistência (entre requests) o nome da imagem
+				if ($this->session->has("photo_name")) {
+					$old_image_uploaded = "img/polaroids/" . $this->session->get("photo_name");
+					unlink($old_image_uploaded);
+				}
 				$this->session->set("photo_name", $photo_new_name);
 				// redireccionar para a página /create-polaroid
 				// com a photo já no html para poder ser editada
@@ -127,7 +131,7 @@ class PolaroidController extends ControllerBase
 
 		$this->assets
 			->collection('header')
-			->addJs("https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places", FALSE);
+				->addJs("https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places", FALSE);
 
 		$this->assets
 			->collection('footer')
@@ -137,6 +141,12 @@ class PolaroidController extends ControllerBase
 
 		if ($this->request->isPost()
 			&& $this->request->hasPost("polaroid_location")
+			&& $this->request->hasPost("polaroid_title")
+			&& $this->request->hasPost("polaroid_description")
+			&& $this->request->hasPost("lat_lon_id")
+			&& $this->request->hasPost("lat")
+			&& $this->request->hasPost("lon")
+			&& $this->request->hasPost("polaroid_country")
 			&& $this->security->checkToken()
 		) {
 			$this->view->disable();
@@ -148,55 +158,85 @@ class PolaroidController extends ControllerBase
 //			echo "<br>";
 //			echo pathinfo($image_location)["dirname"];
 //			echo "<br>";
-
-			echo "O nome do ficheiro: ", $image;
-			var_dump($this->request->getPost());
-			die;
-
+//
+//			echo "O nome do ficheiro: ", $image;
+//			var_dump($this->request->getPost());
 
 			if(substr($image_location, 0, 4) === "http")
 			{
+
 				// fazer download da imagem que foi editada
 				$path  = "img/polaroids/";
 				$ch    = curl_init($image_location);
 				$fp    = fopen($path . $image, 'wb');
 				curl_setopt($ch, CURLOPT_FILE, $fp);
 				curl_setopt($ch, CURLOPT_HEADER, 0);
-				$result = curl_exec($ch);
+//				$result = curl_exec($ch);
+				curl_exec($ch);
 				curl_close($ch);
 				fclose($fp);
 
 				// guardá-la na bd
 				$polaroid                       = new Polaroids();
-				$polaroid->title                = $this->request->getPost("polaroid_title", "string");
-				$polaroid->description          = $this->request->getPost("polaroid_description", "string");
+				$polaroid->lat_lon_id           = $this->request->getPost("lat_lon_id", "string");
+				$polaroid->lat                  = $this->request->getPost("lat", "float");
+				$polaroid->lon                  = $this->request->getPost("lon", "float");
+				$polaroid->title                = $this->request->getPost("polaroid_title", array("striptags", "string"));
+				$polaroid->description          = $this->request->getPost("polaroid_description", array("striptags", "string"));
 				$polaroid->photo_hash_file_name = $image;
+				$polaroid->country              = $this->request->getPost("polaroid_country", "string");
 				$polaroid->id_user              = $this->session->get("auth")["id"];
+				$polaroid->number_of_likes      = 0;
+				$polaroid->datetime_created     = date('Y-m-d H:i:s');
+				$polaroid->datetime_updated     = date('Y-m-d H:i:s');
 
-				// remover a original sem efeitos
-				$old_image_uploaded = "img/polaroids/" . $this->session->get("photo_name");
-				unlink($old_image_uploaded);
-				// remover a variável de sessão com o nome da foto original
-				$this->session->remove("photo_name");
 
-				// redireccionar para a página show polaroid da imagem guardada
-				return $this->response->redirect("/show/#NUMBER_ID#/".
-					$this->tag->friendlyTitle($polaroid->title, "-"));
+				if ($polaroid->save()) {
+					// remover a original sem efeitos
+					$old_image_uploaded = "img/polaroids/" . $this->session->get("photo_name");
+					unlink($old_image_uploaded);
+					// remover a variável de sessão com o nome da foto original
+					$this->session->remove("photo_name");
+
+					// redireccionar para a página show polaroid da imagem guardada
+					return $this->response->redirect("/polaroid/". $polaroid->id ."/".
+						$this->tag->friendlyTitle($polaroid->title, "-"));
+				}else{
+					foreach ($polaroid->getMessages() as $message)
+					$this->flashSession->error($message . "<a href = '#' class='close' >&times;</a >");
+
+					return $this->response->redirect("/create-polaroid");
+				}
+
 			}else
 			{
 				// guardá-la na bd
 				$polaroid                       = new Polaroids();
-				$polaroid->title                = $this->request->getPost("polaroid_title", "string");
-				$polaroid->description          = $this->request->getPost("polaroid_description", "string");
+				$polaroid->lat_lon_id           = $this->request->getPost("lat_lon_id", "string");
+				$polaroid->lat                  = $this->request->getPost("lat", "float");
+				$polaroid->lon                  = $this->request->getPost("lon", "float");
+				$polaroid->title                = $this->request->getPost("polaroid_title", array("striptags", "string"));
+				$polaroid->description          = $this->request->getPost("polaroid_description", array("striptags", "string"));
 				$polaroid->photo_hash_file_name = $this->session->get("photo_name");
+				$polaroid->country              = $this->request->getPost("polaroid_country", "string");
 				$polaroid->id_user              = $this->session->get("auth")["id"];
+				$polaroid->number_of_likes      = 0;
+				$polaroid->datetime_created     = date('Y-m-d H:i:s');
+				$polaroid->datetime_updated     = date('Y-m-d H:i:s');
 
-				// remover a variável de sessão com o nome da foto original
-				$this->session->remove("photo_name");
+				if ($polaroid->save()) {
+					// remover a variável de sessão com o nome da foto original
+					$this->session->remove("photo_name");
 
-				// redireccionar para a página show polaroid da imagem guardada
-				return $this->response->redirect("/show/#NUMBER_ID#/" .
-					$this->tag->friendlyTitle($polaroid->title, "-"));
+					// redireccionar para a página show polaroid da imagem guardada
+					return $this->response->redirect("/polaroid/" . $polaroid->id . "/" .
+						$this->tag->friendlyTitle($polaroid->title, "-"));
+				}else{
+					foreach ($polaroid->getMessages() as $message)
+						$this->flashSession->error($message . "<a href = '#' class='close' >&times;</a >");
+
+					return $this->response->redirect("/create-polaroid");
+				}
 
 			}
 		}

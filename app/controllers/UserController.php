@@ -74,9 +74,9 @@ class UserController extends ControllerBase
 	/**
 	 * @route private
 	 */
-	public function placesAction()
+	public function polaroidsAction()
 	{
-		$this->tag->appendTitle(" | UserController - placesAction");
+		$this->tag->appendTitle(" | UserController - polaroidsAction");
 		$this->view->setTemplateAfter("user-main");
 
 		$this->view->setVars(array(
