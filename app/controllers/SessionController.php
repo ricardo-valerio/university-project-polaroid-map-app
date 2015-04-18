@@ -26,12 +26,14 @@
 			$email    = $this->request->getPost('user_email_or_username', 'email');
 			$username = $this->request->getPost('user_email_or_username', 'alphanum');
 			$password = $this->request->getPost('user_password');
-			$password = sha1($password);
+//			$password = sha1($password);
 
 			$user = Users::findFirst("(email='$email' OR username='$username')
-									 AND password='$password' AND active='Y'");
+									   AND active='Y'");
 
-			if ($user != false) {
+			$valid_pass = $this->security->checkHash($password, $user->password);
+
+			if ($user != false && $valid_pass != false) {
 				$this->_registerSession($user);
 				if ($this->request->hasQuery("return_to")) {
 					return $this->response->redirect($this->request->getQuery("return_to"));
@@ -39,7 +41,7 @@
 				return $this->response->redirect("/");
 			}
 
-			$this->flashSession->error('Wrong email/password');
+			$this->flashSession->error('Wrong email/username or password');
 			return $this->response->redirect("/sign-in-up");
 		}
 		return $this->response->redirect("/sign-in-up");
@@ -53,8 +55,8 @@
 	private function _registerSession($user)
 	{
 		$this->session->set('auth', array(
-			'id'   => $user->id,
-			'name' => $user->name
+			'id'       => $user->id,
+			'username' => $user->username
 		));
 	}
 
@@ -94,19 +96,19 @@
 				return false;
 			}
 
-			$user             = new Users();
-			$user->username   = $username;
-			$user->password   = sha1($password);
-			$user->full_name  = $fullname;
-			$user->email      = $email;
+			$user                      = new Users();
+			$user->username            = $username;
+			$user->password            = $this->security->hash($password);
+			$user->full_name           = $fullname;
+			$user->email               = $email;
+			$user->active              = 'Y';
+			$user->datetime_last_login = date('Y-m-d H:i:s');
 
 			if ($user->save() == false) {
 				foreach ($user->getMessages() as $message) {
 					$this->flashSession->error((string)$message);
 				}
 			} else {
-				Tag::setDefault('email', '');
-				Tag::setDefault('password', '');
 				$this->flashSession->success('Thanks for sign-up, please log-in to
 				start creating polaroids!');
 

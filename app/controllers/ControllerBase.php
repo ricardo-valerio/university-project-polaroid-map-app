@@ -9,7 +9,7 @@ class ControllerBase extends Controller
 		$this->tag->setDoctype(\Phalcon\Tag::HTML5);
 		$this->tag->setTitle("Polaroid-Map-App");
 
-		$this->getLoggedUserInfo();
+//		$this->getLoggedUserInfo();
 	}
 
 	/**
@@ -20,12 +20,12 @@ class ControllerBase extends Controller
 	 *
 	 * http://docs.phalconphp.com/en/latest/reference/controllers.html#initializing-controllers
 	 */
-	protected function getLoggedUserInfo()
-	{
-		if ($this->session->has("auth")) {
-			$logged_user = Users::findFirst($this->session->get('auth')['id']);
-			$this->view->setVar("logged_user", $logged_user);
-		}
-	}
+//	protected function getLoggedUserInfo()
+//	{
+//		if ($this->session->has("auth")) {
+//			$logged_user = Users::findFirst($this->session->get('auth')['id']);
+//			$this->view->setVar("logged_user", $logged_user);
+//		}
+//	}
 
 }

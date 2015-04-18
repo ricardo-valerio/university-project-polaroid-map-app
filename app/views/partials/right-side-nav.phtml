@@ -1,6 +1,6 @@
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
-		<li><label><?php echo $logged_user->full_name; ?></label></li>
+		<li><label><?php echo $this->session->get("auth")["username"]; ?></label></li>
 		<li>
 			<a style="border: 1px solid rgb(38, 38, 38);
 						text-align: center;"
@@ -8,7 +8,8 @@
 			   href="<?php echo $this->url->get("/my-profile"); ?>">
 				<img height="96" width="96"
 				     src="http://www.gravatar.com/avatar/<?php
-					     echo md5(strtolower(trim($logged_user->email)));?>?s=96">
+					     echo md5(strtolower(trim(Users::findFirst
+					     ($this->session->get("auth")["id"])->email)));?>?s=96">
 			</a>
 		</li>
 		<br/><br/>

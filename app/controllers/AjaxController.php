@@ -12,7 +12,6 @@ class AjaxController extends ControllerBase
 //	    $users = Users::find(array(
 //		    "conditions" => "name LIKE '%" . $this->request->getQuery("q", "string") . "%'"
 //	    ));
-
     }
 
 

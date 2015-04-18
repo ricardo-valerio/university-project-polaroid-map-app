@@ -17,6 +17,24 @@
 	</ul>
 <?php endforeach ?>
 
+<ul class="pagination" role="menubar" aria-label="Pagination">
+	<?php if ($page->current != $page->first): ?>
+	<li><a href="<?php echo $this->url->get("/find/users/" . $searched_query); ?>">First</a></li>
+	<li class="arrow"><a href="<?php echo $this->url->get("/find/users/" . $searched_query . "/" . $page->before);?>">&laquo;
+			Previous</a></li>
+	<?php endif ?>
+
+	<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+	<li class="unavailable" aria-disabled="true"><a href="">&hellip; of <?php echo $page->total_items; ?></a></li>
+
+	<?php if ($page->current != $page->last): ?>
+	<li class="arrow"><a href="<?php echo $this->url->get("/find/users/" . $searched_query . "/" . $page->next); ?>">Next &raquo;</a></li>
+	<li><a href="<?php echo $this->url->get("/find/users/" . $searched_query
+			. "/" . $page->last); ?>">Last</a></li>
+	<?php endif ?>
+
+</ul>
+
 
 <?php echo $this->tag->linkTo("/find/users/". $searched_query , "First") ." | "; ?>
 <?php echo $this->tag->linkTo("/find/users/". $searched_query ."/". $page->before, "Previous") ." | "; ?>
