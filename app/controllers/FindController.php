@@ -28,6 +28,10 @@ class FindController extends ControllerBase
 
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
+		if (!Polaroids::count("title LIKE '%" . $query_filtered . "%'")) {
+			$this->response->redirect("/find/all");
+		}
+
 		$this->view->setVar("searched_query", $query_filtered);
 
 		$paginator = new Phalcon\Paginator\Adapter\Model(
@@ -53,6 +57,9 @@ class FindController extends ControllerBase
 
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
+		if (!Routes::count("title LIKE '%" . $query_filtered . "%'")) {
+			$this->response->redirect("/find/all");
+		}
 
 		$this->view->setVar("searched_query", $query_filtered);
 
@@ -79,6 +86,9 @@ class FindController extends ControllerBase
 
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
+		if (!Users::count("full_name LIKE '%" . $query_filtered . "%'")){
+			$this->response->redirect("/find/all");
+		}
 
 		$this->view->setVar("searched_query", $query_filtered);
 
