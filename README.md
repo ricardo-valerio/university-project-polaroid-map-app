@@ -26,3 +26,10 @@ TODO:
 			
 
 			/find/all/{slug}
+			/find/users/{slug}
+			/find/polaroids/{slug}
+			/find/routes/{slug}
+			/find/routes/{slug}
+			/find-users
+			/find-polaroids
+			/find-routes
