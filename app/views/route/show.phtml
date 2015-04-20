@@ -1,6 +1,27 @@
 <h1 class="headers-provisorios">RouteController - showAction</h1>
 
 
+<div class="large-8 columns panel">
+	<ul class="tabs" data-tab>
+		<li class="tab-title active"><a href="#panel1">Route Map</a></li>
+		<li class="tab-title"><a href="#panel2">Directions</a></li>
+	</ul>
+	<div class="tabs-content">
+		<div class="content active panel" id="panel1">
+			<div id='gmap-route' class="large-8" ></div>
+		</div>
+		<div class="content" id="panel2">
+			<div id="route"></div>
+		</div>
+	</div>
+</div>
+<div class="large-4 columns panel">
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur consectetur doloribus eum necessitatibus nesciunt obcaecati quos, recusandae sunt voluptas? Culpa dicta id in maxime non recusandae voluptate? Iure, voluptate?</p>
+</div>
+
+
+<hr/>
+
 <h1>Info da Rota</h1>
 
 <?php if (isset($route_info)): ?>
@@ -25,3 +46,47 @@
 	<?php echo $route_polaroid->polaroids->photo_hash_file_name; ?> <br/>
 	<?php echo $route_polaroid->datetime_associated; ?> <br/>
 <?php endforeach ?>
+
+
+<script>
+	window.onload = function () {
+
+		var data = [
+
+			    <?php foreach ($route_polaroids as $route_polaroid): ?>
+					<?php echo "{"; ?>
+					    <?php echo "lat: " . $route_polaroid->polaroids->lat.",";?>
+					    <?php echo "lon: " . $route_polaroid->polaroids->lon.","; ?>
+					    <?php echo "title: '".$route_polaroid->polaroids->title . "',"; ?>
+					    <?php echo "stopover: true"; ?>
+				    <?php echo "},"; ?>
+			    <?php endforeach ?>
+		];
+
+
+		new Maplace({
+			locations         : data,
+			map_div           : '#gmap-route',
+			controls_div      : false,
+			generate_controls : false,
+			show_markers      : false,
+			type              : 'directions',
+			draggable         : false,
+			directions_panel  : '#route'
+		}).Load();
+
+
+		$(window).resize(function () {
+
+			var height = $(window).height();
+			var width = $(window).width();
+			var nheight = (height - (0.1 * height)) + 'px';
+			var nwidth = (width - (0.4 * width)) + 'px';
+			$('#gmap-route').css({
+				width: nwidth,
+				height: nheight
+			});
+		}).resize();
+
+	};
+</script>

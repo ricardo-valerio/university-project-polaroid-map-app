@@ -33,6 +33,16 @@
 		$this->tag->appendTitle(" | RouteController - showAction");
 		$this->view->setTemplateAfter("session-nav-bar");
 
+
+		$this->assets
+			->collection("header")
+				->addJs("http://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.13");
+
+		$this->assets
+			->collection("footer")
+				->addJs("/js/vendor/maplace.js");
+
+
 		$route_id = $this->dispatcher->getParam("route_id", "int");
 
 		if ($route_id != NULL) {

@@ -280,9 +280,20 @@ i {
     top: 4px;
 }
 
-/******/
+/**flash-messages****/
 
 .alert-box {
     text-align: center;
     font-size: 1.7em;
+}
+
+/***maplace plugin**/
+
+.gm-style img {
+    max-width: none;
+}
+
+.gm-style label {
+    width: auto;
+    display: inline;
 }
