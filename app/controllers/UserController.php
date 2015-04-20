@@ -29,12 +29,14 @@ class UserController extends ControllerBase
 		if ($user_id != NULL)
 		{
 			$this->view->setVars(array(
-				"user_info"      => Users::findFirst($user_id),
-				"user_polaroids" => Polaroids::find(array(
+				"user_info"                => Users::findFirst($user_id),
+				"number_of_user_polaroids" => Polaroids::count("id_user = " . $user_id),
+				"user_polaroids"           => Polaroids::find(array(
 					"conditions" => "id_user = " . $user_id,
 					"order"      => "datetime_created DESC"
 				)),
-				"user_routes"    => Routes::find(array(
+				"number_of_user_routes"    => Routes::count("id_user = " . $user_id),
+				"user_routes"              => Routes::find(array(
 					"conditions" => "id_user = " . $user_id,
 					"order"      => "datetime_created DESC"
 				))

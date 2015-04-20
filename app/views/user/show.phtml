@@ -61,57 +61,71 @@
 
 	<div class="row text-center">
 
-		<?php $counter = 0; ?>
-		<?php foreach ($user_polaroids as $user_polaroid): ?>
+		<?php if ($number_of_user_polaroids): ?>
 
-			<a href="<?php echo $this->url->get("/polaroid/" .
-				$user_polaroid->id . "/" .
-				$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
-				<div class="large-3 small-12 medium-6 columns panel">
-					<img src="<?php echo $this->url->get("/public/img/polaroids/". $user_polaroid->photo_hash_file_name); ?>" alt="<?php echo $user_polaroid->title; ?>"/>
-					<div class="panel">
-						<p><?php echo $user_polaroid->title; ?> </p>
+			<?php $counter = 0; ?>
+			<?php foreach ($user_polaroids as $user_polaroid): ?>
+
+				<a href="<?php echo $this->url->get("/polaroid/" .
+					$user_polaroid->id . "/" .
+					$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
+					<div class="large-3 small-12 medium-6 columns panel">
+						<img src="<?php echo $this->url->get("/public/img/polaroids/". $user_polaroid->photo_hash_file_name); ?>" alt="<?php echo $user_polaroid->title; ?>"/>
+						<div class="panel">
+							<p><?php echo $user_polaroid->title; ?> </p>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
 
-			<?php
-			if ($counter++ == 3) {
-				echo "</div><div class='row'>";
-				$counter = 0;
-			}
-			?>
-		<?php endforeach ?>
+				<?php
+				if ($counter++ == 3) {
+					echo "</div><div class='row'>";
+					$counter = 0;
+				}
+				?>
+			<?php endforeach ?>
+
+		<?php else: ?>
+
+			<p>This User has no polaroids yet!</p>
+
+		<?php endif ?>
 
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
 
 
 	<!-- modal para as routes -->
-	<div id="show-user-routes" class="reveal-modal" data-reveal
+	<div id="show-user-routes" class="reveal-modal text-center" data-reveal
 	     aria-labelledby="Routes" aria-hidden="true" role="dialog">
 		<h2 class="text-center" id="Routes"><?php echo $user_info->username; ?>
 			's Routes</h2>
 
-		<?php foreach ($user_routes as $user_route): ?>
+		<?php if ($number_of_user_routes): ?>
 
-			<div class="panel">
-				<h4><?php echo $user_route->title; ?></h4>
+			<?php foreach ($user_routes as $user_route): ?>
 
-				<div class="row">
-					<div class="large-9 columns">
-						<p><?php echo $user_route->description; ?></p>
-					</div>
-					<div class="large-3 columns">
-						<a href="<?php echo $this->url->get("/route/" . $user_route->id . "/" .
-							$this->tag->friendlyTitle($user_route->title, "-")); ?>"
-						   class="radius button right"><i
-								class="fi-eye"></i></a>
+				<div class="panel">
+					<h4><?php echo $user_route->title; ?></h4>
+
+					<div class="row">
+						<div class="large-9 columns">
+							<p><?php echo $user_route->description; ?></p>
+						</div>
+						<div class="large-3 columns">
+							<a href="<?php echo $this->url->get("/route/" . $user_route->id . "/" .
+								$this->tag->friendlyTitle($user_route->title, "-")); ?>"
+							   class="radius button right"><i
+									class="fi-eye"></i></a>
+						</div>
 					</div>
 				</div>
-			</div>
 
-		<?php endforeach ?>
+			<?php endforeach ?>
+
+		<?php else: ?>
+			<p>This User has no routes yet!</p>
+		<?php endif ?>
 
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
@@ -120,10 +134,10 @@
 <?php if($this->session->has("auth")): ?>
 
 	<div class="row panel">
-				<a href="#" class="button expand success">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Follow
-				</a>
+		<a href="#" class="button expand success">
+			<i style="font-size: 20px;"
+			   class="fi-like"></i> Follow
+		</a>
 	</div>
 
 <?php else: ?>
