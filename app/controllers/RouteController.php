@@ -40,7 +40,10 @@
 			// ir à base de dados buscar toda a info da route
 			return $this->view->setVars(array(
 				"route_info"      => Routes::findFirst("id = " . $route_id),
-				"route_polaroids" => RouteHasPolaroids::find("id_route = " . $route_id)
+				"route_polaroids" => RouteHasPolaroids::find(array(
+					"conditions" => "id_route = " . $route_id,
+					"order"      => "datetime_associated ASC"
+				))
 			));
 
 		} else {
