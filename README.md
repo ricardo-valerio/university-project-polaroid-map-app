@@ -33,3 +33,5 @@ TODO:
 			/find-users
 			/find-polaroids
 			/find-routes
+
+* get flag svg icons for all countries from [http://lipis.github.io/flag-icon-css/](http://lipis.github.io/flag-icon-css/)
