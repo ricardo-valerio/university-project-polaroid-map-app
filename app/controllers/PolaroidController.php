@@ -30,20 +30,14 @@ class PolaroidController extends ControllerBase
 
 		$this->assets
 			->collection('header')
-			->addJs("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", FALSE);
+				->addJs("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", FALSE);
 
 
 		$polaroid_id = $this->dispatcher->getParam("polaroid_id", "int");
 
 		if ($polaroid_id != NULL)
 		{
-			$this->view->setVars(array(
-				"polaroid_info"     => Polaroids::findFirst($polaroid_id),
-				"polaroid_comments" => PolaroidHasComments::find(array(
-					"conditions" => "id_polaroid = $polaroid_id",
-					"order"      => "datetime_created DESC"
-				))
-			));
+			$this->view->setVar("polaroid_info", Polaroids::findFirst($polaroid_id));
 
 		} else
 		{
@@ -265,56 +259,6 @@ class PolaroidController extends ControllerBase
 
 		}
 
-	}
-
-	/**
-	 * @route private
-	 */
-	public function commentAction()
-	{
-		if ($this->request->isPost()
-			&& $this->request->hasPost("polaroid_id")
-			&& $this->security->checkToken()
-		) {
-
-			$comment_polaroid = $this->request->getPost('comment_polaroid', array('string', 'striptags'));
-			$polaroid_id      = $this->request->getPost('polaroid_id', 'int');
-			$polaroid_title   = Polaroids::findFirst($polaroid_id);
-			$polaroid_title   = $polaroid_title->title;
-			$user_id          = $this->session->get('auth')['id'];
-
-			if (strlen($comment_polaroid) == 0) {
-				$this->flashSession->error("Mother Fucker you have to type
-				some text!<a href='#' class='close'>&times;</a>");
-				return $this->response->redirect("/polaroid/" .
-					 $polaroid_id ."/". $this->tag->friendlyTitle($polaroid_title, "-"));
-			}
-
-			$polaroid_has_new_comment                          = new PolaroidHasComments();
-			$polaroid_has_new_comment->comment                 = $comment_polaroid;
-			$polaroid_has_new_comment->id_user                 = $user_id;
-			$polaroid_has_new_comment->id_polaroid             = $polaroid_id;
-			$polaroid_has_new_comment->comment_number_of_likes = 0;
-			$polaroid_has_new_comment->datetime_created        = date('Y-m-d H:i:s');
-			$polaroid_has_new_comment->datetime_updated        = date('Y-m-d H:i:s');
-
-			if ($polaroid_has_new_comment->create())
-			{
-				return $this->response->redirect("/polaroid/" .
-					$polaroid_id . "/" . $this->tag->friendlyTitle($polaroid_title, "-"));
-			}else
-			{
-				foreach ($polaroid_has_new_comment->getMessages() as $message)
-					$this->flashSession->error($message . "<a href = '#' class='close' >&times;</a >");
-
-				return $this->response->redirect("/polaroid/" .
-					$polaroid_id . "/" . $this->tag->friendlyTitle($polaroid_title, "-"));
-
-			}
-
-		}
-
-		return $this->response->redirect("/");
 	}
 
 

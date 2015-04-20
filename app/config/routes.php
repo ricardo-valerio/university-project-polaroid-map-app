@@ -80,18 +80,6 @@
 		"action"     => "like"
 	));
 
-	$router->add("/comment/", array(
-
-		"controller" => "polaroid",
-		"action"     => "like"
-	));
-
-	$router->add("/comment-polaroid", array(
-
-		"controller" => "polaroid",
-		"action"     => "comment"
-	));
-
 	// route/123
 	// route/123/route-in-san-francisco
 	$router->add("/route/{route_id}/:params", array(

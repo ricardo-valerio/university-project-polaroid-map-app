@@ -9,8 +9,7 @@
 				$polaroid_info->users->id . "/" .
 				$polaroid_info->users->username); ?>">
 				<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_info->users->email))); ?>?s=40"
-					alt="<?php echo $polaroid_info->users->username; ?> photo.
-					."/>
+					alt="<?php echo $polaroid_info->users->username; ?> photo.."/>
 			</a>
 			<a href="<?php echo $this->url->get("/user/" .
 				$polaroid_info->users->id . "/" .
@@ -43,68 +42,7 @@
 	</div>
 </div>
 
-<?php if ($this->session->has("auth")): ?>
-
-	<div class="row panel">
-		<ul class="button-group even-2">
-			<li>
-				<a data-reveal-id="comment-polaroid" href="" class="button">
-					<i style="font-size: 20px;"
-					   class="fi-comment"></i> Comment
-				</a>
-			</li>
-			<li>
-				<form action="<?php echo ("/polaroid-map-app/like-polaroid");?>" method="post">
-
-					<input type="hidden"
-					       name="<?php echo $this->security->getTokenKey(); ?>"
-					       value="<?php echo $this->security->getToken(); ?>">
-
-					<input type="hidden" name="polaroid_id"
-					       value="<?php echo $polaroid_info->id;
-					       ?>"/>
-
-					<button type="submit" id="likePolaroidButton"
-					        class="button">
-						<i style="font-size: 20px;"
-						   class="fi-like"></i> Like
-					</button>
-				</form>
-
-			</li>
-		</ul>
-	</div>
-
-
-	<div id="comment-polaroid" class="reveal-modal" data-reveal
-	     aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-		<h2 class="text-center" id="firstModalTitle">&nbsp;</h2>
-
-		<form action="<?php echo $this->url->get("/comment-polaroid"); ?>"
-		      method="post">
-
-			<textarea class="text-center"
-				      style="resize: none; font-size: 2em;"
-					  name="comment_polaroid"
-			          id="comment_textarea"
-			          cols="30"
-			          rows="3"
-			          placeholder="what are you thinking about this polaroid?"></textarea>
-
-			<input type="hidden" name="polaroid_id" value="<?php echo $polaroid_info->id;
-			?>"/>
-
-			<input type="hidden"
-			       name="<?php echo $this->security->getTokenKey(); ?>"
-			       value="<?php echo $this->security->getToken(); ?>">
-
-			<input class="button expand success" type="submit" value="Post"/>
-		</form>
-
-		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-	</div>
-
-<?php else: ?>
+<?php if (!$this->session->has("auth")): ?>
 
 	<div class="row text-center">
 		<ul class="button-group even-1">
@@ -113,7 +51,7 @@
 					. $this->router->getRewriteUri());	?>"
 				   class="button">
 					<i style="font-size: 20px;"
-					   class="fi-like"></i> Login to comment and like!
+					   class="fi-like"></i> Login to like and follow people!
 				</a>
 			</li>
 		</ul>
@@ -121,77 +59,6 @@
 
 <?php endif ?>
 
-
-<div class="row panel">
-
-	<?php if (count($polaroid_comments) == 0): ?>
-
-		<h3 class="text-center">Be the first to comment this polaroid!</h3>
-
-	<?php else: ?>
-
-		<?php foreach ($polaroid_comments as $polaroid_comment): ?>
-
-			<?php if ($polaroid_comment->users->id == $polaroid_info->users->id): ?>
-
-				<div style="background-color: beige;" class="row panel">
-					<div class="small-10 columns">
-						<p>
-							<strong>
-								<a href="<?php echo $this->url->get("/user/" .
-									$polaroid_comment->users->id . "/" .
-									$polaroid_comment->users->username); ?>">
-									<?php echo $polaroid_comment->users->username; ?></a>
-								said:
-							</strong>
-						</p>
-
-						<p>
-							<?php echo $polaroid_comment->comment; ?>
-						</p>
-					</div>
-					<div class="small-2 columns">
-						<a href="<?php echo $this->url->get("/user/" .
-							$polaroid_comment->users->id . "/" .
-							$polaroid_comment->users->username); ?>">
-							<img
-								src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_comment->users->email))); ?>?s=80"
-								alt="<?php echo $polaroid_comment->users->username; ?> comment."/>
-						</a>
-					</div>
-				</div>
-
-			<?php else: ?>
-
-				<div class="row panel">
-					<div class="small-2 columns">
-						<a href="<?php echo $this->url->get("/user/".
-							$polaroid_comment->users->id ."/".
-							$polaroid_comment->users->username); ?>">
-							<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_comment->users->email)));?>?s=80" alt="<?php echo $polaroid_comment->users->username; ?> comment."/>
-						</a>
-					</div>
-					<div class="small-10 columns">
-						<p>
-							<strong>
-								<a href="<?php echo $this->url->get("/user/" .
-									$polaroid_comment->users->id . "/" .
-									$polaroid_comment->users->username); ?>">
-								<?php echo $polaroid_comment->users->username;?></a> said:
-							</strong>
-						</p>
-						<p>
-							<?php echo $polaroid_comment->comment; ?>
-						</p>
-					</div>
-				</div>
-
-			<?php endif ?>
-
-		<?php endforeach ?>
-
-	<?php endif ?>
-</div>
 
 <script>
 	function initialize()
