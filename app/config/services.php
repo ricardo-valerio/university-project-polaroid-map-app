@@ -106,19 +106,19 @@ $di->set('db', function () use ($config) {
     ));
 });
 
-	/**
-	 * If the configuration specify the use of metadata adapter use it or use memory otherwise
-	 */
-	$di->set('modelsMetadata', function () use ($config) {
-		if (isset($config->models->metadata)) {
-			$metaDataConfig  = $config->models->metadata;
-			$metadataAdapter = 'Phalcon\Mvc\Model\Metadata\\' . $metaDataConfig->adapter;
+/**
+ * If the configuration specify the use of metadata adapter use it or use memory otherwise
+ */
+$di->set('modelsMetadata', function () use ($config) {
+	if (isset($config->models->metadata)) {
+		$metaDataConfig  = $config->models->metadata;
+		$metadataAdapter = 'Phalcon\Mvc\Model\Metadata\\' . $metaDataConfig->adapter;
 
-			return new $metadataAdapter();
-		}
+		return new $metadataAdapter();
+	}
 
-		return new Phalcon\Mvc\Model\Metadata\Memory();
-	});
+	return new Phalcon\Mvc\Model\Metadata\Memory();
+});
 
 /**
  * Start the session the first time some component request the session service

@@ -72,7 +72,13 @@
 			show_markers      : false,
 			type              : 'directions',
 			draggable         : false,
-			directions_panel  : '#route'
+			directions_panel  : '#route',
+			listeners: {
+				click: function (marker, event) {
+					console.log(marker);
+					alert("Bye" + marker);
+				}
+			}
 		}).Load();
 
 
