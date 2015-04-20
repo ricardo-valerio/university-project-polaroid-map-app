@@ -1,6 +1,8 @@
 <?php
 
-class RouteController extends ControllerBase
+	use Phalcon\Mvc\Router\Route;
+
+	class RouteController extends ControllerBase
 {
 
 	/**
@@ -34,10 +36,12 @@ class RouteController extends ControllerBase
 		$route_id = $this->dispatcher->getParam("route_id", "int");
 
 		if ($route_id != NULL) {
-			// ir à base de dados buscar toda a info da route
 
-			// passar o result set retornado para a view
-			return $this->view->setVar("route_id", $route_id);
+			// ir à base de dados buscar toda a info da route
+			return $this->view->setVars(array(
+				"route_info"      => Routes::findFirst("id = " . $route_id),
+				"route_polaroids" => RouteHasPolaroids::find("id_route = " . $route_id)
+			));
 
 		} else {
 			$this->flashSession->error("O id não existe ou não é válido");

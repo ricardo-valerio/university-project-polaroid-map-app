@@ -1,6 +1,26 @@
 <h1 class="headers-provisorios">RouteController - showAction</h1>
 
 
-<?php if (isset($route_id)): ?>
-	<?php echo "Route id: ", $route_id, "<br>"; ?>
+<h1>Info da Rota</h1>
+
+<?php if (isset($route_info)): ?>
+	<?php echo "Route id: ", $route_info->id, "<br>"; ?>
+	<?php echo "Route title: ", $route_info->title, "<br>"; ?>
+	<?php echo "Route description: ", $route_info->description, "<br>"; ?>
+	<?php echo "User's route: ", $route_info->users->username, "<br>"; ?>
+	<?php echo "Route number of likes: ", $route_info->number_of_likes, "<br>"; ?>
+	<?php echo "Route datetime created: ", $route_info->datetime_created, "<br>"; ?>
 <?php endif ?>
+
+
+<h1>Polaroids da Rota</h1>
+
+<?php foreach ($route_polaroids as $route_polaroid): ?>
+	<hr/>
+	<?php echo $route_polaroid->id_polaroid; ?> <br/>
+	<?php echo $route_polaroid->polaroids->lat; ?> <br/>
+	<?php echo $route_polaroid->polaroids->lon; ?> <br/>
+	<?php echo $route_polaroid->polaroids->title; ?> <br/>
+	<?php echo $route_polaroid->polaroids->description; ?> <br/>
+	<?php echo $route_polaroid->polaroids->photo_hash_file_name; ?> <br/>
+<?php endforeach ?>

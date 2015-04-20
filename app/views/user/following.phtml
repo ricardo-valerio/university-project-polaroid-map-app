@@ -2,6 +2,7 @@
 
 <div class="row">
 
+	<?php $counter = 0; ?>
 	<?php foreach ($following as $f): ?>
 		<div class="large-3 medium-6 small-12 columns panel">
 			<div class="panel text-center">
@@ -14,6 +15,11 @@
 					Unfollow</a>
 			</div>
 		</div>
+
+		<?php if ($counter++ == 3): ?>
+			<?php echo "</div><div class='row'></div>";?>
+		<?php endif ?>
+
 	<?php endforeach ?>
 
 </div>
