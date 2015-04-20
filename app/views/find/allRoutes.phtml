@@ -2,6 +2,12 @@
 
 <?php $this->flashSession->output(); ?>
 
+<ul class="breadcrumbs">
+	<li><a href="<?php echo $this->url->get("/find"); ?>">Find</a></li>
+	<li class="current"><a href="<?php echo $this->url->get
+		("/find-routes"); ?>">Find All Routes</a></li>
+</ul>
+
 <?php foreach ($page->items as $item): ?>
 	<ul>
 		<li><?php echo $item->id; ?></li>

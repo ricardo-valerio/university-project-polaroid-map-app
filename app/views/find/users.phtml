@@ -3,6 +3,11 @@
 
 <?php $this->flashSession->output(); ?>
 
+<ul class="breadcrumbs">
+	<li><a href="<?php echo $this->url->get("/find"); ?>">Find</a></li>
+	<li class="current"><a href="<?php echo $this->url->get
+		("/find/users"); ?>">Find Users</a></li>
+</ul>
 
 <?php if (isset($searched_query)): ?>
 	<?php echo $searched_query; ?>
