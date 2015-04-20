@@ -59,6 +59,7 @@
 
 		<div class="row text-center">
 
+		<?php $counter = 0; ?>
 		<?php foreach ($user_polaroids as $user_polaroid): ?>
 
 			<a href="<?php echo $this->url->get("/polaroid/" .
@@ -73,7 +74,6 @@
 			</a>
 
 			<?php
-			$counter = 0;
 			if ($counter++ == 3 ) {
 				echo "</div><div class='row'>";
 				$counter = 0;

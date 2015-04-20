@@ -28,7 +28,17 @@ class UserController extends ControllerBase
 
 		if ($user_id != NULL)
 		{
-			return $this->view->setVar("user_id", $user_id);
+			$this->view->setVars(array(
+				"user_info"      => Users::findFirst($user_id),
+				"user_polaroids" => Polaroids::find(array(
+					"conditions" => "id_user = " . $user_id,
+					"order"      => "datetime_created DESC"
+				)),
+				"user_routes"    => Routes::find(array(
+					"conditions" => "id_user = " . $user_id,
+					"order"      => "datetime_created DESC"
+				))
+			));
 
 		}else
 		{
