@@ -13,12 +13,25 @@
 <?php endforeach ?>
 
 
-<?php echo $this->tag->linkTo("/find-users/", "First") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-users/". $page->before, "Previous") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-users/". $page->next, "Next") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-users/". $page->last, "Last"); ?>
+<ul class="pagination" role="menubar" aria-label="Pagination">
+	<?php if ($page->current != $page->first): ?>
+		<li>
+			<a href="<?php echo $this->url->get("/find-users"); ?>">First</a>
+		</li>
+		<li class="arrow"><a
+				href="<?php echo $this->url->get("/find-users/" . $page->before); ?>">&laquo;
+				Previous</a></li>
+	<?php endif ?>
 
-<br/><br/>
-<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
-<br/>
-<?php echo "There are a total of items of ", $page->total_items; ?>
+	<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+	<li class="unavailable" aria-disabled="true"><a href="">&hellip;
+			of <?php echo $page->total_items; ?></a></li>
+
+	<?php if ($page->current != $page->last): ?>
+		<li class="arrow"><a
+				href="<?php echo $this->url->get("/find-users/" . $page->next); ?>">Next &raquo;</a>
+		</li>
+		<li><a href="<?php echo $this->url->get("/find-users/" . $page->last); ?>">Last</a></li>
+	<?php endif ?>
+
+</ul>

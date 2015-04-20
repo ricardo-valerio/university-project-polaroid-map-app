@@ -34,14 +34,3 @@
 	<?php endif ?>
 
 </ul>
-
-
-<?php echo $this->tag->linkTo("/find/users/". $searched_query , "First") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/users/". $searched_query ."/". $page->before, "Previous") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/users/". $searched_query ."/". $page->next, "Next") ." | "; ?>
-<?php echo $this->tag->linkTo("/find/users/". $searched_query ."/". $page->last, "Last"); ?>
-
-<br/><br/>
-<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
-<br/>
-<?php echo "There are a total of items of ", $page->total_items; ?>

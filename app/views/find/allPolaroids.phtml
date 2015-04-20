@@ -16,13 +16,27 @@
 	</ul>
 <?php endforeach ?>
 
+<ul class="pagination" role="menubar" aria-label="Pagination">
+	<?php if ($page->current != $page->first): ?>
+		<li>
+			<a href="<?php echo $this->url->get("/find-polaroids");?>">First</a>
+		</li>
+		<li class="arrow"><a
+				href="<?php echo $this->url->get("/find-polaroids/" . $page->before);?>">&laquo;
+				Previous</a></li>
+	<?php endif ?>
 
-<?php echo $this->tag->linkTo("/find-polaroids/", "First") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-polaroids/". $page->before, "Previous") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-polaroids/". $page->next, "Next") . " | "; ?>
-<?php echo $this->tag->linkTo("/find-polaroids/". $page->last, "Last"); ?>
+	<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+	<li class="unavailable" aria-disabled="true"><a href="">&hellip;
+			of <?php echo $page->total_items; ?></a></li>
 
-<br/><br/>
-<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
-<br/>
-<?php echo "There are a total of items of ", $page->total_items; ?>
+	<?php if ($page->current != $page->last): ?>
+		<li class="arrow"><a
+				href="<?php echo $this->url->get("/find-polaroids/" . $page->next);?>">Next &raquo;</a>
+		</li>
+		<li>
+			<a href="<?php echo $this->url->get("/find-polaroids/" . $page->last);?>">Last</a>
+		</li>
+	<?php endif ?>
+
+</ul>
