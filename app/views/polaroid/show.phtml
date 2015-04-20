@@ -59,6 +59,25 @@
 
 <?php endif ?>
 
+<div class="row panel">
+	<form action="<?php echo("/polaroid-map-app/like-polaroid"); ?>"
+	      method="post">
+
+		<input type="hidden"
+		       name="<?php echo $this->security->getTokenKey(); ?>"
+		       value="<?php echo $this->security->getToken(); ?>">
+
+		<input type="hidden" name="polaroid_id"
+		       value="<?php echo $polaroid_info->id;
+		       ?>"/>
+
+		<button type="submit" id="likePolaroidButton"
+		        class="button expand">
+			<i style="font-size: 20px;"
+			   class="fi-like"></i> Like
+		</button>
+	</form>
+</div>
 
 <script>
 	function initialize()
