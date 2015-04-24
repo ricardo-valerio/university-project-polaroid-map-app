@@ -1,13 +1,8 @@
 <?php $this->flashSession->output(); ?>
 
-<ul class="breadcrumbs">
-	<li><a href="<?php echo $this->url->get("/"); ?>">Home</a></li>
-	<li class="current"><a href="#">Sign In | SignUp</a></li>
-</ul>
-
 <div class="row collapse">
-	<div class="small-12 large-5 columns">
-		<h2>Login</h2>
+	<div class="small-12 large-8 small-centered columns">
+		<h2 class="text-center">Sign In</h2>
 	<?php if ($this->request->hasQuery("return_to")): ?>
 		<?php echo $this->tag->form(array('/session/login?return_to=' .
 		                                  $this->request->getQuery("return_to"), "method" => "post")); ?>
@@ -33,27 +28,18 @@
 				<div class="text-center">
 					<?php echo $this->tag->submitButton(array(
 						"Sign In",
-						"class" => "button expand"
+						"class" => "button expand success"
 					)); ?>
+				</div>
+
+				<div class="text-center">
+					<?php echo $this->tag->linkTo(array(
+						'/sign-up',
+						'Sign Up!',
+						'class' => 'button expand secondary'
+					));
+					?>
 				</div>
 			</fieldset>
 		<?php echo $this->tag->endForm(); ?>
-	</div>
-	<div class="small-12 large-offset-1 large-5 columns">
-		<h2>Don't have an account yet?</h2>
-		<p>Create an account offers the following advantages:</p>
-		<ul>
-			<li>Advantage A</li>
-			<li>Advantage B</li>
-			<li>Advantage C</li>
-		</ul>
-		<div class="text-center">
-			<?php echo $this->tag->linkTo(array(
-							'/sign-up',
-							'Sign Up!',
-							'class' => 'button expand success'
-						));
-			?>
-		</div>
-	</div>
 </div>
