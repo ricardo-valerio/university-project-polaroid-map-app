@@ -1,0 +1,38 @@
+<div class="off-canvas-wrap docs-wrap"
+     data-offcanvas="">
+	<div style="height: 100%; height: 100vh;" class="inner-wrap">
+		<nav class="tab-bar">
+			<section class="left-small">
+				<a aria-expanded="false"
+				   class="left-off-canvas-toggle menu-icon"><span></span></a>
+			</section>
+
+			<section class="middle tab-bar-section">
+				<div class="row collapse">
+					<div style="height: 45px;" class="large-8 small-12 columns">
+						<div class="row collapse">
+							<div class="large-11 small-12 columns">
+								<?php $this->partial("partials/search-bar"); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</nav>
+
+		<aside class="left-off-canvas-menu">
+			<?php $this->partial("partials/show-partial-left-side-nav"); ?>
+		</aside>
+
+
+		<section class="main-section">
+
+			<?php $this->partial("partials/search-bar-results"); ?>
+
+			<?php echo $this->getContent(); ?>
+
+		</section>
+
+	</div>
+</div>

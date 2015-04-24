@@ -2,7 +2,6 @@
 
 class IndexController extends ControllerBase
 {
-
 	/**
 	 * @route public
 	 */
@@ -18,32 +17,26 @@ class IndexController extends ControllerBase
 		$this->assets
 			->collection('footer')
 				->addJs("/js/app-main-map.js")
-				->addJs("/js/app-left-side-nav.js");
-
-
-		$last_polaroids = Polaroids::find(array(
-			"columns" => "lat, lon, title",
-			"order"   => "datetime_created DESC",
-			"limit"   => 10
-		));
-
-		$last_routes = Routes::find(array(
-			"columns" => "id, title",
-			"order" => "datetime_created DESC",
-			"limit" => 10
-		));
-
-		$liked_polaroids = Polaroids::find(array(
-			"columns" => "id, title",
-			"order" => "number_of_likes DESC",
-			"limit" => 10
-		));
+				->addJs("/js/app-left-side-nav.js")
+				->addJs("/js/app-search-bar.js");
 
 
 		$this->view->setVars(array(
-			"last_polaroids"  => $last_polaroids,
-			"last_routes"     => $last_routes,
-		    "liked_polaroids" => $liked_polaroids
+			"last_polaroids"  => Polaroids::find(array(
+				"columns" => "lat, lon, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"last_routes"     => Routes::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"liked_polaroids" => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "number_of_likes DESC",
+				"limit"   => 10
+			))
 		));
 
 	}

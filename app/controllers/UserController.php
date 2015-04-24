@@ -3,6 +3,31 @@
 class UserController extends ControllerBase
 {
 
+	public function initialize()
+	{
+		$this->assets
+			->collection("footer")
+				->addJs("/js/app-search-bar.js");
+
+
+		$this->view->setVars(array(
+			"last_polaroids"  => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"last_routes"     => Routes::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"liked_polaroids" => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "number_of_likes DESC",
+				"limit"   => 10
+			))
+		));
+	}
 	/**
 	 * @route public
 	 *
@@ -22,13 +47,35 @@ class UserController extends ControllerBase
 	public function showAction()
 	{
 		$this->tag->appendTitle(" | UserController - indexAction");
-		$this->view->setTemplateAfter("session-nav-bar");
+		$this->view->setTemplateAfter("show-layout");
+
+		$this->assets
+				->collection("footer")
+					->addJs("/js/app-search-bar.js");
 
 		$user_id = $this->dispatcher->getParam("user_id", "int");
 
+		$this->view->setVars(array(
+			"last_polaroids"  => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"last_routes"     => Routes::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"liked_polaroids" => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "number_of_likes DESC",
+				"limit"   => 10
+			))
+		));
+
 		if ($user_id != NULL)
 		{
-			$this->view->setVars(array(
+			return $this->view->setVars(array(
 				"user_info"                => Users::findFirst($user_id),
 				"number_of_user_polaroids" => Polaroids::count("id_user = " . $user_id),
 				"user_polaroids"           => Polaroids::find(array(
@@ -59,7 +106,7 @@ class UserController extends ControllerBase
 		$this->view->setTemplateAfter("user-main");
 
 
-		$this->view->setVars(array(
+		return $this->view->setVars(array(
 			"user_info"      => Users::findFirst($this->session->get("auth")["id"]),
 			"user_polaroids" => Polaroids::find(array(
 					"conditions" => "id_user = ". $this->session->get("auth")["id"],
@@ -91,7 +138,7 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - polaroidsAction");
 		$this->view->setTemplateAfter("user-main");
 
-		$this->view->setVars(array(
+		return $this->view->setVars(array(
 			"user_polaroids" => Polaroids::find(array(
 				"conditions" => "id_user = " . $this->session->get("auth")["id"],
 				"order"      => "datetime_created DESC"
@@ -108,7 +155,7 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - routesAction");
 		$this->view->setTemplateAfter("user-main");
 
-		$this->view->setVars(array(
+		return $this->view->setVars(array(
 			"user_routes"    => Routes::find(array(
 				"conditions" => "id_user = " . $this->session->get("auth")["id"],
 				"order"      => "datetime_created DESC"
@@ -125,7 +172,7 @@ class UserController extends ControllerBase
 		$this->view->setTemplateAfter("user-main");
 
 		$following = UserIsFollowing::find("id_user_who_follows = ". $this->session->get("auth")["id"] );
-		$this->view->setVar("following", $following);
+		return $this->view->setVar("following", $following);
 	}
 
 	/**

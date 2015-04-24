@@ -3,13 +3,38 @@
 class FindController extends ControllerBase
 {
 
+	public function initialize()
+	{
+		$this->view->setTemplateAfter("show-layout");
+
+		$this->assets
+			->collection("footer")
+			->addJs("/js/app-search-bar.js");
+
+		$this->view->setVars(array(
+			"last_polaroids"  => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"last_routes"     => Routes::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"liked_polaroids" => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "number_of_likes DESC",
+				"limit"   => 10
+			))
+		));
+	}
 	/**
 	 * @route public
 	 */
 	public function indexAction()
     {
 	    $this->tag->appendTitle(" | FindController - indexAction");
-	    $this->view->setTemplateAfter("session-nav-bar");
 
 	    $this->dispatcher->forward(array(
 		   "controller" => "find",
@@ -24,8 +49,6 @@ class FindController extends ControllerBase
 	public function polaroidsAction($q = "", $current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - placesAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
 		if (!Polaroids::count("title LIKE '%" . $query_filtered . "%'")) {
@@ -53,8 +76,6 @@ class FindController extends ControllerBase
 	public function routesAction($q = "", $current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - routesAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
 		if (!Routes::count("title LIKE '%" . $query_filtered . "%'")) {
@@ -82,8 +103,6 @@ class FindController extends ControllerBase
 	public function usersAction($q = "", $current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - usersAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
 		if (!Users::count("full_name LIKE '%" . $query_filtered . "%'")){
@@ -111,8 +130,6 @@ class FindController extends ControllerBase
 	public function allAction($q = "")
 	{
 		$this->tag->appendTitle(" | FindController - allAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 		$this->assets
 			->collection("footer")
 				->addJs("/js/foundation/foundation.orbit.js");
@@ -138,8 +155,6 @@ class FindController extends ControllerBase
 	public function allUsersAction($current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - allUsersAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
@@ -157,8 +172,6 @@ class FindController extends ControllerBase
 	public function allPolaroidsAction($current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - allPolaroidsAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
@@ -175,8 +188,6 @@ class FindController extends ControllerBase
 	public function allRoutesAction($current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - allRoutesAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
 
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(

@@ -1,14 +1,12 @@
-<h1 class="headers-provisorios">SessionController - indexAction</h1>
-
 <?php $this->flashSession->output(); ?>
 
 <ul class="breadcrumbs">
-	<li><a href="<?php echo $this->url->get(""); ?>">Home</a></li>
+	<li><a href="<?php echo $this->url->get("/"); ?>">Home</a></li>
 	<li class="current"><a href="#">Sign In | SignUp</a></li>
 </ul>
 
-<div class="row">
-	<div class="small-6 columns">
+<div class="row collapse">
+	<div class="small-12 large-5 columns">
 		<h2>Login</h2>
 	<?php if ($this->request->hasQuery("return_to")): ?>
 		<?php echo $this->tag->form(array('/session/login?return_to=' .
@@ -33,12 +31,15 @@
 				       name="<?php echo $this->security->getTokenKey() ?>"
 				       value="<?php echo $this->security->getToken() ?>">
 				<div class="text-center">
-					<?php echo $this->tag->submitButton(array("Sign In", "class" => "button small")); ?>
+					<?php echo $this->tag->submitButton(array(
+						"Sign In",
+						"class" => "button expand"
+					)); ?>
 				</div>
 			</fieldset>
 		<?php echo $this->tag->endForm(); ?>
 	</div>
-	<div class="small-6 columns">
+	<div class="small-12 large-offset-1 large-5 columns">
 		<h2>Don't have an account yet?</h2>
 		<p>Create an account offers the following advantages:</p>
 		<ul>
@@ -50,7 +51,7 @@
 			<?php echo $this->tag->linkTo(array(
 							'/sign-up',
 							'Sign Up!',
-							'class' => 'button small success'
+							'class' => 'button expand success'
 						));
 			?>
 		</div>

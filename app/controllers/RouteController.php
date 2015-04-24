@@ -31,8 +31,7 @@
 	public function showAction($id = null)
 	{
 		$this->tag->appendTitle(" | RouteController - showAction");
-		$this->view->setTemplateAfter("session-nav-bar");
-
+		$this->view->setTemplateAfter("show-layout");
 
 		$this->assets
 			->collection("header")
@@ -40,19 +39,34 @@
 
 		$this->assets
 			->collection("footer")
-				->addJs("/js/vendor/maplace.js");
+				->addJs("/js/vendor/maplace.js")
+				->addJs("/js/app-search-bar.js");
 
 
 		$route_id = $this->dispatcher->getParam("route_id", "int");
 
 		if ($route_id != NULL) {
 
-			// ir à base de dados buscar toda a info da route
 			return $this->view->setVars(array(
 				"route_info"      => Routes::findFirst("id = " . $route_id),
 				"route_polaroids" => RouteHasPolaroids::find(array(
 					"conditions" => "id_route = " . $route_id,
 					"order"      => "datetime_associated ASC"
+				)),
+				"last_polaroids"  => Polaroids::find(array(
+					"columns" => "id, title",
+					"order"   => "datetime_created DESC",
+					"limit"   => 10
+				)),
+				"last_routes"     => Routes::find(array(
+					"columns" => "id, title",
+					"order"   => "datetime_created DESC",
+					"limit"   => 10
+				)),
+				"liked_polaroids" => Polaroids::find(array(
+					"columns" => "id, title",
+					"order"   => "number_of_likes DESC",
+					"limit"   => 10
 				))
 			));
 

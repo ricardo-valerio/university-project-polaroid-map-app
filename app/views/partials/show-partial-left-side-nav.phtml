@@ -1,0 +1,30 @@
+<ul class="off-canvas-list">
+	<li style="margin-bottom: -20px;" class="">
+		<a class="button success" href="<?php echo $this->url->get("/"); ?>"><i
+				class="fi-map"></i>
+			Back to the Map!</a>
+	</li>
+	<li><label>Last Polaroids</label></li>
+	<?php foreach ($last_polaroids as $last_polaroid): ?>
+		<li class="">
+			<?php echo $this->tag->linkTo("/polaroid/" . $last_polaroid->id . "/" . $this->tag->friendlyTitle($last_polaroid->title, "-"), $last_polaroid->title); ?>
+		</li>
+	<?php endforeach ?>
+
+
+	<li><label>Last Routes</label></li>
+	<?php foreach ($last_routes as $last_route): ?>
+		<li class="ajax-change-last-route">
+			<?php echo $this->tag->linkTo("/route/". $last_route->id . "/" . $this->tag->friendlyTitle($last_route->title, "-"), $last_route->title ); ?>
+		</li>
+	<?php endforeach ?>
+
+
+	<li><label>Most Liked Polaroids</label></li>
+	<?php foreach ($liked_polaroids as $liked_polaroid): ?>
+		<li class="ajax-change-last-like">
+			<?php echo $this->tag->linkTo("/polaroid/" . $liked_polaroid->id . "/" . $this->tag->friendlyTitle($liked_polaroid->title, "-"), $liked_polaroid->title); ?>
+		</li>
+	<?php endforeach ?>
+
+</ul>

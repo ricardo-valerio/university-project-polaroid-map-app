@@ -1,16 +1,14 @@
-<h1 class="headers-provisorios">SessionController - signUpAction</h1>
-
 <?php $this->flashSession->output(); ?>
 
 <ul class="breadcrumbs">
-	<li><a href="<?php echo $this->url->get(""); ?>">Home</a></li>
+	<li><a href="<?php echo $this->url->get("/"); ?>">Home</a></li>
 	<li><a href="<?php echo $this->url->get("/sign-in-up"); ?>">Sign In | Sign
 	                                                            Up</a></li>
 	<li class="current"><a href="#">Sign Up</a></li>
 </ul>
 
 <div class="row text-center">
-		<div class="small-8 small-centered columns">
+		<div class="small-12 large-10 small-centered columns">
 		<h2>Sign Up for Polaroid Map App</h2>
 
 	<form data-abide action="<?php echo $this->url->get("/sign-up");
@@ -86,7 +84,9 @@
 			       name="<?php echo $this->security->getTokenKey() ?>"
 			       value="<?php echo $this->security->getToken() ?>">
 
-			<?php echo $this->tag->submitButton(array("Sign Up", "class" => "button small success")); ?>
+			<br/>
+
+			<?php echo $this->tag->submitButton(array("Sign Up", "class" => "button expand success")); ?>
 		</fieldset>
 	</form>
 	</div>

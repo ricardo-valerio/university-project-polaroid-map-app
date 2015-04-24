@@ -6,8 +6,14 @@ class PolaroidController extends ControllerBase
 	public function initialize()
 	{
 		parent::initialize();
-		$this->view->setTemplateAfter("session-nav-bar");
+		$this->view->setTemplateAfter("show-layout");
 	}
+
+	public function afterExecuteRoute($dispatcher)
+	{
+		// Executed after every found action
+	}
+
 	/**
 	 * @route private
 	 */
@@ -19,10 +25,6 @@ class PolaroidController extends ControllerBase
 
 	/**
 	 * @route public
-	 *
-	 * photo detail
-	 *
-	 * @param $id - id da photo polaroid
 	 */
 	public function showAction()
 	{
@@ -32,12 +34,33 @@ class PolaroidController extends ControllerBase
 			->collection('header')
 				->addJs("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", FALSE);
 
+		$this->assets
+			->collection('footer')
+				->addJs("/js/app-search-bar.js");
+
 
 		$polaroid_id = $this->dispatcher->getParam("polaroid_id", "int");
 
 		if ($polaroid_id != NULL)
 		{
-			$this->view->setVar("polaroid_info", Polaroids::findFirst($polaroid_id));
+			return $this->view->setVars(array(
+				"polaroid_info"   => Polaroids::findFirst($polaroid_id),
+				"last_polaroids"  => Polaroids::find(array(
+					"columns" => "id, title",
+					"order"   => "datetime_created DESC",
+					"limit"   => 10
+				)),
+				"last_routes"     => Routes::find(array(
+					"columns" => "id, title",
+					"order"   => "datetime_created DESC",
+					"limit"   => 10
+				)),
+				"liked_polaroids" => Polaroids::find(array(
+					"columns" => "id, title",
+					"order"   => "number_of_likes DESC",
+					"limit"   => 10
+				))
+			));
 
 		} else
 		{
@@ -122,7 +145,6 @@ class PolaroidController extends ControllerBase
 		if(!$this->session->has("photo_name"))
 			$this->response->redirect("/");
 
-
 		$this->assets
 			->collection('header')
 				->addJs("https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places", FALSE);
@@ -130,7 +152,28 @@ class PolaroidController extends ControllerBase
 		$this->assets
 			->collection('footer')
 				->addJs("http://feather.aviary.com/imaging/v1/editor.js")
-				->addJs("/js/app-polaroid-creation.js");
+				->addJs("/js/app-polaroid-creation.js")
+				->addJs("/js/app-search-bar.js");
+
+		$this->view->setVars(array(
+			"last_polaroids"  => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"last_routes"     => Routes::find(array(
+				"columns" => "id, title",
+				"order"   => "datetime_created DESC",
+				"limit"   => 10
+			)),
+			"liked_polaroids" => Polaroids::find(array(
+				"columns" => "id, title",
+				"order"   => "number_of_likes DESC",
+				"limit"   => 10
+			))
+		));
+
+
 
 
 		if ($this->request->isPost()

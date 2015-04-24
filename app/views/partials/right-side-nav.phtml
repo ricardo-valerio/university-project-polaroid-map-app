@@ -1,5 +1,11 @@
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
+		<li style="margin-bottom: -20px;" class="show-for-medium-down"><a
+				class="button success"
+		                                     href="<?php echo
+			$this->url->get("/create-polaroid"); ?>">
+				<i style="margin-left: 0px;" class="fi-camera
+				app-icons"></i> Create a Polaroid!</a></li>
 		<li><label><?php echo $this->session->get("auth")["username"]; ?></label></li>
 		<li>
 			<a style="border: 1px solid rgb(38, 38, 38);

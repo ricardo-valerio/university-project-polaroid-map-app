@@ -3,22 +3,16 @@
 	<div class="inner-wrap">
 		<nav class="tab-bar">
 
-			<section class="top-bar-section">
-				<!-- Right Nav Section -->
-				<ul class="left">
-					<li class="active">
-						<a href="<?php echo $this->url->get("/");
-						?>">Mapppp!</a>
-					</li>
-				</ul>
+			<section class="left-small">
+				<a aria-expanded="false"
+				   class="left-off-canvas-toggle menu-icon"><span></span></a>
 			</section>
 
 			<section class="middle tab-bar-section">
 				<div class="row collapse">
-					<div style="height: 45px;" class="large-6 small-10
-						columns">
+					<div style="height: 45px;" class="large-8 small-12 columns">
 							<div class="row collapse">
-								<div class="large-10 small-8 columns">
+								<div class="large-11 small-12 columns">
 									<?php $this->partial("partials/search-bar"); ?>
 								</div>
 							</div>
@@ -39,6 +33,10 @@
 				</section>
 			<?php endif ?>
 		</nav>
+
+		<aside class="left-off-canvas-menu">
+			<?php $this->partial("partials/show-partial-left-side-nav"); ?>
+		</aside>
 
 
 		<?php if ($this->session->has("auth")): ?>

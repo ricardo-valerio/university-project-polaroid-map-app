@@ -21,7 +21,7 @@ class AjaxController extends ControllerBase
 		$this->response->setContentType('application/json', 'UTF-8');
 
 		if (!$this->request->hasQuery("q")) {
-			return NULL;
+			return [];
 		} else {
 			$q = trim($this->request->getQuery("q", array("string", "striptags")));
 
@@ -54,11 +54,10 @@ class AjaxController extends ControllerBase
 						"id"                  => $polaroid->id,
 						"title"               => $polaroid->title,
 						"title_friendly"      => $this->tag->friendlyTitle($polaroid->title, "-"),
-						"hash_photo_location" => "public/img/polaroids/" . $polaroid->photo_hash_file_name,
+						"hash_photo_location" => "/polaroid-map-app/public/img/polaroids/" . $polaroid->photo_hash_file_name,
 						"country"             => $polaroid->country
 					);
 				}
-
 
 				$routes = Routes::find(array(
 					"conditions" => "title LIKE '%" . $q . "%'",
@@ -69,7 +68,7 @@ class AjaxController extends ControllerBase
 					$data["routes"][] = array(
 						"id"             => $route->id,
 						"title"          => $route->title,
-						"icon"           => "public/img/misc/routes.png",
+						"icon"           => "/polaroid-map-app/public/img/misc/routes.png",
 						"title_friendly" => $this->tag->friendlyTitle($route->title, "-")
 					);
 				}

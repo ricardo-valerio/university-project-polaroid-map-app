@@ -11,7 +11,31 @@
 	public function indexAction()
     {
 	    $this->tag->appendTitle(" | SessionController - indexAction");
-	    $this->view->setTemplateAfter("session-nav-bar");
+	    $this->view->setTemplateAfter("session-layout");
+
+	    $this->assets
+		    ->collection('footer')
+			    ->addJs("/js/app-search-bar.js");
+
+	    $this->view->setVars(array(
+		    "last_polaroids"  => Polaroids::find(array(
+			    "columns" => "id, title",
+			    "order"   => "datetime_created DESC",
+			    "limit"   => 10
+		    )),
+		    "last_routes"     => Routes::find(array(
+			    "columns" => "id, title",
+			    "order"   => "datetime_created DESC",
+			    "limit"   => 10
+		    )),
+		    "liked_polaroids" => Polaroids::find(array(
+			    "columns" => "id, title",
+			    "order"   => "number_of_likes DESC",
+			    "limit"   => 10
+		    ))
+	    ));
+
+
     }
 
 	/**
@@ -26,7 +50,6 @@
 			$email    = $this->request->getPost('user_email_or_username', 'email');
 			$username = $this->request->getPost('user_email_or_username', 'alphanum');
 			$password = $this->request->getPost('user_password');
-//			$password = sha1($password);
 
 			$user = Users::findFirst("(email='$email' OR username='$username')
 									   AND active='Y'");
