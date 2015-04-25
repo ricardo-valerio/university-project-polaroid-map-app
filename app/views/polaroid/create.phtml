@@ -6,11 +6,24 @@
 	      accept-charset="utf-8"
 	      method="post"> -->
 
-		<div class="row text-center">
+
+
+<ul class="tabs text-center" data-tab role="tablist">
+  <li style="float: none !important;
+display: inline-block;" class="tab-title active" role="presentational" ><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">First Step</a></li>
+  <li style="float: none !important;
+display: inline-block;" class="tab-title" role="presentational" ><a href="#panel2-2" role="tab" tabindex="0"aria-selected="false" controls="panel2-2">Second Step</a></li>
+  <li style="float: none !important;
+display: inline-block;" class="tab-title" role="presentational"><a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" controls="panel2-3">Third Step</a></li>
+</ul>
+<div class="tabs-content">
+  <section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+
+   	<div class="row text-center">
 
 			<!-- large-6 small-12 medium-6 text-center small-centered columns panel   -->
 			<div style="background-color: white;"
-			     class="large-6 columns panel">
+			     class="large-6 small-12 medium-6 text-center small-centered columns panel">
 
 				<input type="hidden"
 				       name="<?php echo $this->security->getTokenKey() ?>"
@@ -46,8 +59,14 @@
 						          rows="5"></textarea>
 				</div>
 			</div>
+		</div>
+
+  </section>
+  <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2">
+
+    <div class="row">
 			<div style="background-color: white;"
-			     class="large-6 columns panel">
+			     class="large-8 small-12 medium-9 text-center small-centered columns panel">
 				<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 				<div id="map-canvas"></div>
 				<input type="hidden" name="lat_lon_id" id="lat_lon_id"/>
@@ -56,10 +75,20 @@
 				<input type="hidden" name="polaroid_country" id="polaroid_country"/>
 			</div>
 		</div>
+
+  </section>
+
+  <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3">
+
+	    <h2>Be Happy!</h2>
+
 		<div class="row text-center">
 			<input type="submit" class="button success expand"
 			       value="Upload Polaroid"/>
 		</div>
+  </section>
+</div>
+
 	</form>
 </div>
 

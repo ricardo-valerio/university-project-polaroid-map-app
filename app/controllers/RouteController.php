@@ -35,7 +35,7 @@
 
 		$this->assets
 			->collection("header")
-				->addJs("http://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.13");
+				->addJs("http://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.13", FALSE);
 
 		$this->assets
 			->collection("footer")

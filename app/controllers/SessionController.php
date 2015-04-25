@@ -15,6 +15,7 @@
 
 	    $this->assets
 		    ->collection('footer')
+			    ->addJs("/js/foundation/foundation.abide.js")
 			    ->addJs("/js/app-search-bar.js");
 
 	    $this->view->setVars(array(
@@ -43,8 +44,8 @@
 	 */
 	public function loginAction()
 	{
-		if ($this->request->isPost() 
-			&& $this->request->hasPost("user_password")	
+		if ($this->request->isPost()
+			&& $this->request->hasPost("user_password")
 			&& $this->security->checkToken()) {
 
 			$email    = $this->request->getPost('user_email_or_username', 'email');
@@ -103,8 +104,12 @@
 		$this->tag->appendTitle(" | SessionController - signUpAction");
 		$this->view->setTemplateAfter("session-nav-bar");
 
+	    $this->assets
+		    ->collection('footer')
+			    ->addJs("/js/foundation/foundation.abide.js");
 
-		if ($this->request->isPost() 
+
+		if ($this->request->isPost()
 			&& $this->request->hasPost("user_password")
 			&& $this->security->checkToken()) {
 
