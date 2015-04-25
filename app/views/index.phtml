@@ -46,13 +46,11 @@
 
 <!--
 			remover este script para os assets onde
-			existe validação de formulários:
-
-			- signup
-			- create polaroid
+			existe flash messages:
 
 -->
-		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.abide.js"); ?>
+		<?php echo $this->tag->javascriptInclude("/js/app-close-flash-messages.js"); ?>
+
 
 
 		<?php if ($this->assets->collection('footer')->count()): ?>

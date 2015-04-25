@@ -161,7 +161,7 @@ $di->set('flashSession', function () {
 $di->set('security', function () {
 	$security = new Phalcon\Security();
 	$security->setWorkFactor(13);
-	$security->setDefaultHash(Phalcon\Security::CRYPT_BLOWFISH_Y);
+	// $security->setDefaultHash(Phalcon\Security::CRYPT_BLOWFISH_Y);
 
 	return $security;
 });

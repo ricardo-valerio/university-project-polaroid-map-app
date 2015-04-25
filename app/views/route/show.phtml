@@ -1,22 +1,5 @@
 <?php $this->flashSession->output(); ?>
-
-<div class="large-8 columns panel">
-	<ul class="tabs" data-tab>
-		<li class="tab-title active"><a href="#panel1">Route Map</a></li>
-		<li class="tab-title"><a href="#panel2">Directions</a></li>
-	</ul>
-	<div class="tabs-content">
-		<div class="content active panel" id="panel1">
-			<div style="margin: 0 auto;" id='gmap-route' class="large-8" ></div>
-		</div>
-		<div class="content" id="panel2">
-			<div id="route"></div>
-		</div>
-	</div>
-</div>
-<div class="large-4 columns panel">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aspernatur consectetur doloribus eum necessitatibus nesciunt obcaecati quos, recusandae sunt voluptas? Culpa dicta id in maxime non recusandae voluptate? Iure, voluptate?</p>
-</div>
+<div id='map-canvas'></div>
 
 
 <hr/>
@@ -65,13 +48,13 @@
 
 		new Maplace({
 			locations         : data,
-			map_div           : '#gmap-route',
+			map_div           : '#map-canvas',
 			controls_div      : false,
 			generate_controls : false,
 			show_markers      : false,
 			type              : 'directions',
 			draggable         : false,
-			directions_panel  : '#route',
+			// directions_panel  : '#route',
 			listeners: {
 				click: function (marker, event) {
 					console.log(marker);

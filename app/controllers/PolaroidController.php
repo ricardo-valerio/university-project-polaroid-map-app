@@ -92,7 +92,7 @@ class PolaroidController extends ControllerBase
 	{
 		$this->view->disable();
 
-		if ($this->request->isPost() 
+		if ($this->request->isPost()
 			&& $this->security->checkToken()
 			&& $this->request->hasFiles()
 			&& count($this->request->getUploadedFiles()) == 1 ) {
@@ -105,8 +105,7 @@ class PolaroidController extends ControllerBase
 					&& $file->getExtension() !== "jpg"
 					&& $file->getExtension() !== "png" ) {
 
-					$this->flashSession->notice("A foto tem de ser do tipo jpeg ou png");
-					return $this->response->redirect("/find");
+					return $this->response->redirect("/");
 				}
 
 
@@ -153,6 +152,7 @@ class PolaroidController extends ControllerBase
 			->collection('footer')
 				->addJs("http://feather.aviary.com/imaging/v1/editor.js")
 				->addJs("/js/app-polaroid-creation.js")
+			    ->addJs("/js/foundation/foundation.abide.js")
 				->addJs("/js/app-search-bar.js");
 
 		$this->view->setVars(array(
@@ -174,7 +174,11 @@ class PolaroidController extends ControllerBase
 		));
 
 
-
+		if ($this->request->isPost()) {
+			var_dump($_POST);
+			if(!$this->security->checkToken()) echo "não condiz";
+			die;
+		}
 
 		if ($this->request->isPost()
 			&& $this->request->hasPost("polaroid_location")
@@ -277,8 +281,6 @@ class PolaroidController extends ControllerBase
 
 			}
 		}
-
-		//return $this->response->redirect("/");
 	}
 
 	public function likeAction()
