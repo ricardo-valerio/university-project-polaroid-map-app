@@ -104,10 +104,6 @@
 		$this->tag->appendTitle(" | SessionController - signUpAction");
 		$this->view->setTemplateAfter("session-nav-bar");
 
-	    $this->assets
-		    ->collection('footer')
-			    ->addJs("/js/foundation/foundation.abide.js");
-
 
 		if ($this->request->isPost()
 			&& $this->request->hasPost("user_password")
@@ -143,6 +139,10 @@
 				return $this->response->redirect("/sign-in-up");
 			}
 		}
+
+		 $this->assets
+		    ->collection('footer')
+			    ->addJs("/js/foundation/foundation.abide.js");
 
 	}
 }
