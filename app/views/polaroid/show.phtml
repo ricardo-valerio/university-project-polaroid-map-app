@@ -41,19 +41,15 @@
 <?php if (!$this->session->has("auth")): ?>
 
 	<div class="row text-center">
-		<ul class="button-group even-1">
-			<li>
 				<a href="<?php echo $this->url->get("/sign-in-up?return_to="
 					. $this->router->getRewriteUri());	?>"
-				   class="button">
+				   class="button expand warning">
 					<i style="font-size: 20px;"
-					   class="fi-like"></i> Login to like and follow people!
+					   class="fi-upload-cloud"></i> Login to like and follow people!
 				</a>
-			</li>
-		</ul>
 	</div>
 
-<?php endif ?>
+<?php else: ?>
 
 <div class="row panel">
 	<form action="<?php echo("/polaroid-map-app/like-polaroid"); ?>"
@@ -74,6 +70,9 @@
 		</button>
 	</form>
 </div>
+
+<?php endif ?>
+
 
 <script>
 	function initialize()
