@@ -1,18 +1,18 @@
 <ul class="off-canvas-list">
 
-
 <li style="margin-bottom: -20px;"><a
-				data-reveal-id="create-polaroid-right-nav-modal"
-				class="button success" href="<?php echo $this->url->get("/"); ?>">
-				<i style="margin-left: 0px;" class="fi-map
-				app-icons"></i>Back to the Map</a></li>
+	class="button success" href="<?php echo $this->url->get("/"); ?>">
+	<i style="margin-left: 0px;" class="fi-map
+	app-icons"></i>Back to the Map</a>
+</li>
 
-
+<?php if (!$this->session->has("auth")): ?>
 <li style="margin-bottom: -20px;" class="show-for-medium-down"><a
 				data-reveal-id="create-polaroid-right-nav-modal"
 				class="button warning" href="<?php echo $this->url->get("/sign-in-up"); ?>">
 				<i style="margin-left: 0px;" class="fi-upload-cloud
 				app-icons"></i>Sign In | Sign Up</a></li>
+<?php endif ?>
 
 	<li><label>Last Polaroids</label></li>
 	<?php foreach ($last_polaroids as $last_polaroid): ?>
