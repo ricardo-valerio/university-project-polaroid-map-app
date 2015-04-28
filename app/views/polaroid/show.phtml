@@ -25,7 +25,7 @@
 			<div class="panel">
 				<img src="<?php echo $this->url->get("/public/img/polaroids/" . $polaroid_info->photo_hash_file_name); ?>"/>
 			</div>
-
+			<a href="#" data-reveal-id="viewPolaroidModal"><i style="color: darkgrey; font-size: 2em;" class="fi-eye app-icons"></i></a>
 			<div class="panel">
 				<h3><?php echo $polaroid_info->title; ?></h3>
 				<h5 class="subheader"><?php echo $polaroid_info->description; ?></h5>
@@ -36,6 +36,14 @@
 			<div id="map-canvinhas"></div>
 		</div>
 	</div>
+</div>
+
+<div id="viewPolaroidModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	<br>
+	<div class="row panel">
+		<img src="<?php echo $this->url->get("/public/img/polaroids/" . $polaroid_info->photo_hash_file_name); ?>"/>
+	</div>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
 <?php if (!$this->session->has("auth")): ?>
