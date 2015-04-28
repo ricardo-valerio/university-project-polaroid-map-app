@@ -128,6 +128,8 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - accountAction");
 		$this->view->setTemplateAfter("user-main");
 
+		$this->view->setVar("user_info", Users::findFirst($this->session->get("auth")["id"]));
+
 	}
 
 	/**
@@ -184,5 +186,71 @@ class UserController extends ControllerBase
 		$this->view->setTemplateAfter("user-main");
 
 	}
+
+	public function personalInfoAction()
+	{
+		if ($this->request->isPost()) {
+
+            $full_name   = $this->request->getPost("full_name"	, array("striptags", "string"));
+            $facebook    = $this->request->getPost("facebook"	, array("striptags", "string"));
+            $twitter     = $this->request->getPost("twitter"	, array("striptags", "string"));
+            $google_plus = $this->request->getPost("google_plus", array("striptags", "string"));
+            $bio         = $this->request->getPost("bio"		, array("striptags", "string"));
+            $country     = $this->request->getPost("country"	, array("striptags", "string"));
+
+			$user_in_session		      		   = Users::findFirst($this->session->get("auth")["id"]);
+            $user_in_session->full_name            = $full_name;
+            $user_in_session->facebook_username    = $facebook;
+            $user_in_session->twitter_username     = $twitter;
+            $user_in_session->twitter_username     = $twitter;
+            $user_in_session->google_plus_username = $google_plus;
+            $user_in_session->bio                  = $bio;
+            $user_in_session->country              = $country;
+
+            if ($user_in_session->update()) {
+	    		$this->flashSession->success("Cool Bro!" . "<a href = '#' class='close' >&times;</a >");
+				return $this->response->redirect("/my-account");
+            }else{
+				$this->flashSession->notice("Your are dumb!" . "<a href = '#' class='close' >&times;</a >");
+				return $this->response->redirect("/my-account");
+            }
+
+		}else{
+			$this->flashSession->error("Who the hell are you!?!" . "<a href = '#' class='close' >&times;</a >");
+			return $this->response->redirect("/my-account");
+		}
+	}
+
+	public function accountSettingsAction()
+	{
+			var_dump($_POST);
+			$this->view->disable();
+		if ($this->request->isPost()
+			&& $this->security->checkToken()) {
+
+			echo "o token passou";
+
+		}else{
+			echo "o token não passou";
+		}
+
+	}
+
+	public function dangerZoneAction()
+	{
+			var_dump($_POST);
+			$this->view->disable();
+		if ($this->request->isPost()
+			&& $this->security->checkToken()) {
+
+			echo "o token passou";
+
+		}else{
+			echo "o token não passou";
+		}
+
+	}
+
+
 }
 

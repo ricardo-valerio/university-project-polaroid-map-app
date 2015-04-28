@@ -147,9 +147,9 @@ $di->set('flash', function () {
  */
 $di->set('flashSession', function () {
 	return new \Phalcon\Flash\Session(array(
-     'error'   => 'alert-box alert radius',
-     'success' => 'alert-box success radius',
-     'notice'  => 'alert-box info radius'
+     'error'   => 'row alert-box alert radius',
+     'success' => 'row alert-box success radius',
+     'notice'  => 'row alert-box info radius'
  ));
 });
 

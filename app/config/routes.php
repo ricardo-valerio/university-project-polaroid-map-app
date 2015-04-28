@@ -23,6 +23,12 @@
 		"action"     => "signUp"
 	));
 
+	$router->add("/logout", array(
+
+		"controller" => "session",
+		"action"     => "logout"
+	));
+
 	$router->add("/people-online", array(
 
 		"controller" => "user",
@@ -141,10 +147,22 @@
 		"action"     => "liked"
 	));
 
-	$router->add("/logout", array(
+	$router->add("/personal-info", array(
 
-		"controller" => "session",
-		"action"     => "logout"
+		"controller" => "user",
+		"action"     => "personalInfo"
+	));
+
+	$router->add("/account-settings", array(
+
+		"controller" => "user",
+		"action"     => "accountSettings"
+	));
+
+	$router->add("/danger-zone", array(
+
+		"controller" => "user",
+		"action"     => "dangerZone"
 	));
 
 
