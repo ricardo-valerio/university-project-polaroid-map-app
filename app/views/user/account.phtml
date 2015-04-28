@@ -1,5 +1,7 @@
+<?php $this->flashSession->output(); ?>
+
 <div class="row panel" style="margin-top: 37px;">
-	<div class="row panel">
+	<div class="row">
 
 		<ul class="tabs text-center" data-tab="" role="tablist"
 		    data-options="deep_linking: true">
@@ -21,6 +23,15 @@ display: inline-block;" class="tab-title" role="presentational">
 					controls="tabs-deeplink-2">Account Settings
 				</a>
 			</li>
+			<li  style="float: none !important;
+display: inline-block;" class="tab-title" role="presentational">
+				<a  href="#danger"
+					role="tab"
+					tabindex="0"
+					aria-selected="false"
+					controls="tabs-deeplink-3">Danger Zone
+				</a>
+			</li>
 		</ul>
 
 	</div>
@@ -28,18 +39,17 @@ display: inline-block;" class="tab-title" role="presentational">
 	<div class="tabs-content">
 			<section tabindex="0" id="personal-info" role="tabpanel"
 			         aria-hidden="false" class="content active">
-				<h3>Personal Info</h3>
 
 				<p id="tabs-deeplink-content-1">
 
-				<form action="" method="post">
+				<form action="<?php echo $this->url->get("/personal-info"); ?>" method="post">
 					<div class="row">
 						<div class="large-12 columns">
 							<label>Full Name:
 								<input type="text"
-								       placeholder=""
-										value="<?php echo "Ricardo Valério";
-										?>"/>
+									   name="full_name"
+								       placeholder="Enter your Full Name..."
+									   value="<?php echo $user_info->full_name;?>"/>
 							</label>
 						</div>
 					</div>
@@ -50,7 +60,7 @@ display: inline-block;" class="tab-title" role="presentational">
 							      class="prefix">facebook.com/</span>
 						</div>
 						<div class="small-9 large-10 columns">
-				<input type="text" placeholder="Enter your facebook username...">
+				<input type="text" name="facebook" value="<?php echo $user_info->facebook_username; ?>" placeholder="Enter your facebook username...">
 						</div>
 					</div>
 					<div class="row collapse">
@@ -59,7 +69,7 @@ display: inline-block;" class="tab-title" role="presentational">
 							white;" class="prefix">twitter.com/</span>
 						</div>
 						<div class="small-9 large-10 columns">
-				<input type="text" placeholder="Enter your twitter username...">
+				<input type="text" name="twitter" value="<?php echo $user_info->twitter_username; ?>" placeholder="Enter your twitter username...">
 						</div>
 					</div>
 					<div class="row collapse">
@@ -68,7 +78,7 @@ display: inline-block;" class="tab-title" role="presentational">
 							white;" class="prefix">plus.google.com/</span>
 						</div>
 						<div class="small-9 large-10 columns">
-				<input type="text" placeholder="Enter your google plus username...">
+				<input type="text" name="google_plus" value="<?php echo $user_info->google_plus_username; ?>" placeholder="Enter your google plus username...">
 						</div>
 					</div>
 
@@ -77,8 +87,9 @@ display: inline-block;" class="tab-title" role="presentational">
 							<label>Bio
 								<textarea
 									style="resize: none;"
+									name="bio"
 									rows="5"
-									placeholder="Your Bio"></textarea>
+									placeholder="Your Bio"><?php echo $user_info->bio; ?></textarea>
 							</label>
 						</div>
 					</div>
@@ -88,7 +99,7 @@ display: inline-block;" class="tab-title" role="presentational">
 							<label>Country:
 								<select
 									class="ember-view ember-select form-control country-select"
-									id="ember906">
+									name="country">
 									<option value="">Country</option>
 									<option value="US" class="ember-view"
 									        id="ember915">United States
@@ -873,6 +884,9 @@ display: inline-block;" class="tab-title" role="presentational">
 					</div>
 
 					<br/><br/>
+						<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey() ?>"
+				       value="<?php echo $this->security->getToken() ?>">
 
 					<input class="button expand success" type="submit"
 					       value="Update Info"/>
@@ -881,11 +895,10 @@ display: inline-block;" class="tab-title" role="presentational">
 			</section>
 			<section tabindex="0" id="settings" role="tabpanel"
 			         aria-hidden="true" class="content">
-				<h3>Account Settings</h3>
 
 				<p id="tabs-deeplink-content-2">
 
-				<form action="#bazinga" method="post">
+				<form action="<?php echo $this->url->get("/account-settings"); ?>" method="post">
 					<div class="row collapse">
 						<div class="small-3 large-2 columns">
 							<span style="background-color: #007095; color:
@@ -942,6 +955,10 @@ display: inline-block;" class="tab-title" role="presentational">
 									       value="" />
 								</div>
 							</div>
+								<input type="hidden"
+							       name="<?php echo $this->security->getTokenKey() ?>"
+							       value="<?php echo $this->security->getToken() ?>">
+
 
 								<input class="button expand success"
 								       type="submit"
@@ -952,17 +969,22 @@ display: inline-block;" class="tab-title" role="presentational">
 
 				</form>
 
-				<br/>
-				<br/>
-
-				<h3>Danger Zone:</h3>
-				<a class="button expand alert" data-reveal-id="delete-account"
-				   href="#">Delete Account</a>
-
 				</p>
 			</section>
+
+
+			<section tabindex="0" id="danger" role="tabpanel"
+						         aria-hidden="true" class="content">
+				<p id="tabs-deeplink-content-3">
+					<br/>
+					<br/>
+					<a class="button expand alert" data-reveal-id="delete-account" href="#">Delete Account</a>
+				</p>
+			</section>
+
 		</div>
 </div>
+
 
 
 <div id="delete-account"
@@ -973,7 +995,7 @@ display: inline-block;" class="tab-title" role="presentational">
 	<h2 id="modalTitle">Enter your current password to delete your account...</h2>
 
 	<p class="lead">
-		<form action="/user/delete-account" method="post">
+		<form action="<?php echo $this->url->get("/danger-zone"); ?>" method="post">
 			<div class="row collapse text-center">
 				<div class="small-3 large-2 columns">
 										<span style="background-color: #007095; color:
