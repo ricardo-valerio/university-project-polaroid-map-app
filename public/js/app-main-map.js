@@ -44,16 +44,30 @@ $(document).ready(function () {
 
                 for (var j = 0; j < place.polaroids.length; j++) {
 
-                    contentString +=
-                        '<div id="content">'
-                        + '<h1 id="firstHeading" class="firstHeading">'
-                        + place.polaroids[j].title
-                        + '</h1>'+ '<img src="/polaroid-map-app/img/polaroids/'+ place.polaroids[j].polaroid_image
-                        +'" alt="'+ place.polaroids[j].title
-                        +'" height="100" width="100"/>'
-                        + '<div id="bodyContent">'+ place.polaroids[j].polaroid_description
-                        + '</div>'
-                        +'</div>';
+                    // contentString +=
+                    //     '<div id="content">'
+                    //     + '<h1 id="firstHeading" class="firstHeading">'
+                    //     + place.polaroids[j].title
+                    //     + '</h1>'+ '<img src="/polaroid-map-app/img/polaroids/'+ place.polaroids[j].polaroid_image
+                    //     +'" alt="'+ place.polaroids[j].title
+                    //     +'" height="100" width="100"/>'
+                    //     + '<div id="bodyContent">'+ place.polaroids[j].polaroid_description
+                    //     + '</div>'
+                    //     +'</div>';
+
+                        contentString +=
+                            '<div style="border: 1px solid grey; padding: 12px 0px 0px; margin: 0px 0px 15px; border-left: 6px solid orange; border-right: 6px solid #FFA500; border-bottom: 6px solid grey; border-top: 6px solid grey;" class="row">'
+                              + '<div class="small-6 columns">'
+                              +  '<h5 class="text-center">' + place.polaroids[j].title + '</h5>'
+                              + '<p class="text-center">' + place.polaroids[j].polaroid_likes + ' Likes </p>'
+                              + '</div>'
+                              + '<div class="small-6 columns">'
+                              + '<a class="th" href="/polaroid-map-app/polaroid/'+ place.polaroids[j].id + '/' + place.polaroids[j].title_friendly +'">'
+                              + '<img src="/polaroid-map-app/img/polaroids/' + place.polaroids[j].polaroid_image + '" alt="'
+                              + place.polaroids[j].title + '" height="100" width="100">'
+                              + '</a>'
+                              + '</div>'
+                          + '</div>';
 
                 }
 

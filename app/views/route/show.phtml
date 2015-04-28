@@ -1,6 +1,4 @@
-<?php $this->flashSession->output(); ?>
-<div id='map-canvas'></div>
-
+<div style="height: 100vh;" id='maplace-map-canvas'></div>
 
 <hr/>
 
@@ -48,33 +46,34 @@
 
 		new Maplace({
 			locations         : data,
-			map_div           : '#map-canvas',
+			map_div           : '#maplace-map-canvas',
 			controls_div      : false,
+		    controls_on_map	  : false,
 			generate_controls : false,
 			show_markers      : false,
 			type              : 'directions',
 			draggable         : false,
 			// directions_panel  : '#route',
-			listeners: {
-				click: function (marker, event) {
-					console.log(marker);
-					alert("Bye" + marker);
-				}
-			}
+			// listeners: {
+			// 	click: function (marker, event) {
+			// 		console.log(marker);
+			// 		alert("Bye" + marker);
+			// 	}
+			// }
 		}).Load();
 
 
-		$(window).resize(function () {
+		// $(window).resize(function () {
 
-			var height = $(window).height();
-			var width = $(window).width();
-			var nheight = (height - (0.1 * height)) + 'px';
-			var nwidth = (width - (0.4 * width)) + 'px';
-			$('#gmap-route').css({
-				width: nwidth,
-				height: nheight
-			});
-		}).resize();
+		// 	var height = $(window).height();
+		// 	var width = $(window).width();
+		// 	var nheight = (height - (0.1 * height)) + 'px';
+		// 	var nwidth = (width - (0.4 * width)) + 'px';
+		// 	$('#gmap-route').css({
+		// 		width: nwidth,
+		// 		height: nheight
+		// 	});
+		// }).resize();
 
 	};
 </script>
