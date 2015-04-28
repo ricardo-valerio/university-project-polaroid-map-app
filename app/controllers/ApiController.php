@@ -125,7 +125,9 @@ class ApiController extends ControllerBase
 			$array[] = array(
 				"id"                   => $p->id,
 				"title"                => $p->title,
+				"title_friendly"       => $this->tag->friendlyTitle($p->title, "-"),
 				"polaroid_description" => $p->description,
+				"polaroid_likes" 	   => $p->number_of_likes,
 				"polaroid_image"       => $p->photo_hash_file_name,
 				"datetime_created"     => $p->datetime_created
 			);
