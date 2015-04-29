@@ -60,6 +60,9 @@
 		<?php if ($this->assets->collection('footer')->count()): ?>
 			<?php $this->assets->outputJs('footer'); ?>
 		<?php endif ?>
+		<?php if ($this->assets->collection('footer_mason')->count()): ?>
+			<?php $this->assets->outputJs('footer_mason'); ?>
+		<?php endif ?>
 
 		<script>
 			$(document).foundation();

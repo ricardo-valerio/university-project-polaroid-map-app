@@ -140,6 +140,22 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - polaroidsAction");
 		$this->view->setTemplateAfter("user-main");
 
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+
+
 		return $this->view->setVars(array(
 			"user_polaroids" => Polaroids::find(array(
 				"conditions" => "id_user = " . $this->session->get("auth")["id"],
