@@ -1,24 +1,19 @@
-<div class="row text-center" style="margin-top: 37px;">
+<div style="margin-top: 2em;" class="row">
+    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
-	<?php $counter = 0; ?>
-	<?php foreach ($user_polaroids as $user_polaroid): ?>
+    <?php foreach ($user_polaroids as $user_polaroid): ?>
+        <div class="box col3">
+            <div class="thumbnail">
+                <a href="<?php echo $this->url->get("/polaroid/" . $user_polaroid->id . "/" .
+            $this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
+                <img class="img-rounded BarnieFonte" src="public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
+                </a>
+                <div class="caption text-center BarnieFonte">
+                    <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $user_polaroid->title; ?></h3>
+                    <p style="margin-bottom: -0.75rem; border-top: 0.1px solid rgba(128, 128, 128, 0.2); padding-top: 5px;"><?php echo date("F j, Y", strtotime($user_polaroid->datetime_created)); ?></p> </div>
+            </div>
+        </div>
+    <?php endforeach ?>
 
-		<a href="<?php echo $this->url->get("/polaroid/" .
-			$user_polaroid->id . "/" .
-			$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
-			<div class="large-3 small-12 medium-3 columns panel">
-				<img
-					src="public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
-
-				<div class="panel">
-					<p><?php echo $user_polaroid->title; ?> </p>
-				</div>
-			</div>
-		</a>
-
-		<?php if ($counter++ == 3): ?>
-			<?php echo "</div><div class='row text-center'>";?>
-			<?php $counter = 0; ?>
-		<?php endif ?>
-
-	<?php endforeach ?>
+    </div>
+</div>
