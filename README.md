@@ -4,8 +4,8 @@ university project :mortar_board:
 
 TODO:
 
-* follow user inside the show user info view 
-			
+* follow user inside the show user info view
+
 
 			/user/{user-id}/user-name
 
@@ -20,18 +20,5 @@ TODO:
 * user login via social plugins (facebook/twitter/google+)
 
 
-
-
-* Css styles for find section
-			
-
-			/find/all/{slug}
-			/find/users/{slug}
-			/find/polaroids/{slug}
-			/find/routes/{slug}
-			/find/routes/{slug}
-			/find-users
-			/find-polaroids
-			/find-routes
 
 * get flag svg icons for all countries from [http://lipis.github.io/flag-icon-css/](http://lipis.github.io/flag-icon-css/)
