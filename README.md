@@ -21,4 +21,17 @@ TODO:
 
 
 
+
+* Css styles for find section
+
+
+			/find/all/{slug}
+			/find/users/{slug}
+			/find/polaroids/{slug}
+			/find/routes/{slug}
+			/find/routes/{slug}
+			/find-users
+			/find-polaroids
+			/find-routes
+
 * get flag svg icons for all countries from [http://lipis.github.io/flag-icon-css/](http://lipis.github.io/flag-icon-css/)
