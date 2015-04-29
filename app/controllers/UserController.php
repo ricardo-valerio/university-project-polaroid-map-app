@@ -240,8 +240,10 @@ class UserController extends ControllerBase
 	{
 			var_dump($_POST);
 			$this->view->disable();
-		if ($this->request->isPost()
-			&& $this->security->checkToken()) {
+		if ($this->request->isPost()) {
+
+				// verificar se a pass é valida
+				// eliminar conta
 
 			echo "o token passou";
 

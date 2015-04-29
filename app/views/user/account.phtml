@@ -44,61 +44,70 @@ display: inline-block;" class="tab-title" role="presentational">
 
 				<form action="<?php echo $this->url->get("/personal-info"); ?>" method="post">
 					<div class="row">
+						<div class="small-12 columns">
+							<span style="background-color: #444; color:
+							white;" class="prefix">Name</span>
+						</div>
 						<div class="large-12 columns">
-							<label>Full Name:
 								<input type="text"
+									   class="text-center"
 									   name="full_name"
 								       placeholder="Enter your Full Name..."
 									   value="<?php echo $user_info->full_name;?>"/>
-							</label>
 						</div>
 					</div>
-					<div class="row collapse">
-						<div class="small-3 large-2 columns">
+					<div class="row collapse text-center">
+						<div class="small-12 columns">
 							<span style="background-color: #46629E; color:
 							white;"
 							      class="prefix">facebook.com/</span>
 						</div>
-						<div class="small-9 large-10 columns">
-				<input type="text" name="facebook" value="<?php echo $user_info->facebook_username; ?>" placeholder="Enter your facebook username...">
+						<div class="small-12 columns">
+				<input type="text" name="facebook" class="text-center" value="<?php echo $user_info->facebook_username; ?>" placeholder="Enter your facebook username...">
 						</div>
 					</div>
-					<div class="row collapse">
-						<div class="small-3 large-2 columns">
+					<div class="row collapse text-center">
+						<div class="small-12 columns">
 							<span style="background-color: #55ACEE; color:
 							white;" class="prefix">twitter.com/</span>
 						</div>
-						<div class="small-9 large-10 columns">
-				<input type="text" name="twitter" value="<?php echo $user_info->twitter_username; ?>" placeholder="Enter your twitter username...">
+						<div class="small-12 columns">
+				<input type="text" name="twitter" class="text-center" value="<?php echo $user_info->twitter_username; ?>" placeholder="Enter your twitter username...">
 						</div>
 					</div>
-					<div class="row collapse">
-						<div class="small-3 large-2 columns">
+					<div class="row collapse text-center">
+						<div class="small-12 columns">
 							<span style="background-color: #D73D32; color:
 							white;" class="prefix">plus.google.com/</span>
 						</div>
-						<div class="small-9 large-10 columns">
-				<input type="text" name="google_plus" value="<?php echo $user_info->google_plus_username; ?>" placeholder="Enter your google plus username...">
+						<div class="small-12 columns">
+				<input type="text" name="google_plus" class="text-center" value="<?php echo $user_info->google_plus_username; ?>" placeholder="Enter your google plus username...">
 						</div>
 					</div>
 
-					<div class="row collapse">
-						<div class="large-12 columns">
-							<label>Bio
+					<div class="row collapse text-center">
+						<div class="small-12 columns">
+							<span style="background-color: #444; color:
+							white;" class="prefix">Bio</span>
+						</div>
+						<div class="small-12 columns">
 								<textarea
 									style="resize: none;"
+									class="text-center"
 									name="bio"
 									rows="5"
 									placeholder="Your Bio"><?php echo $user_info->bio; ?></textarea>
-							</label>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="large-12 columns">
-							<label>Country:
+						<div class="small-12 columns">
+							<span style="background-color: #444; color:
+							white;" class="prefix">Country</span>
+						</div>
+						<div class="small-12 columns">
 								<select
-									class="ember-view ember-select form-control country-select"
+									class="text-center"
 									name="country">
 									<option value="">Country</option>
 									<option value="US" class="ember-view"
@@ -900,11 +909,11 @@ display: inline-block;" class="tab-title" role="presentational">
 
 				<form action="<?php echo $this->url->get("/account-settings"); ?>" method="post">
 					<div class="row collapse">
-						<div class="small-3 large-2 columns">
+						<div class="small-12 columns">
 							<span style="background-color: #007095; color:
 							white;" class="prefix">New Password:</span>
 						</div>
-						<div class="small-9 large-10 columns">
+						<div class="small-12 columns">
 							<input class="text-center"
 							       style="font-size: 2em;"
 							       type="password"
@@ -913,11 +922,11 @@ display: inline-block;" class="tab-title" role="presentational">
 					</div>
 
 					<div class="row collapse">
-						<div class="small-3 large-2 columns">
+						<div class="small-12 columns">
 							<span style="background-color: #007095; color:
 							white;" class="prefix">Confirm Password:</span>
 						</div>
-						<div class="small-9 large-10 columns">
+						<div class="small-12 columns">
 							<input class="text-center"
 							       style="font-size: 2em;"
 							       type="password"
@@ -926,49 +935,33 @@ display: inline-block;" class="tab-title" role="presentational">
 						</div>
 					</div>
 
-					<br/><br/>
-					<a href="#"
-					   class="button success expand"
-					   data-reveal-id="updatePassWord">Update Password</a>
+					<br/>
 
-					<div id="updatePassWord"
-					     class="reveal-modal"
-					     data-reveal
-					     aria-labelledby="modalUpdateTitle"
-					     aria-hidden="true"
-					     role="dialog">
-
-							<h2 id="modalUpdateTitle">
-								Enter your current Password
-							</h2>
-
-							<div class=" lead row collapse">
-								<div class="small-3 large-2 columns">
-								<span style="background-color: #007095; color:
-								white;" class="prefix">Confirm Password:</span>
-								</div>
-								<div class="small-9 large-10 columns">
-									<input class="text-center"
-									       style="font-size: 2em;"
-									       type="password"
-									       name="current_password"
-									       value="" />
-								</div>
-							</div>
-								<input type="hidden"
-							       name="<?php echo $this->security->getTokenKey() ?>"
-							       value="<?php echo $this->security->getToken() ?>">
-
-
-								<input class="button expand success"
-								       type="submit"
-								       value="Submit"/>
-						<a class="close-reveal-modal" aria-label="Close">
-							&#215;</a>
+					<div class="row collapse">
+						<div class="small-12 columns">
+							<span style="background-color: #E99703; color:
+							white;" class="prefix">Current Password:</span>
+						</div>
+						<div class="small-12 columns">
+							<input class="text-center"
+							       style="font-size: 2em;"
+							       type="password"
+							       name="current_password"
+							       value="" />
+						</div>
 					</div>
 
-				</form>
+					<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey() ?>"
+				       value="<?php echo $this->security->getToken() ?>">
 
+		<br>
+
+						<input class="button expand success"
+						       type="submit"
+						       value="Submit"/>
+
+				</form>
 				</p>
 			</section>
 
@@ -978,7 +971,7 @@ display: inline-block;" class="tab-title" role="presentational">
 				<p id="tabs-deeplink-content-3">
 					<br/>
 					<br/>
-					<a class="button expand alert" data-reveal-id="delete-account" href="#">Delete Account</a>
+					<a class="button expand alert round" data-reveal-id="delete-account" href="#">Delete Account</a>
 				</p>
 			</section>
 
@@ -1003,7 +996,7 @@ display: inline-block;" class="tab-title" role="presentational">
 										      class="prefix">Current Password:</span>
 				</div>
 				<div class="small-9 large-10 columns">
-					<input type="password" name="password_to_delete"
+					<input type="password" name="current_password"
 					       value="">
 				</div>
 				<input type="hidden"
