@@ -31,6 +31,10 @@ class PolaroidController extends ControllerBase
 		$this->tag->appendTitle(" | PolaroidController - showAction");
 
 		$this->assets
+			->collection('header_css')
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
 			->collection('header')
 				->addJs("http://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true", FALSE);
 
