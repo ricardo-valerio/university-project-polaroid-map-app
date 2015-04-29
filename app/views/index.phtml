@@ -22,6 +22,7 @@
 		<meta name="msapplication-TileImage" content="/polaroid-map-app/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 
+
 		<!--[if lte IE 8]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -29,6 +30,9 @@
 		<?php echo $this->tag->stylesheetLink("/css/foundation.css"); ?>
 		<?php echo $this->tag->stylesheetLink("/css/foundation-icons.css"); ?>
 		<?php echo $this->tag->stylesheetLink("/css/app.css"); ?>
+		<?php if ($this->assets->collection('header_css')->count()): ?>
+			<?php $this->assets->outputCss('header_css'); ?>
+		<?php endif ?>
 
 		<?php echo $this->tag->javascriptInclude("/js/vendor/modernizr.js"); ?>
 		<?php if ($this->assets->collection('header')->count()): ?>

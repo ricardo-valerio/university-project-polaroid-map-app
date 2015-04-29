@@ -22,13 +22,15 @@
 	<div class="row">
 		<div id="primeiraDiv" style="background-color: white;"
 		     class="large-6 large-uncentered medium-8 small-12 small-centered columns panel text-center">
-			<div class="panel">
+			<div class="">
 				<img src="<?php echo $this->url->get("/public/img/polaroids/" . $polaroid_info->photo_hash_file_name); ?>"/>
 			</div>
 			<a href="#" data-reveal-id="viewPolaroidModal"><i style="color: darkgrey; font-size: 2em;" class="fi-eye app-icons"></i></a>
-			<a href="#" id="mapToggle"><i style="color: darkgrey; font-size: 1.4em; margin-right: 10px; margin-top: 0px;" class="right fi-map app-icons"></i></a> <div class="panel">
-				<h3><?php echo $polaroid_info->title; ?></h3>
-				<h5 class="subheader"><?php echo $polaroid_info->description; ?></h5>
+			<a href="#" id="mapToggle"><i style="color: darkgrey; font-size: 1.4em; margin-right: 10px; margin-top: 0px;" class="right fi-map app-icons"></i></a>
+			<div style="background-color: white; border: none;" class="panel">
+				<h3 style="font-size: 2.3em; font-weight: bolder;"><?php echo $polaroid_info->title; ?></h3>
+				<p style="  font-size: 1.6em;" class="subheader"><?php echo $polaroid_info->description; ?></p>
+				<p class="right"><?php echo date("F j, Y", strtotime($polaroid_info->datetime_created)); ?></p>
 			</div>
 		</div>
 		<div id="segundaDiv" style="background-color: white;"
@@ -51,7 +53,7 @@
 	<div class="row text-center">
 				<a href="<?php echo $this->url->get("/sign-in-up?return_to="
 					. $this->router->getRewriteUri());	?>"
-				   class="button expand warning">
+				   class="button round expand warning">
 					<i style="font-size: 20px;"
 					   class="fi-upload-cloud"></i> Login to like and follow people!
 				</a>
@@ -72,7 +74,7 @@
 		       ?>"/>
 
 		<button type="submit" id="likePolaroidButton"
-		        class="button expand">
+		        class="button expand round">
 			<i style="font-size: 20px;"
 			   class="fi-like"></i> Like
 		</button>

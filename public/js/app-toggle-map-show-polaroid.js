@@ -5,10 +5,10 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		$("#segundaDiv").fadeToggle(0, function() {
-			$("#primeiraDiv").toggleClass("large-uncentered")
+			$("#primeiraDiv").toggleClass("large-uncentered");
+			$("#primeiraDiv").toggleClass("primeiraDivEffects");
 		});
 
-		console.log("scorpion");
 	});
 
 
