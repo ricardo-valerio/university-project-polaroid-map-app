@@ -19,14 +19,30 @@
 				<div class="large-12 columns">
 					<h4><?php echo $user_info->full_name; ?></h4>
 					<hr>
-					<h5 class="subheader">
-						<?php echo $user_info->facebook_username; ?> |
-						<?php echo $user_info->twitter_username; ?> |
-						<?php echo $user_info->google_plus_username; ?>
-						<p>
-							<?php echo $user_info->bio; ?>
-						</p>
-					</h5>
+				<h5 class="subheader">
+					<div class="row collapse">
+						<div class="small-12 columns">
+							<a href="https://facebook.com/<?php echo $user_info->facebook_username; ?>"><span style="background-color: #46629E; color:
+								white;"
+								      class="prefix">facebook.com/<?php echo $user_info->facebook_username; ?></span></a>
+						</div>
+						<div class="small-12 columns">
+							<a href="https://twitter.com/<?php echo $user_info->twitter_username; ?>"><span style="background-color: #55ACEE; color:
+								white;" class="prefix">twitter.com/<?php echo $user_info->twitter_username; ?></span></a>
+						</div>
+						<div class="small-12 columns">
+							<a href="https://plus.google.com/<?php echo $user_info->google_plus_username; ?>"><span style="background-color: #D73D32; color:
+								white;" class="prefix">plus.google.com/<?php echo $user_info->google_plus_username; ?></span></a>
+						</div>
+					</div>
+				</h5>
+				</div>
+			</div>
+		</div>
+		<div class="panel radius">
+			<div class="row">
+				<div class="large-12 columns text-center">
+					<?php echo $user_info->bio; ?>
 				</div>
 			</div>
 		</div>
@@ -129,7 +145,7 @@
 	</div>
 
 </div>
-<?php if($this->session->has("auth")): ?>
+<?php if($this->session->has("auth") && $user_info->id != $this->session->get("auth")["id"] ): ?>
 
 	<div class="row panel">
 		<a href="#" class="button expand success">
@@ -138,19 +154,17 @@
 		</a>
 	</div>
 
-<?php else: ?>
+<?php endif ?>
 
-	<div class="row text-center">
-		<ul class="button-group even-1">
-			<li>
+<?php if(!$this->session->has("auth")): ?>
+
+	<div class="row panel text-center">
 				<a href="<?php echo $this->url->get("/sign-in-up?return_to="
 					. $this->router->getRewriteUri()); ?>"
-				   class="button">
+				   class="button expand warning">
 					<i style="font-size: 20px;"
 					   class="fi-like"></i> Login to Follow!
 				</a>
-			</li>
-		</ul>
 	</div>
 
 <?php endif ?>

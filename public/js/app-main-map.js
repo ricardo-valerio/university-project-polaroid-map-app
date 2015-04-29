@@ -76,7 +76,7 @@ $(document).ready(function () {
                     position: myLatLng,
                     map: window.map,
                     icon: {
-                        url: "/polaroid-map-app/public/img/markers/pink.png",
+                        url: "/polaroid-map-app/public/img/markers/red.png",
                         size: new google.maps.Size(30, 30),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(0, 30)

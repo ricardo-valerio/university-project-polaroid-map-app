@@ -36,6 +36,7 @@ class PolaroidController extends ControllerBase
 
 		$this->assets
 			->collection('footer')
+				->addJs("/js/app-toggle-map-show-polaroid.js")
 				->addJs("/js/app-search-bar.js");
 
 
@@ -93,7 +94,6 @@ class PolaroidController extends ControllerBase
 		$this->view->disable();
 
 		if ($this->request->isPost()
-			&& $this->security->checkToken()
 			&& $this->request->hasFiles()
 			&& count($this->request->getUploadedFiles()) == 1 ) {
 
@@ -174,12 +174,6 @@ class PolaroidController extends ControllerBase
 		));
 
 
-		if ($this->request->isPost()) {
-			var_dump($_POST);
-			if(!$this->security->checkToken()) echo "não condiz";
-			die;
-		}
-
 		if ($this->request->isPost()
 			&& $this->request->hasPost("polaroid_location")
 			&& $this->request->hasPost("polaroid_title")
@@ -188,31 +182,22 @@ class PolaroidController extends ControllerBase
 			&& $this->request->hasPost("lat")
 			&& $this->request->hasPost("lon")
 			&& $this->request->hasPost("polaroid_country")
-			&& $this->security->checkToken()
 		) {
 			$this->view->disable();
 
 			$image_location = $this->request->getPost("polaroid_location", "string");
 			$image = basename($image_location);
 
-//			print_r(pathinfo($this->request->getPost("polaroid_location")));
-//			echo "<br>";
-//			echo pathinfo($image_location)["dirname"];
-//			echo "<br>";
-//
-//			echo "O nome do ficheiro: ", $image;
-//			var_dump($this->request->getPost());
-
+			// verifica se a imagem vem do plugin da adobe
 			if(substr($image_location, 0, 4) === "http")
 			{
 
 				// fazer download da imagem que foi editada
-				$path  = "img/polaroids/";
-				$ch    = curl_init($image_location);
-				$fp    = fopen($path . $image, 'wb');
+				$path = "img/polaroids/";
+				$ch   = curl_init($image_location);
+				$fp   = fopen($path . $image, 'wb');
 				curl_setopt($ch, CURLOPT_FILE, $fp);
 				curl_setopt($ch, CURLOPT_HEADER, 0);
-//				$result = curl_exec($ch);
 				curl_exec($ch);
 				curl_close($ch);
 				fclose($fp);
@@ -306,10 +291,5 @@ class PolaroidController extends ControllerBase
 
 	}
 
-
-	public function editCommentAction()
-	{
-
-	}
 }
 
