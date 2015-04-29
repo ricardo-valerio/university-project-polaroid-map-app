@@ -8,7 +8,6 @@ class AjaxController extends ControllerBase
 	 */
 	public function indexAction()
     {
-
 //	    $users = Users::find(array(
 //		    "conditions" => "name LIKE '%" . $this->request->getQuery("q", "string") . "%'"
 //	    ));
@@ -30,7 +29,7 @@ class AjaxController extends ControllerBase
 				$data["search_query"] = $this->escaper->escapeHtml($q);
 
 				$users = Users::find(array(
-					"conditions" => "full_name LIKE '%" . $q . "%'",
+					"conditions" => "username LIKE '%" . $q . "%'",
 					"limit"      => 3
 				));
 

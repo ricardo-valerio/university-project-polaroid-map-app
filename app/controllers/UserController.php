@@ -223,32 +223,72 @@ class UserController extends ControllerBase
 
 	public function accountSettingsAction()
 	{
-			var_dump($_POST);
-			$this->view->disable();
 		if ($this->request->isPost()
-			&& $this->security->checkToken()) {
+			&& $this->request->hasPost("new_password")
+			&& $this->request->hasPost("confirmed_new_password")
+			&& $this->request->hasPost("current_password"))
+		{
 
-			echo "o token passou";
+            $new_password            = $this->request->getPost("new_password", array("striptags", "string"));
+            $confirmed_new_password  = $this->request->getPost("confirmed_new_password", array("striptags", "string"));
+            $current_password        = $this->request->getPost("current_password", array("striptags", "string"));
 
-		}else{
-			echo "o token não passou";
+            $user_in_session  		= Users::findFirst($this->session->get("auth")["id"]);
+            $valid_current_password = $this->security->checkHash($current_password, $user_in_session->password);
+
+
+            if (!$valid_current_password) {
+            	$this->flashSession->error("incorrect current password!");
+            	return $this->response->redirect("/my-account");
+            }
+
+			if ($new_password == $confirmed_new_password) {
+
+                $user_in_session->password = $this->security->hash($new_password);
+
+                if (!$user_in_session->update()) {
+					foreach ($user->getMessages() as $message)
+						$this->flashSession->error((string)$message);
+
+					$this->response->redirect("/my-account");
+                }else{
+                	$this->flashSession->success("cool bro!");
+                }
+
+			}else{
+				$this->flashSession->error("passwords are not equal!");
+			}
+
 		}
+
+		return $this->response->redirect("/my-account");
 
 	}
 
 	public function dangerZoneAction()
 	{
-			var_dump($_POST);
-			$this->view->disable();
-		if ($this->request->isPost()) {
+		if ($this->request->isPost()
+			&& $this->request->hasPost("current_password")) {
 
-				// verificar se a pass é valida
-				// eliminar conta
+			$current_password       = $this->request->getPost("current_password", array("striptags", "string"));
+            $user_in_session  		= Users::findFirst($this->session->get("auth")["id"]);
+            $valid_current_password = $this->security->checkHash($current_password, $user_in_session->password);
 
-			echo "o token passou";
+
+            if (!$valid_current_password) {
+            	$this->flashSession->error("incorrect current password!");
+            	return $this->response->redirect("/my-account");
+            }
+
+	        if (!$user_in_session->delete()) {
+				foreach ($user->getMessages() as $message)
+					$this->flashSession->error((string)$message);
+            }else{
+            	return $this->response->redirect("/logout");
+            }
 
 		}else{
-			echo "o token não passou";
+			return $this->response->redirect("/my-account");
 		}
 
 	}
