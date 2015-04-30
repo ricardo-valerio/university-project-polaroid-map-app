@@ -52,20 +52,39 @@ class FindController extends ControllerBase
 		$query_filtered = $this->filter->sanitize($q, array("string", "striptags"));
 
 		if (!Polaroids::count("title LIKE '%" . $query_filtered . "%'")) {
-			$this->response->redirect("/find/all");
+			return $this->response->redirect("/find/all");
 		}
 
 		$this->view->setVar("searched_query", $query_filtered);
 
+
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find("title LIKE '%" . $query_filtered . "%'"),
-				"limit" => 1,
+				"limit" => 4,
 				"page"  => $current_page
 			)
 		);
 
 		$page = $paginator->getPaginate();
+
+
+
 		$this->view->setVar("page", $page);
 
 	}
@@ -176,12 +195,29 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find(),
-				"limit" => 1,
+				"limit" => 4,
 				"page"  => $current_page
 			)
 		);
 
 		$page = $paginator->getPaginate();
+
+
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+
 		$this->view->setVar("page", $page);
 	}
 

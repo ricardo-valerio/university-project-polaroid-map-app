@@ -7,43 +7,54 @@
 		("/find/polaroids");?>">Find Polaroids</a></li>
 </ul>
 
-<?php if (isset($searched_query)): ?>
-	<?php echo $searched_query; ?>
-<?php endif ?>
-
-<?php foreach ($page->items as $item): ?>
-	<ul>
-		<li><?php echo $item->id; ?></li>
-		<li><?php echo $item->title; ?></li>
-		<li><?php echo $item->description; ?></li>
-		<li><?php echo $item->photo_hash_file_name; ?></li>
-		<li><?php echo $item->number_of_likes; ?></li>
-		<li><?php echo $item->country; ?></li>
-		<li><?php echo $item->id_user; ?></li>
-		<li><?php echo $item->users->username; ?></li>
-	</ul>
-<?php endforeach ?>
 
 
-<ul class="pagination" role="menubar" aria-label="Pagination">
-	<?php if ($page->current != $page->first): ?>
-		<li>
-			<a href="<?php echo $this->url->get("/find/polaroids/" . $searched_query); ?>">First</a>
-		</li>
-		<li class="arrow"><a
-				href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->before); ?>">&laquo;
-				Previous</a></li>
-	<?php endif ?>
+<div style="margin-top: 2em;" class="row">
+    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
-	<li class="current"><a href=""><?php echo $page->current; ?></a></li>
-	<li class="unavailable" aria-disabled="true"><a href="">&hellip;
-			of <?php echo $page->total_items; ?></a></li>
+    <?php foreach ($page->items as $item): ?>
+        <div class="box col3">
+            <div style="padding-top: 2px;" class="thumbnail">
+				<div style="padding-left: 14px; padding-right: 14px;" class="row">
+				    <div class="left">
+			<a href="<?php echo $this->url->get("/user/" . $item->users->id . "/" . $item->users->username); ?>"><?php echo $item->users->username; ?></a>
+				    </div>
+				    <div class="right"><?php echo $item->country; ?></div>
+			  	</div>
+                <a href="<?php echo $this->url->get("/polaroid/" . $item->id . "/" .
+            $this->tag->friendlyTitle($item->title, "-")); ?>">
+                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $item->photo_hash_file_name; ?>">
+                </a>
+                <div class="caption text-center BarnieFonte">
+                    <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $item->title; ?></h3>
+                    <p style="margin-bottom: -0.75rem; border-top: 0.1px solid rgba(128, 128, 128, 0.2); padding-top: 5px;"><?php echo date("F j, Y", strtotime($item->datetime_created)); ?></p> </div>
+            </div>
+        </div>
+    <?php endforeach ?>
 
-	<?php if ($page->current != $page->last): ?>
-		<li class="arrow"><a
-				href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->next); ?>">Next &raquo;</a>
-		</li>
-		<li><a href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->last); ?>">Last</a></li>
-	<?php endif ?>
+    </div>
+</div>
 
-</ul>
+<div class="row">
+	<div class="offset-8 small-4 small-centered columns">
+		<ul class="pagination" role="menubar" aria-label="Pagination">
+			<?php if ($page->current != $page->first): ?>
+				<li>
+					<a href="<?php echo $this->url->get("/find/polaroids/" . $searched_query); ?>">First</a>
+				</li>
+				<li class="arrow"><a
+						href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->before); ?>">&laquo;
+						Previous</a></li>
+			<?php endif ?>
+
+			<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+
+			<?php if ($page->current != $page->last): ?>
+				<li class="arrow"><a
+						href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->next); ?>">Next &raquo;</a>
+				</li>
+				<li><a href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->last); ?>">Last</a></li>
+			<?php endif ?>
+		</ul>
+	</div>
+</div>

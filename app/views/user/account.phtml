@@ -36,11 +36,18 @@ display: inline-block;" class="tab-title" role="presentational">
 
 	</div>
 
+
 	<div class="tabs-content">
 			<section tabindex="0" id="personal-info" role="tabpanel"
 			         aria-hidden="false" class="content active">
 
 				<p id="tabs-deeplink-content-1">
+
+				<div class="row text-center" style="margin-top: 17px; margin-bottom: 5px;">
+					<img
+					src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user_info->email))); ?>?s=100">
+					<p>change your image at <a target="_blank" href="https://gravatar.com">gravatar.com</a> </p>
+				</div>
 
 				<form action="<?php echo $this->url->get("/personal-info"); ?>" method="post">
 					<div class="row">
@@ -1010,5 +1017,3 @@ display: inline-block;" class="tab-title" role="presentational">
 	</p>
 	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
-
-
