@@ -10,6 +10,10 @@
 	 */
 	public function indexAction()
     {
+    	if ($this->session->has("auth")) {
+    		return $this->response->redirect("/");
+    	}
+
 	    $this->tag->appendTitle(" | SessionController - indexAction");
 	    $this->view->setTemplateAfter("session-layout");
 

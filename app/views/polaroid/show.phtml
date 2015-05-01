@@ -55,31 +55,55 @@
 					. $this->router->getRewriteUri());	?>"
 				   class="button round expand warning">
 					<i style="font-size: 20px;"
-					   class="fi-upload-cloud"></i> Login to like and follow people!
+					   class="fi-upload-cloud"></i> Login to Like this Polaroid!
 				</a>
 	</div>
 
 <?php else: ?>
 
-<div class="row panel">
-	<form action="<?php echo("/polaroid-map-app/like-polaroid"); ?>"
-	      method="post">
+	<?php if ($user_likes_polaroid_or_not): ?>
 
-		<input type="hidden"
-		       name="<?php echo $this->security->getTokenKey(); ?>"
-		       value="<?php echo $this->security->getToken(); ?>">
+		<div class="row panel">
+			<form action="<?php echo("/polaroid-map-app/unlike-polaroid"); ?>"
+			      method="post">
 
-		<input type="hidden" name="polaroid_id"
-		       value="<?php echo $polaroid_info->id;
-		       ?>"/>
+				<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey(); ?>"
+				       value="<?php echo $this->security->getToken(); ?>">
 
-		<button type="submit" id="likePolaroidButton"
-		        class="button expand round">
-			<i style="font-size: 20px;"
-			   class="fi-like"></i> Like
-		</button>
-	</form>
-</div>
+				<input type="hidden" name="polaroid_id"
+				       value="<?php echo $polaroid_info->id;
+				       ?>"/>
+
+				<button type="submit" id="unlikePolaroidButton"
+				        class="button expand info round">
+					<i style="font-size: 20px;"
+					   class="fi-dislike"></i> UnLike
+				</button>
+			</form>
+		</div>
+
+	<?php else: ?>
+		<div class="row panel">
+			<form action="<?php echo("/polaroid-map-app/like-polaroid"); ?>"
+			      method="post">
+
+				<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey(); ?>"
+				       value="<?php echo $this->security->getToken(); ?>">
+
+				<input type="hidden" name="polaroid_id"
+				       value="<?php echo $polaroid_info->id;
+				       ?>"/>
+
+				<button type="submit" id="likePolaroidButton"
+				        class="button expand round">
+					<i style="font-size: 20px;"
+					   class="fi-like"></i> Like
+				</button>
+			</form>
+		</div>
+	<?php endif ?>
 
 <?php endif ?>
 

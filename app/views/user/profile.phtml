@@ -15,24 +15,47 @@
 	<div class="large-8 columns">
 		<div class="panel radius">
 			<div class="row">
-				<div class="large-12 columns">
-					<h4><?php echo $user_info->full_name; ?></h4>
-					<hr>
-					<h5 class="subheader">
-						<?php echo $user_info->facebook_username; ?> |
-						<?php echo $user_info->twitter_username; ?> |
-						<?php echo $user_info->google_plus_username; ?>
-					</h5>
+				<div class="large-12 columns text-center">
+					<?php if ($user_info->full_name): ?>
+						<h4><?php echo $user_info->full_name; ?></h4>
+						<hr>
+					<?php endif ?>
+				<h5 class="subheader">
+					<div class="row collapse">
+						<?php if ($user_info->facebook_username): ?>
+							<div class="small-12 columns">
+								<a href="https://facebook.com/<?php echo $user_info->facebook_username; ?>"><span style="background-color: #46629E; color:
+									white;"
+									      class="prefix">facebook.com/<?php echo $user_info->facebook_username; ?></span></a>
+							</div>
+						<?php endif ?>
+						<?php if ($user_info->twitter_username): ?>
+
+						<div class="small-12 columns">
+							<a href="https://twitter.com/<?php echo $user_info->twitter_username; ?>"><span style="background-color: #55ACEE; color:
+								white;" class="prefix">twitter.com/<?php echo $user_info->twitter_username; ?></span></a>
+						</div>
+						<?php endif ?>
+						<?php if ($user_info->google_plus_username): ?>
+						<div class="small-12 columns">
+							<a href="https://plus.google.com/<?php echo $user_info->google_plus_username; ?>"><span style="background-color: #D73D32; color:
+								white;" class="prefix">plus.google.com/<?php echo $user_info->google_plus_username; ?></span></a>
+						</div>
+						<?php endif ?>
+					</div>
+				</h5>
 				</div>
 			</div>
 		</div>
+		<?php if ($user_info->bio): ?>
 		<div class="panel radius">
 			<div class="row">
 				<div class="large-12 columns">
-						<?php echo $user_info->bio; ?>
+					<?php echo $user_info->bio; ?>
 				</div>
 			</div>
 		</div>
+		<?php endif ?>
 	</div>
 </div>
 

@@ -5,5 +5,5 @@ $(document).ready(function() {
 $(document).ready(function() {
 	setTimeout( function() {
 		$('.alert-box').fadeOut("slow");
-	},2000);
+	},3500);
 });

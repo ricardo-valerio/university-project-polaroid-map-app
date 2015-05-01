@@ -16,7 +16,7 @@
 	<div class="large-8 columns">
 		<div class="panel radius">
 			<div class="row">
-				<div class="large-12 columns">
+				<div class="large-12 columns text-center">
 					<?php if ($user_info->full_name): ?>
 						<h4><?php echo $user_info->full_name; ?></h4>
 						<hr>
@@ -174,7 +174,7 @@
 					. $this->router->getRewriteUri()); ?>"
 				   class="button expand warning">
 					<i style="font-size: 20px;"
-					   class="fi-like"></i> Login to Follow!
+					   class="fi-like"></i> Login to Follow <?php echo $user_info->username; ?>!
 				</a>
 	</div>
 

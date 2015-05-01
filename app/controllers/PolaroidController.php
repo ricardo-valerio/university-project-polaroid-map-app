@@ -48,6 +48,10 @@ class PolaroidController extends ControllerBase
 
 		if ($polaroid_id != NULL)
 		{
+			if ($this->session->has("auth")) {
+				$user_likes_polaroid_or_not = UserLikesPolaroid::count("id_polaroid = $polaroid_id AND id_user = " . $this->session->get('auth')['id']);
+			}
+
 			return $this->view->setVars(array(
 				"polaroid_info"   => Polaroids::findFirst($polaroid_id),
 				"last_polaroids"  => Polaroids::find(array(
@@ -64,7 +68,8 @@ class PolaroidController extends ControllerBase
 					"columns" => "id, title",
 					"order"   => "number_of_likes DESC",
 					"limit"   => 10
-				))
+				)),
+				"user_likes_polaroid_or_not" => $user_likes_polaroid_or_not
 			));
 
 		} else
@@ -283,16 +288,57 @@ class PolaroidController extends ControllerBase
 			$polaroid_title     = $polaroid_to_update->title;
 			$polaroid_to_update->number_of_likes += 1;
 
-			if ($polaroid_to_update->update() == false)
-				$this->flashSession->notice("Something Went Wrong!");
-			else
-				$this->flashSession->success("Thanks dude! <a href='#' class='close'>&times;</a>");
+			if (!$polaroid_to_update->update()){
+				$this->flashSession->notice("Ultra Bug - Call Rv!");
+			}
+			else{
+				$user_likes_polaroids = new UserLikesPolaroid();
+				$user_likes_polaroids->id_polaroid = $polaroid_id;
+				$user_likes_polaroids->id_user     = $this->session->get("auth")["id"];
+
+				if (!$user_likes_polaroids->save()) {
+					$this->flashSession->notice("Ultra Bug - Call Rv!");
+				}else{
+					$this->flashSession->success("Liked! =) <a href='#' class='close'>&times;</a>");
+				}
+			}
 
 			return $this->response->redirect("/polaroid/" . $polaroid_id
 					. "/" . $this->tag->friendlyTitle($polaroid_title, "-"));
 
 		}
 
+	}
+
+	public function unlikeAction()
+	{
+		$this->view->disable();
+
+				if ($this->request->isPost())
+		{
+			$polaroid_id        = $this->request->getPost("polaroid_id", "int");
+			$polaroid_to_update = Polaroids::findFirst($polaroid_id);
+			$polaroid_title     = $polaroid_to_update->title;
+			$polaroid_to_update->number_of_likes -= 1;
+
+			if (!$polaroid_to_update->update()){
+				$this->flashSession->notice("Ultra Bug - Call Rv!");
+			}
+			else{
+				$user_likes_polaroid = UserLikesPolaroid::findFirst("id_polaroid = $polaroid_id
+					AND id_user = ". $this->session->get("auth")["id"]);
+
+				if (!$user_likes_polaroid->delete()) {
+					$this->flashSession->notice("Ultra Bug - Call Rv!");
+				}else{
+					$this->flashSession->notice("Unliked! =( <a href='#' class='close'>&times;</a>");
+				}
+			}
+
+			return $this->response->redirect("/polaroid/" . $polaroid_id
+					. "/" . $this->tag->friendlyTitle($polaroid_title, "-"));
+
+		}
 	}
 
 }

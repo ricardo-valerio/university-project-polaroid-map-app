@@ -86,6 +86,12 @@
 		"action"     => "like"
 	));
 
+	$router->add("/unlike-polaroid", array(
+
+		"controller" => "polaroid",
+		"action"     => "unlike"
+	));
+
 	// route/123
 	// route/123/route-in-san-francisco
 	$router->add("/route/{route_id}/:params", array(
