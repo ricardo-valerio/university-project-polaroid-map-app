@@ -1,23 +1,22 @@
-<div class="row" style="margin-top: 37px;">
 
-	<?php $counter = 0; ?>
-	<?php foreach ($following as $f): ?>
-		<div class="large-3 medium-6 small-12 columns panel">
-			<div class="panel text-center">
-				<img src="http://www.gravatar.com/avatar/<?php
-				echo md5(strtolower(trim($f->users->email))); ?>?s=150">
-			</div>
-			<div class="panel text-center">
-				<h4><?php echo $f->users->username; ?></h4>
-				<a href="" class="button expand warning"><i class="fi-dislike"></i>
-					Unfollow</a>
-			</div>
-		</div>
+<div style="margin-top: 2em;" class="row">
+    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
-		<?php if ($counter++ == 3): ?>
-			<?php echo "</div><div class='row'></div>";?>
-		<?php endif ?>
+    <?php foreach ($following as $f): ?>
+        <div class="box col3">
+            <div class="thumbnail">
+                <a href="<?php echo $this->url->get("/user/" . $f->users->id . "/" .
+            $this->tag->friendlyTitle($f->users->username, "-")); ?>">
+                <img src="http://www.gravatar.com/avatar/<?php
+                echo md5(strtolower(trim($f->users->email))); ?>?s=150">
+                </a>
+                <div class="caption text-center BarnieFonte">
+                    <h3 style="font-size: 1.5em;" class=""><?php echo $f->users->username; ?></h3>
+                    <a href="" class="button alert expand round">Unfollow</a>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
 
-	<?php endforeach ?>
-
+    </div>
 </div>

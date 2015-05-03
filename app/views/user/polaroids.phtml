@@ -6,7 +6,7 @@
             <div class="thumbnail">
                 <a href="<?php echo $this->url->get("/polaroid/" . $user_polaroid->id . "/" .
             $this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
-                <img class="img-rounded BarnieFonte" src="public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
+                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
                 </a>
                 <div class="caption text-center BarnieFonte">
                     <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $user_polaroid->title; ?></h3>

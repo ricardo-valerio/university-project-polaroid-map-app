@@ -39,7 +39,7 @@ class Security extends Plugin
 			$privateResources = array(
 				'polaroid' => array('index', 'create', 'update', 'delete', 'comment', 'like', 'unlike'),
 				'route'    => array('index', 'create', 'update', 'delete'),
-				'user'     => array('profile', 'account', 'polaroids', 'routes', 'liked', 'following', 'personalInfo', 'accountSettings', 'dangerZone')
+				'user'     => array('profile', 'account', 'polaroids', 'routes', 'liked', 'following', 'personalInfo', 'accountSettings', 'dangerZone', 'follow', 'unfollow')
 			);
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);

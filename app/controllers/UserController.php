@@ -49,32 +49,30 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - indexAction");
 		$this->view->setTemplateAfter("show-layout");
 
-		$this->assets
-				->collection("footer")
-					->addJs("/js/app-search-bar.js");
 
 		$user_id = $this->dispatcher->getParam("user_id", "int");
 
-		$this->view->setVars(array(
-			"last_polaroids"  => Polaroids::find(array(
-				"columns" => "id, title",
-				"order"   => "datetime_created DESC",
-				"limit"   => 10
-			)),
-			"last_routes"     => Routes::find(array(
-				"columns" => "id, title",
-				"order"   => "datetime_created DESC",
-				"limit"   => 10
-			)),
-			"liked_polaroids" => Polaroids::find(array(
-				"columns" => "id, title",
-				"order"   => "number_of_likes DESC",
-				"limit"   => 10
-			))
-		));
 
 		if ($user_id != NULL)
 		{
+			$this->assets
+					->collection('header_css')
+						->addCss("/css/mason/mason_base.css")
+						->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+				$this->assets
+					->collection('header')
+						->addJs("/js/mason/modernizr-transitions.js");
+
+				$this->assets
+					->collection('footer')
+						->addJs("/js/mason/jquery.masonry.js")
+						->addJs("/js/app-mason-start.js");
+
+			if ($this->session->has("auth")) {
+				$user_follows_user_or_not = UserIsFollowing::count("id_user_who_is_followed = $user_id AND id_user_who_follows = " . $this->session->get('auth')['id']);
+			}
+
 			return $this->view->setVars(array(
 				"user_info"                => Users::findFirst($user_id),
 				"number_of_user_polaroids" => Polaroids::count("id_user = " . $user_id),
@@ -86,7 +84,8 @@ class UserController extends ControllerBase
 				"user_routes"              => Routes::find(array(
 					"conditions" => "id_user = " . $user_id,
 					"order"      => "datetime_created DESC"
-				))
+				)),
+				"user_follows_user_or_not" => $user_follows_user_or_not
 			));
 
 		}else
@@ -104,6 +103,20 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - profileAction");
 		$this->view->setTemplateAfter("user-main");
+
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
 
 
 		return $this->view->setVars(array(
@@ -188,6 +201,20 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - followingAction");
 		$this->view->setTemplateAfter("user-main");
+
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
 
 		$following = UserIsFollowing::find("id_user_who_follows = ". $this->session->get("auth")["id"] );
 		return $this->view->setVar("following", $following);
@@ -309,6 +336,59 @@ class UserController extends ControllerBase
 
 	}
 
+
+	public function followAction()
+	{
+		$this->view->disable();
+
+		if ($this->request->isPost())
+		{
+			$user_to_follow_id  = $this->request->getPost("user_to_follow_id", "int");
+			$username 			= Users::findFirst($user_to_follow_id)->username;
+
+			$user_follows_user 							= new UserIsFollowing();
+			$user_follows_user->id_user_who_follows 	= $this->session->get("auth")["id"];
+			$user_follows_user->id_user_who_is_followed = $user_to_follow_id;
+
+			if (!$user_follows_user->save()){
+				$this->flashSession->error("Ultra Bug - Call Rv!");
+			}
+			else{
+					$this->flashSession->success("Followed! =) <a href='#' class='close'>&times;</a>");
+			}
+
+			return $this->response->redirect("/user/" . $user_to_follow_id
+					. "/" . $this->tag->friendlyTitle($username, "-"));
+
+		}
+
+	}
+
+	public function unfollowAction()
+	{
+		$this->view->disable();
+
+		if ($this->request->isPost())
+		{
+			$user_to_unfollow_id  = $this->request->getPost("user_to_unfollow_id", "int");
+			$username 			  = Users::findFirst($user_to_unfollow_id)->username;
+
+
+			$user_follows_user = UserIsFollowing::findFirst("id_user_who_is_followed = $user_to_unfollow_id AND id_user_who_follows = " . $this->session->get('auth')['id']);
+
+			if (!$user_follows_user->delete()){
+				$this->flashSession->error("Ultra Bug - Call Rv!");
+			}
+			else{
+					$this->flashSession->notice("Unfollowed! =( <a href='#' class='close'>&times;</a>");
+			}
+
+			return $this->response->redirect("/user/" . $user_to_unfollow_id
+					. "/" . $this->tag->friendlyTitle($username, "-"));
+
+		}
+
+	}
 
 }
 

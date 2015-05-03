@@ -289,15 +289,15 @@ class PolaroidController extends ControllerBase
 			$polaroid_to_update->number_of_likes += 1;
 
 			if (!$polaroid_to_update->update()){
-				$this->flashSession->notice("Ultra Bug - Call Rv!");
+				$this->flashSession->error("Ultra Bug - Call Rv!");
 			}
 			else{
 				$user_likes_polaroids = new UserLikesPolaroid();
-				$user_likes_polaroids->id_polaroid = $polaroid_id;
 				$user_likes_polaroids->id_user     = $this->session->get("auth")["id"];
+				$user_likes_polaroids->id_polaroid = $polaroid_id;
 
 				if (!$user_likes_polaroids->save()) {
-					$this->flashSession->notice("Ultra Bug - Call Rv!");
+					$this->flashSession->error("Ultra Bug - Call Rv!");
 				}else{
 					$this->flashSession->success("Liked! =) <a href='#' class='close'>&times;</a>");
 				}
@@ -314,7 +314,7 @@ class PolaroidController extends ControllerBase
 	{
 		$this->view->disable();
 
-				if ($this->request->isPost())
+		if ($this->request->isPost())
 		{
 			$polaroid_id        = $this->request->getPost("polaroid_id", "int");
 			$polaroid_to_update = Polaroids::findFirst($polaroid_id);
@@ -322,14 +322,14 @@ class PolaroidController extends ControllerBase
 			$polaroid_to_update->number_of_likes -= 1;
 
 			if (!$polaroid_to_update->update()){
-				$this->flashSession->notice("Ultra Bug - Call Rv!");
+				$this->flashSession->error("Ultra Bug - Call Rv!");
 			}
 			else{
 				$user_likes_polaroid = UserLikesPolaroid::findFirst("id_polaroid = $polaroid_id
 					AND id_user = ". $this->session->get("auth")["id"]);
 
 				if (!$user_likes_polaroid->delete()) {
-					$this->flashSession->notice("Ultra Bug - Call Rv!");
+					$this->flashSession->error("Ultra Bug - Call Rv!");
 				}else{
 					$this->flashSession->notice("Unliked! =( <a href='#' class='close'>&times;</a>");
 				}

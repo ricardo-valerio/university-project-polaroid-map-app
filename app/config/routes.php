@@ -147,6 +147,18 @@
 		"action"     => "following"
 	));
 
+	$router->add("/follow-user", array(
+
+		"controller" => "user",
+		"action"     => "follow"
+	));
+
+	$router->add("/unfollow-user", array(
+
+		"controller" => "user",
+		"action"     => "unfollow"
+	));
+
 	$router->add("/i-liked", array(
 
 		"controller" => "user",

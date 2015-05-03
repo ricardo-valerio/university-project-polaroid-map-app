@@ -84,40 +84,27 @@
 	<h2 class="text-center" id="Polaroids"><?php echo $user_info->username;
 		?>'s Polaroids!</h2>
 
-	<div class="row text-center">
+	<div style="margin-top: 2em;" class="row">
+	    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
-		<?php if ($number_of_user_polaroids): ?>
+	    <?php foreach ($user_polaroids as $user_polaroid): ?>
+	        <div class="box col3">
+	            <div class="thumbnail">
+	                <a href="<?php echo $this->url->get("/polaroid/" . $user_polaroid->id . "/" .
+	            $this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
+	                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
+	                </a>
+	                <div class="caption text-center BarnieFonte">
+	                    <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $user_polaroid->title; ?></h3>
+	                    <p style="margin-bottom: -0.75rem; border-top: 0.1px solid rgba(128, 128, 128, 0.2); padding-top: 5px;"><?php echo date("F j, Y", strtotime($user_polaroid->datetime_created)); ?></p> </div>
+	            </div>
+	        </div>
+	    <?php endforeach ?>
 
-			<?php $counter = 0; ?>
-			<?php foreach ($user_polaroids as $user_polaroid): ?>
-
-				<a href="<?php echo $this->url->get("/polaroid/" .
-					$user_polaroid->id . "/" .
-					$this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
-					<div class="large-3 small-12 medium-6 columns panel">
-						<img src="<?php echo $this->url->get("/public/img/polaroids/". $user_polaroid->photo_hash_file_name); ?>" alt="<?php echo $user_polaroid->title; ?>"/>
-						<div class="panel">
-							<p><?php echo $user_polaroid->title; ?> </p>
-						</div>
-					</div>
-				</a>
-
-				<?php
-				if ($counter++ == 3) {
-					echo "</div><div class='row'>";
-					$counter = 0;
-				}
-				?>
-			<?php endforeach ?>
-
-		<?php else: ?>
-
-			<p>This User has no polaroids yet!</p>
-
-		<?php endif ?>
-
-		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	    </div>
 	</div>
+
+</div>
 
 
 	<!-- modal para as routes -->
@@ -158,12 +145,53 @@
 </div>
 <?php if($this->session->has("auth") && $user_info->id != $this->session->get("auth")["id"] ): ?>
 
+
+<?php if ($user_follows_user_or_not): ?>
+
 	<div class="row panel">
-		<a href="#" class="button expand success">
-			<i style="font-size: 20px;"
-			   class="fi-like"></i> Follow
-		</a>
+			<form action="<?php echo("/polaroid-map-app/unfollow-user"); ?>"
+			      method="post">
+
+				<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey(); ?>"
+				       value="<?php echo $this->security->getToken(); ?>">
+
+				<input type="hidden" name="user_to_unfollow_id"
+				       value="<?php echo $user_info->id;
+				       ?>"/>
+
+				<button type="submit" id="unfollowUserButton"
+				        class="button expand alert round">
+					<i style="font-size: 20px;"
+					   class="fi-like"></i> Unfollow
+				</button>
+			</form>
 	</div>
+
+<?php else: ?>
+
+	<div class="row panel">
+			<form action="<?php echo("/polaroid-map-app/follow-user"); ?>"
+			      method="post">
+
+				<input type="hidden"
+				       name="<?php echo $this->security->getTokenKey(); ?>"
+				       value="<?php echo $this->security->getToken(); ?>">
+
+				<input type="hidden" name="user_to_follow_id"
+				       value="<?php echo $user_info->id;
+				       ?>"/>
+
+				<button type="submit" id="followUserButton"
+				        class="button expand success round">
+					<i style="font-size: 20px;"
+					   class="fi-like"></i> Follow
+				</button>
+			</form>
+	</div>
+
+<?php endif ?>
+
 
 <?php endif ?>
 
