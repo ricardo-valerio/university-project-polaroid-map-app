@@ -1,6 +1,16 @@
+<?php $this->flashSession->output(); ?>
 
 <div style="margin-top: 2em;" class="row">
     <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
+
+<?php if (!count($following)): ?>
+
+    <div class="callout panel text-center">
+        <h2>You're an antisocial being, because you aren't following anyone <br>at the moment my friend!</h2>
+         <p><a href="<?php echo $this->url->get("/find-users"); ?>">Find People</a> and be happy...</p>
+    </div>
+
+<?php else: ?>
 
     <?php foreach ($following as $f): ?>
         <div class="box col3">
@@ -12,11 +22,28 @@
                 </a>
                 <div class="caption text-center BarnieFonte">
                     <h3 style="font-size: 1.5em;" class=""><?php echo $f->users->username; ?></h3>
-                    <a href="" class="button alert expand round">Unfollow</a>
+                    <form action="<?php echo("/polaroid-map-app/unfollow-user-from-profile"); ?>"
+                  method="post">
+
+                        <input type="hidden"
+                               name="<?php echo $this->security->getTokenKey(); ?>"
+                               value="<?php echo $this->security->getToken(); ?>">
+
+                        <input type="hidden" name="user_to_unfollow_id"
+                               value="<?php echo $f->users->id;
+                               ?>"/>
+
+                        <button type="submit" id="unfollowUserButton"
+                                class="button expand alert round">
+                            <i style="font-size: 20px;"
+                               class=""></i> Unfollow
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     <?php endforeach ?>
+<?php endif ?>
 
     </div>
 </div>

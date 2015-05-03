@@ -76,7 +76,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find("title LIKE '%" . $query_filtered . "%'"),
-				"limit" => 4,
+				"limit" => 10,
 				"page"  => $current_page
 			)
 		);
@@ -195,7 +195,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find(),
-				"limit" => 4,
+				"limit" => 10,
 				"page"  => $current_page
 			)
 		);

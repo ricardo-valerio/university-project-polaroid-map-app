@@ -390,5 +390,30 @@ class UserController extends ControllerBase
 
 	}
 
+	public function unfollowFromProfileAction()
+	{
+		$this->view->disable();
+
+		if ($this->request->isPost())
+		{
+			$user_to_unfollow_id  = $this->request->getPost("user_to_unfollow_id", "int");
+			$username 			  = Users::findFirst($user_to_unfollow_id)->username;
+
+
+			$user_follows_user = UserIsFollowing::findFirst("id_user_who_is_followed = $user_to_unfollow_id AND id_user_who_follows = " . $this->session->get('auth')['id']);
+
+			if (!$user_follows_user->delete()){
+				$this->flashSession->error("Ultra Bug - Call Rv!");
+			}
+			else{
+					$this->flashSession->notice("Unfollowed! =( <a href='#' class='close'>&times;</a>");
+			}
+
+			return $this->response->redirect("/i-am-following");
+
+		}
+
+	}
+
 }
 

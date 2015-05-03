@@ -142,56 +142,53 @@
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
 
-</div>
 <?php if($this->session->has("auth") && $user_info->id != $this->session->get("auth")["id"] ): ?>
 
+	<?php if ($user_follows_user_or_not): ?>
 
-<?php if ($user_follows_user_or_not): ?>
+		<div class="row panel">
+				<form action="<?php echo("/polaroid-map-app/unfollow-user"); ?>"
+				      method="post">
 
-	<div class="row panel">
-			<form action="<?php echo("/polaroid-map-app/unfollow-user"); ?>"
-			      method="post">
+					<input type="hidden"
+					       name="<?php echo $this->security->getTokenKey(); ?>"
+					       value="<?php echo $this->security->getToken(); ?>">
 
-				<input type="hidden"
-				       name="<?php echo $this->security->getTokenKey(); ?>"
-				       value="<?php echo $this->security->getToken(); ?>">
+					<input type="hidden" name="user_to_unfollow_id"
+					       value="<?php echo $user_info->id;
+					       ?>"/>
 
-				<input type="hidden" name="user_to_unfollow_id"
-				       value="<?php echo $user_info->id;
-				       ?>"/>
+					<button type="submit" id="unfollowUserButton"
+					        class="button expand alert round">
+						<i style="font-size: 20px;"
+						   class="fi-like"></i> Unfollow
+					</button>
+				</form>
+		</div>
 
-				<button type="submit" id="unfollowUserButton"
-				        class="button expand alert round">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Unfollow
-				</button>
-			</form>
-	</div>
+	<?php else: ?>
 
-<?php else: ?>
+		<div class="row panel">
+				<form action="<?php echo("/polaroid-map-app/follow-user"); ?>"
+				      method="post">
 
-	<div class="row panel">
-			<form action="<?php echo("/polaroid-map-app/follow-user"); ?>"
-			      method="post">
+					<input type="hidden"
+					       name="<?php echo $this->security->getTokenKey(); ?>"
+					       value="<?php echo $this->security->getToken(); ?>">
 
-				<input type="hidden"
-				       name="<?php echo $this->security->getTokenKey(); ?>"
-				       value="<?php echo $this->security->getToken(); ?>">
+					<input type="hidden" name="user_to_follow_id"
+					       value="<?php echo $user_info->id;
+					       ?>"/>
 
-				<input type="hidden" name="user_to_follow_id"
-				       value="<?php echo $user_info->id;
-				       ?>"/>
+					<button type="submit" id="followUserButton"
+					        class="button expand success round">
+						<i style="font-size: 20px;"
+						   class="fi-like"></i> Follow
+					</button>
+				</form>
+		</div>
 
-				<button type="submit" id="followUserButton"
-				        class="button expand success round">
-					<i style="font-size: 20px;"
-					   class="fi-like"></i> Follow
-				</button>
-			</form>
-	</div>
-
-<?php endif ?>
-
+	<?php endif ?>
 
 <?php endif ?>
 
@@ -207,4 +204,3 @@
 	</div>
 
 <?php endif ?>
-

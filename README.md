@@ -4,34 +4,16 @@ university project :mortar_board:
 
 TODO:
 
-* follow user inside the show user info view
-
-
-			/user/{user-id}/user-name
+* fix the css properties for the div containing results at the top search-bar
 
 
 * routes (show and load all the corresponding markers and info)
 
 
-			/route/{route-id}/route-title
-
+			/route/{route-id}/{route-title}
 
 
 * user login via social plugins (facebook/twitter/google+)
 
-
-
-
-* Css styles for find section
-
-
-			/find/all/{slug}
-			/find/users/{slug}
-			/find/polaroids/{slug}
-			/find/routes/{slug}
-			/find/routes/{slug}
-			/find-users
-			/find-polaroids
-			/find-routes
 
 * get flag svg icons for all countries from [http://lipis.github.io/flag-icon-css/](http://lipis.github.io/flag-icon-css/)

@@ -159,6 +159,12 @@
 		"action"     => "unfollow"
 	));
 
+	$router->add("/unfollow-user-from-profile", array(
+
+		"controller" => "user",
+		"action"     => "unfollowFromProfile"
+	));
+
 	$router->add("/i-liked", array(
 
 		"controller" => "user",
