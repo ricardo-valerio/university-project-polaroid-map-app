@@ -15,5 +15,3 @@ TODO:
 
 * user login via social plugins (facebook/twitter/google+)
 
-
-* get flag svg icons for all countries from [http://lipis.github.io/flag-icon-css/](http://lipis.github.io/flag-icon-css/)

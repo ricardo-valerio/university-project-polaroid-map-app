@@ -1,6 +1,14 @@
 <div style="margin-top: 2em;" class="row">
     <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
+<?php if (!count($user_polaroids)): ?>
+
+    <div class="callout panel text-center">
+        <h2>You have no polaroids at the moment my friend!</h2>
+    </div>
+
+<?php else: ?>
+
     <?php foreach ($user_polaroids as $user_polaroid): ?>
         <div class="box col3">
             <div class="thumbnail">
@@ -14,6 +22,8 @@
             </div>
         </div>
     <?php endforeach ?>
+
+<?php endif ?>
 
     </div>
 </div>

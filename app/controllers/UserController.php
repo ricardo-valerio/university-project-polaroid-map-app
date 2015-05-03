@@ -5,6 +5,10 @@ class UserController extends ControllerBase
 
 	public function initialize()
 	{
+		$this->assets
+			->collection('footer')
+				->addJs("/js/app-search-bar.js");
+
 
 		$this->view->setVars(array(
 			"last_polaroids"  => Polaroids::find(array(

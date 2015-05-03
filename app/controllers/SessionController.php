@@ -19,7 +19,9 @@
 
 	    $this->assets
 		    ->collection('footer')
-			    ->addJs("/js/foundation/foundation.abide.js");
+			    ->addJs("/js/foundation/foundation.abide.js")
+				->addJs("/js/app-search-bar.js");
+
 
 
 	    $this->view->setVars(array(

@@ -17,7 +17,8 @@ class IndexController extends ControllerBase
 		$this->assets
 			->collection('footer')
 				->addJs("/js/app-main-map.js")
-				->addJs("/js/app-left-side-nav.js");
+				->addJs("/js/app-left-side-nav.js")
+				->addJs("/js/app-search-bar.js");
 
 
 		$this->view->setVars(array(

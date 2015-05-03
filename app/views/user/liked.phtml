@@ -1,81 +1,96 @@
-<div style="margin-top: 37px;" class="row text-center">
-	<div class="medium-6 columns panel">
-		<a href="#" data-reveal-id="LikePolaroidsModal">
-			<img class="th"
-		     src="http://placehold.it/250x250&amp;text=Polaroids">
-		</a>
-	</div>
-	<div class="medium-6 columns panel">
-		<a href="#" data-reveal-id="LikeRoutesModal">
-			<img class="th"
-			     src="http://placehold.it/250x250&amp;text=Routes">
-		</a>
-	</div>
-</div>
+<?php if (($number_of_polaroids_liked && $number_of_routes_liked) == FALSE): ?>
 
+	<div class="row" style="margin-top: 37px;">
 
-<div id="LikePolaroidsModal" class="reveal-modal text-center" data-reveal
-     aria-labelledby="modalTitle"
-     aria-hidden="true" role="dialog">
-		<div style="margin-top: 2em;" class="row">
-	    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
-
-	<?php if ($number_of_polaroids_liked): ?>
-
-	    <?php foreach ($polaroids_liked as $polaroid_liked): ?>
-	        <div class="box col3">
-	            <div class="thumbnail">
-	                <a href="<?php echo $this->url->get("/polaroid/" . $polaroid_liked->polaroids->id . "/" .
-	            $this->tag->friendlyTitle($polaroid_liked->polaroids->title, "-")); ?>">
-	                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $polaroid_liked->polaroids->photo_hash_file_name; ?>">
-	                </a>
-	                <div class="caption text-center BarnieFonte">
-	                    <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $polaroid_liked->polaroids->title; ?></h3>
-	                    <p style="margin-bottom: -0.75rem; border-top: 0.1px solid rgba(128, 128, 128, 0.2); padding-top: 5px;"><?php echo date("F j, Y", strtotime($polaroid_liked->polaroids->datetime_created)); ?></p> </div>
-	            </div>
-	        </div>
-	    <?php endforeach ?>
-
-	<?php else: ?>
-		<p>You don't like any polaroids! Duchebag!</p>
-	<?php endif ?>
+	    <div class="callout panel text-center">
+	        <h2>You have didn't like anything! <br>You should be ashame of yourself!</h2>
+	        <p><a href="<?php echo $this->url->get("/find"); ?>">Find Stuff!</a></p>
 	    </div>
+
+	</div>
+
+<?php else: ?>
+
+	<div style="margin-top: 37px;" class="row text-center">
+		<div class="medium-6 columns panel">
+			<a href="#" data-reveal-id="LikePolaroidsModal">
+				<img class="th"
+			     src="http://placehold.it/250x250&amp;text=Polaroids">
+			</a>
+		</div>
+		<div class="medium-6 columns panel">
+			<a href="#" data-reveal-id="LikeRoutesModal">
+				<img class="th"
+				     src="http://placehold.it/250x250&amp;text=Routes">
+			</a>
+		</div>
 	</div>
 
 
-	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
+	<div id="LikePolaroidsModal" class="reveal-modal text-center" data-reveal
+	     aria-labelledby="modalTitle"
+	     aria-hidden="true" role="dialog">
+			<div style="margin-top: 2em;" class="row">
+		    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
+		<?php if ($number_of_polaroids_liked): ?>
 
-<div id="LikeRoutesModal" class="reveal-modal text-center" data-reveal
-     aria-labelledby="modalTitle"
-     aria-hidden="true" role="dialog">
-
-		<?php if ($number_of_routes_liked): ?>
-
-			<?php foreach ($routes_liked as $route_liked): ?>
-
-				<div class="panel">
-					<h4><?php echo $route_liked->routes->title; ?></h4>
-
-					<div class="row">
-						<div class="large-9 columns">
-							<p><?php echo $route_liked->routes->description; ?></p>
-						</div>
-						<div class="large-3 columns">
-							<a href="<?php echo $this->url->get("/route/" . $route_liked->routes->id . "/" .
-								$this->tag->friendlyTitle($route_liked->routes->title, "-")); ?>"
-							   class="radius button right"><i
-									class="fi-eye"></i></a>
-						</div>
-					</div>
-				</div>
-
-			<?php endforeach ?>
+		    <?php foreach ($polaroids_liked as $polaroid_liked): ?>
+		        <div class="box col3">
+		            <div class="thumbnail">
+		                <a href="<?php echo $this->url->get("/polaroid/" . $polaroid_liked->polaroids->id . "/" .
+		            $this->tag->friendlyTitle($polaroid_liked->polaroids->title, "-")); ?>">
+		                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $polaroid_liked->polaroids->photo_hash_file_name; ?>">
+		                </a>
+		                <div class="caption text-center BarnieFonte">
+		                    <h3 style="font-size: 1.5em;" class="BarnieFonte"><?php echo $polaroid_liked->polaroids->title; ?></h3>
+		                    <p style="margin-bottom: -0.75rem; border-top: 0.1px solid rgba(128, 128, 128, 0.2); padding-top: 5px;"><?php echo date("F j, Y", strtotime($polaroid_liked->polaroids->datetime_created)); ?></p> </div>
+		            </div>
+		        </div>
+		    <?php endforeach ?>
 
 		<?php else: ?>
-			<p>You don't like any routes! You bastard!</p>
+			<p>You don't like any polaroids! Duchebag!</p>
 		<?php endif ?>
+		    </div>
+		</div>
 
-	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
+
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+
+	<div id="LikeRoutesModal" class="reveal-modal text-center" data-reveal
+	     aria-labelledby="modalTitle"
+	     aria-hidden="true" role="dialog">
+
+			<?php if ($number_of_routes_liked): ?>
+
+				<?php foreach ($routes_liked as $route_liked): ?>
+
+					<div class="panel">
+						<h4><?php echo $route_liked->routes->title; ?></h4>
+
+						<div class="row">
+							<div class="large-9 columns">
+								<p><?php echo $route_liked->routes->description; ?></p>
+							</div>
+							<div class="large-3 columns">
+								<a href="<?php echo $this->url->get("/route/" . $route_liked->routes->id . "/" .
+									$this->tag->friendlyTitle($route_liked->routes->title, "-")); ?>"
+								   class="radius button right"><i
+										class="fi-eye"></i></a>
+							</div>
+						</div>
+					</div>
+
+				<?php endforeach ?>
+
+			<?php else: ?>
+				<p>You don't like any routes! You bastard!</p>
+			<?php endif ?>
+
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+<?php endif ?>

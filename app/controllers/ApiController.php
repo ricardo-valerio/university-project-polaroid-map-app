@@ -19,7 +19,6 @@ class ApiController extends ControllerBase
 		}else{
 			$places = Polaroids::find(array(
 				"order" => "datetime_created DESC"
-//				"limit" => 5
 			));
 		}
 

@@ -19,7 +19,9 @@
 					<div class="left">
 						<a href="<?php echo $this->url->get("/user/" . $item->users->id . "/" . $item->users->username); ?>"><?php echo $item->users->username; ?></a>
 					</div>
-					<div class="right"><?php echo $item->country; ?></div>
+					<div class="right">
+	    				<a href="<?php echo $this->url->get("/find-by-country/". strtolower($item->country)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($item->country); ?>"></span></a>
+					</div>
 				</div>
 
                 <a href="<?php echo $this->url->get("/polaroid/" . $item->id . "/" .

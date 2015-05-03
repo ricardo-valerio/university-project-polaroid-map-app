@@ -7,6 +7,10 @@ class FindController extends ControllerBase
 	{
 		$this->view->setTemplateAfter("show-layout");
 
+		$this->assets
+				->collection("footer")
+					->addJs("/js/app-search-bar.js");
+
 		$this->view->setVars(array(
 			"last_polaroids"  => Polaroids::find(array(
 				"columns" => "id, title",
@@ -161,6 +165,7 @@ class FindController extends ControllerBase
 	public function allAction($q = "")
 	{
 		$this->tag->appendTitle(" | FindController - allAction");
+
 		$this->assets
 			->collection("footer")
 				->addJs("/js/foundation/foundation.orbit.js");
@@ -262,6 +267,32 @@ class FindController extends ControllerBase
 
 		$page = $paginator->getPaginate();
 		$this->view->setVar("page", $page);
+	}
+
+	public function countryAction($country = null)
+	{
+		$this->view->disable();
+		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
+
+		if ($country_filtered != NULL) {
+
+			echo "Country in url: ", $country_filtered;
+
+			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+				echo "Existe na BD";
+				// vai buscar todos os users e polaroid deste pais
+				// e passa para a view para seres mostrados com um paginador
+				// para cada uma
+			}else{
+				echo "Não existe na BD";
+				// redirect para o a página inicial com todas as bandeiras
+				// o que irá ser feito no else abaixo
+			}
+		}else{
+			// ir buscar todos os paises e mostrar todas as bandeiras
+			// de todos os paises para o user poder escolher uma bandeira
+			echo "O country é null, vou mostrar todas as bandeiras";
+		}
 	}
 
 }
