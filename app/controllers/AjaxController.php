@@ -38,7 +38,7 @@ class AjaxController extends ControllerBase
 						"id"       => $user->id,
 						"username" => $this->tag->friendlyTitle($user->username, "-"),
 						"avatar"   => "http://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))),
-						"country"  => $user->country
+						"country"  => strtolower($user->country)
 					);
 				}
 
@@ -54,7 +54,7 @@ class AjaxController extends ControllerBase
 						"title"               => $polaroid->title,
 						"title_friendly"      => $this->tag->friendlyTitle($polaroid->title, "-"),
 						"hash_photo_location" => "/polaroid-map-app/public/img/polaroids/" . $polaroid->photo_hash_file_name,
-						"country"             => $polaroid->country
+						"country"             => strtolower($polaroid->country)
 					);
 				}
 

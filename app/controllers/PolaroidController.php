@@ -32,7 +32,8 @@ class PolaroidController extends ControllerBase
 
 		$this->assets
 			->collection('header_css')
-				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+			->addCss("/css/flagicon/flag-icon.css")
+			->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
 
 		$this->assets
 			->collection('header')
@@ -40,8 +41,7 @@ class PolaroidController extends ControllerBase
 
 		$this->assets
 			->collection('footer')
-				->addJs("/js/app-toggle-map-show-polaroid.js")
-				->addJs("/js/app-search-bar.js");
+				->addJs("/js/app-toggle-map-show-polaroid.js");
 
 
 		$polaroid_id = $this->dispatcher->getParam("polaroid_id", "int");
@@ -161,8 +161,7 @@ class PolaroidController extends ControllerBase
 			->collection('footer')
 				->addJs("http://feather.aviary.com/imaging/v1/editor.js")
 				->addJs("/js/app-polaroid-creation.js")
-			    ->addJs("/js/foundation/foundation.abide.js")
-				->addJs("/js/app-search-bar.js");
+			    ->addJs("/js/foundation/foundation.abide.js");
 
 		$this->view->setVars(array(
 			"last_polaroids"  => Polaroids::find(array(

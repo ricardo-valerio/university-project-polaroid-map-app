@@ -40,8 +40,7 @@
 
 		$this->assets
 			->collection("footer")
-				->addJs("/js/vendor/maplace.js")
-				->addJs("/js/app-search-bar.js");
+				->addJs("/js/vendor/maplace.js");
 
 
 		$route_id = $this->dispatcher->getParam("route_id", "int");

@@ -29,7 +29,9 @@
 		<?php echo $this->tag->stylesheetLink("/css/normalize.css"); ?>
 		<?php echo $this->tag->stylesheetLink("/css/foundation.css"); ?>
 		<?php echo $this->tag->stylesheetLink("/css/foundation-icons.css"); ?>
+		<?php echo $this->tag->stylesheetLink("/css/flagicon/flag-icon.css"); ?>
 		<?php echo $this->tag->stylesheetLink("/css/app.css"); ?>
+
 		<?php if ($this->assets->collection('header_css')->count()): ?>
 			<?php $this->assets->outputCss('header_css'); ?>
 		<?php endif ?>
@@ -42,24 +44,19 @@
 </head>
 	<body>
 
+
 		<?php echo $this->getContent(); ?>
 
 
 		<?php echo $this->tag->javascriptInclude("/js/vendor/jquery.js"); ?>
 		<?php echo $this->tag->javascriptInclude("/js/foundation/foundation.min.js"); ?>
-
-<!--
-			remover este script para os assets onde
-			existe flash messages:
-
--->
+		<?php echo $this->tag->javascriptInclude("/js/app-search-bar.js"); ?>
 		<?php echo $this->tag->javascriptInclude("/js/app-close-flash-messages.js"); ?>
-
-
 
 		<?php if ($this->assets->collection('footer')->count()): ?>
 			<?php $this->assets->outputJs('footer'); ?>
 		<?php endif ?>
+
 		<?php if ($this->assets->collection('footer_mason')->count()): ?>
 			<?php $this->assets->outputJs('footer_mason'); ?>
 		<?php endif ?>

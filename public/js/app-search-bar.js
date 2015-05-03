@@ -21,7 +21,9 @@ $(document).ready(function () {
                          htmlContent += '<h4 class="ajax-search-bar-title-results text-center">Polaroids</h4>';
                         for (var i = 0; i < responseJson.polaroids.length ; i++)
                         {
-                            htmlContent += '<li class="li1"><a href="/polaroid-map-app/polaroid/'+ responseJson.polaroids[i].id + '/'+ responseJson.polaroids[i].title_friendly + '" class="a1"><span class="span1"><img class="img1" src="' + responseJson.polaroids[i].hash_photo_location + '"><span class="span2"><span class="span3"><span class="span4">' + responseJson.polaroids[i].title + '</span><span class="span5"><span class="span7">' + responseJson.polaroids[i].country + '</span></span></span></span></span></a></li>';
+                            // htmlContent += '<li class="li1"><a href="/polaroid-map-app/polaroid/'+ responseJson.polaroids[i].id + '/'+ responseJson.polaroids[i].title_friendly + '" class="a1"><span class="span1"><img class="img1" src="' + responseJson.polaroids[i].hash_photo_location + '"><span class="span2"><span class="span3"><span class="span4">' + responseJson.polaroids[i].title + '</span><span class="span5"><span class="span7">' + responseJson.polaroids[i].country + '</span></span></span></span></span></a></li>';
+
+                            htmlContent += '<li class="li1"><a href="/polaroid-map-app/polaroid/'+ responseJson.polaroids[i].id + '/'+ responseJson.polaroids[i].title_friendly + '" class="a1"><span class="span1"><img class="img1" src="' + responseJson.polaroids[i].hash_photo_location + '"><span class="span2"><span class="span3"><span class="span4">' + responseJson.polaroids[i].title + '</span><span class="span5"><span class="flag-icon flag-icon-' + responseJson.polaroids[i].country'"></span></span></span></span></a></li>';
 
                         }
                     }

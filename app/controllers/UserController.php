@@ -5,10 +5,6 @@ class UserController extends ControllerBase
 
 	public function initialize()
 	{
-		$this->assets
-			->collection("footer")
-				->addJs("/js/app-search-bar.js");
-
 
 		$this->view->setVars(array(
 			"last_polaroids"  => Polaroids::find(array(
@@ -58,6 +54,7 @@ class UserController extends ControllerBase
 			$this->assets
 					->collection('header_css')
 						->addCss("/css/mason/mason_base.css")
+						->addCss("/css/flagicon/flag-icon.css")
 						->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
 
 				$this->assets
@@ -86,13 +83,13 @@ class UserController extends ControllerBase
 					"order"      => "datetime_created DESC"
 				)),
 				"user_follows_user_or_not" => $user_follows_user_or_not,
-				"number_of_followers"      => UserIsFollowing::count("id_user_who_is_followed = ". $this->session->get("auth")["id"] ),
-				"number_of_following"      => UserIsFollowing::count("id_user_who_follows = ". $this->session->get("auth")["id"] ),
+				"number_of_followers"      => UserIsFollowing::count("id_user_who_is_followed = ". $user_id),
+				"number_of_following"      => UserIsFollowing::count("id_user_who_follows = ". $user_id),
 				"followers"                => UserIsFollowing::find(array(
-													"conditions" => "id_user_who_is_followed = ". $this->session->get("auth")["id"],
+													"conditions" => "id_user_who_is_followed = ". $user_id,
 													"columns"    => "id_user_who_follows"
 											 )),
-				"following"                => UserIsFollowing::find("id_user_who_follows = ". $this->session->get("auth")["id"] )
+				"following"                => UserIsFollowing::find("id_user_who_follows = ". $user_id)
 
 
 			));
@@ -116,6 +113,7 @@ class UserController extends ControllerBase
 		$this->assets
 			->collection('header_css')
 				->addCss("/css/mason/mason_base.css")
+				->addCss("/css/flagicon/flag-icon.css")
 				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
 
 		$this->assets
@@ -149,6 +147,10 @@ class UserController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | UserController - accountAction");
 		$this->view->setTemplateAfter("user-main");
+
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/flagicon/flag-icon.css");
 
 		$this->view->setVar("user_info", Users::findFirst($this->session->get("auth")["id"]));
 

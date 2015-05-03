@@ -7,10 +7,6 @@ class FindController extends ControllerBase
 	{
 		$this->view->setTemplateAfter("show-layout");
 
-		$this->assets
-			->collection("footer")
-			->addJs("/js/app-search-bar.js");
-
 		$this->view->setVars(array(
 			"last_polaroids"  => Polaroids::find(array(
 				"columns" => "id, title",

@@ -19,8 +19,8 @@
 
 	    $this->assets
 		    ->collection('footer')
-			    ->addJs("/js/foundation/foundation.abide.js")
-			    ->addJs("/js/app-search-bar.js");
+			    ->addJs("/js/foundation/foundation.abide.js");
+
 
 	    $this->view->setVars(array(
 		    "last_polaroids"  => Polaroids::find(array(

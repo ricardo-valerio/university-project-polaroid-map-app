@@ -7,7 +7,7 @@
 				<h4><?php echo $user_info->username; ?> </h4>
 			</div>
 			<div class="large-6 small-6 text-right columns">
-				<i class="fi-flag"></i>
+				<span class="flag-icon flag-icon-<?php echo strtolower($user_info->country); ?>"></span>
 			</div>
 		</div>
 		<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user_info->email))); ?>?s=250">

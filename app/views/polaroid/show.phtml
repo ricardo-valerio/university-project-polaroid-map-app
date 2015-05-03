@@ -30,7 +30,10 @@
 			<div style="background-color: white; border: none;" class="panel">
 				<h3 style="font-size: 2.3em; font-weight: bolder;"><?php echo $polaroid_info->title; ?></h3>
 				<p style="  font-size: 1.6em;" class="subheader"><?php echo $polaroid_info->description; ?></p>
-				<p class="right"><?php echo date("F j, Y", strtotime($polaroid_info->datetime_created)); ?></p>
+				<p class="right">
+					<?php echo date("F j, Y", strtotime($polaroid_info->datetime_created)); ?>
+					<span class="flag-icon flag-icon-<?php echo strtolower($polaroid_info->country); ?>"></span>
+				</p>
 			</div>
 		</div>
 		<div id="segundaDiv" style="background-color: white;"
