@@ -7,34 +7,50 @@
 </ul>
 
 
-<?php foreach ($page->items as $item): ?>
-	<ul>
-		<li><?php echo $item->id; ?></li>
-		<li><?php echo $item->username; ?></li>
-		<li><?php echo $item->full_name; ?></li>
-	</ul>
-<?php endforeach ?>
+<div style="margin-top: 2em;" class="row">
+    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
+
+		<?php foreach ($page->items as $item): ?>
+
+		    <div class="box col3">
+		        <div class="thumbnail">
+		            <a href="<?php echo $this->url->get("/user/" . $item->id . "/" .
+		        $this->tag->friendlyTitle($item->username, "-")); ?>">
+		            <img src="http://www.gravatar.com/avatar/<?php
+		            echo md5(strtolower(trim($item->email))); ?>?s=280">
+		            </a>
+		            <div class="caption text-center BarnieFonte">
+		                <h3 style="font-size: 1.5em;" class=""><?php echo $item->username; ?></h3>
+		            </div>
+		        </div>
+		    </div>
+
+		<?php endforeach ?>
+
+    </div>
+</div>
+
+<div class="row">
+	<div class="offset-8 small-4 small-centered columns">
+		<ul class="pagination" role="menubar" aria-label="Pagination">
+			<?php if ($page->current != $page->first): ?>
+				<li>
+					<a href="<?php echo $this->url->get("/find-users"); ?>">First</a>
+				</li>
+				<li class="arrow"><a
+						href="<?php echo $this->url->get("/find-users/" . $page->before); ?>">&laquo;
+						Previous</a></li>
+			<?php endif ?>
 
 
-<ul class="pagination" role="menubar" aria-label="Pagination">
-	<?php if ($page->current != $page->first): ?>
-		<li>
-			<a href="<?php echo $this->url->get("/find-users"); ?>">First</a>
-		</li>
-		<li class="arrow"><a
-				href="<?php echo $this->url->get("/find-users/" . $page->before); ?>">&laquo;
-				Previous</a></li>
-	<?php endif ?>
+			<?php if ($page->current != $page->last): ?>
+				<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+				<li class="arrow"><a
+						href="<?php echo $this->url->get("/find-users/" . $page->next); ?>">Next &raquo;</a>
+				</li>
+				<li><a href="<?php echo $this->url->get("/find-users/" . $page->last); ?>">Last</a></li>
+			<?php endif ?>
 
-	<li class="current"><a href=""><?php echo $page->current; ?></a></li>
-	<li class="unavailable" aria-disabled="true"><a href="">&hellip;
-			of <?php echo $page->total_items; ?></a></li>
-
-	<?php if ($page->current != $page->last): ?>
-		<li class="arrow"><a
-				href="<?php echo $this->url->get("/find-users/" . $page->next); ?>">Next &raquo;</a>
-		</li>
-		<li><a href="<?php echo $this->url->get("/find-users/" . $page->last); ?>">Last</a></li>
-	<?php endif ?>
-
-</ul>
+		</ul>
+	</div>
+</div>

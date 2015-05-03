@@ -47,9 +47,9 @@
 						Previous</a></li>
 			<?php endif ?>
 
-			<li class="current"><a href=""><?php echo $page->current; ?></a></li>
 
 			<?php if ($page->current != $page->last): ?>
+				<li class="current"><a href=""><?php echo $page->current; ?></a></li>
 				<li class="arrow"><a
 						href="<?php echo $this->url->get("/find/polaroids/" . $searched_query . "/" . $page->next); ?>">Next &raquo;</a>
 				</li>

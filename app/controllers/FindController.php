@@ -128,12 +128,28 @@ class FindController extends ControllerBase
 			$this->response->redirect("/find/all");
 		}
 
+
+		$this->assets
+				->collection('header_css')
+					->addCss("/css/mason/mason_base.css")
+					->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+
 		$this->view->setVar("searched_query", $query_filtered);
 
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Users::find("full_name LIKE '%" . $query_filtered . "%'"),
-				"limit" => 1,
+				"limit" => 10,
 				"page"  => $current_page
 			)
 		);
@@ -175,10 +191,25 @@ class FindController extends ControllerBase
 	{
 		$this->tag->appendTitle(" | FindController - allUsersAction");
 
+		$this->assets
+				->collection('header_css')
+					->addCss("/css/mason/mason_base.css")
+					->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Users::find(),
-				"limit" => 1,
+				"limit" => 10,
 				"page"  => $current_page
 			)
 		);
