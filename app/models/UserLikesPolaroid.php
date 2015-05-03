@@ -7,12 +7,6 @@ class UserLikesPolaroid extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $id;
-
-    /**
-     *
-     * @var integer
-     */
     public $id_user;
 
     /**
@@ -20,6 +14,7 @@ class UserLikesPolaroid extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $id_polaroid;
+
     public function initialize()
     {
         $this->belongsTo('id_polaroid', 'Polaroids', 'id', array('alias' => 'Polaroids'));

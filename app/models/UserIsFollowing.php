@@ -14,6 +14,7 @@ class UserIsFollowing extends \Phalcon\Mvc\Model
      * @var integer
      */
     public $id_user_who_is_followed;
+
     public function initialize()
     {
         $this->belongsTo('id_user_who_follows', 'Users', 'id', array('alias' => 'Users'));

@@ -24,23 +24,25 @@
 				<h5 class="subheader">
 					<div class="row collapse">
 						<?php if ($user_info->facebook_username): ?>
-							<div class="small-12 columns">
-								<a href="https://facebook.com/<?php echo $user_info->facebook_username; ?>"><span style="background-color: #46629E; color:
-									white;"
-									      class="prefix">facebook.com/<?php echo $user_info->facebook_username; ?></span></a>
+							<div class="small-12 medium-4 columns">
+								<a href="https://facebook.com/<?php echo $user_info->facebook_username; ?>">
+								<img src="/polaroid-map-app/public/facebook.png" alt="<?php echo $user_info->facebook_username; ?>">
+								</a>
 							</div>
 						<?php endif ?>
 						<?php if ($user_info->twitter_username): ?>
 
-						<div class="small-12 columns">
-							<a href="https://twitter.com/<?php echo $user_info->twitter_username; ?>"><span style="background-color: #55ACEE; color:
-								white;" class="prefix">twitter.com/<?php echo $user_info->twitter_username; ?></span></a>
+						<div class="small-12 medium-4 columns">
+							<a href="https://twitter.com/<?php echo $user_info->twitter_username; ?>">
+							<img src="/polaroid-map-app/public/twitter.png" alt="<?php echo $user_info->twitter_username; ?>">
+							</a>
 						</div>
 						<?php endif ?>
 						<?php if ($user_info->google_plus_username): ?>
-						<div class="small-12 columns">
-							<a href="https://plus.google.com/<?php echo $user_info->google_plus_username; ?>"><span style="background-color: #D73D32; color:
-								white;" class="prefix">plus.google.com/<?php echo $user_info->google_plus_username; ?></span></a>
+						<div class="small-12 medium-4 columns">
+							<a href="https://plus.google.com/<?php echo $user_info->google_plus_username; ?>">
+								<img src="/polaroid-map-app/public/googleplus.png" alt="<?php echo $user_info->google_plus_username; ?>">
+							</a>
 						</div>
 						<?php endif ?>
 					</div>
@@ -76,6 +78,20 @@
 			</a>
 		</li>
 	</ul>
+	<ul class="button-group even-2">
+		<li>
+			<a data-reveal-id="followers-modal" href="#" class="button warning">
+				<i style="font-size: 20px;"
+				   class="fi-social-myspace"></i> Followers <span class="label secondary alert round"><?php echo $number_of_followers; ?></span>
+			</a>
+		</li>
+		<li>
+			<a data-reveal-id="following-modal" href="#" class="button warning">
+				<i style="font-size: 20px;"
+				   class="fi-torsos-all"></i> Following <span class="label secondary alert round"><?php echo $number_of_following ?></span>
+			</a>
+		</li>
+	</ul>
 </div>
 
 <!-- modal para as polaroids-->
@@ -86,6 +102,8 @@
 
 	<div style="margin-top: 2em;" class="row">
 	    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
+
+	<?php if ($number_of_user_polaroids): ?>
 
 	    <?php foreach ($user_polaroids as $user_polaroid): ?>
 	        <div class="box col3">
@@ -100,6 +118,10 @@
 	            </div>
 	        </div>
 	    <?php endforeach ?>
+
+	<?php else: ?>
+			<p><?php echo $user_info->username; ?> has no polaroids yet!</p>
+	<?php endif ?>
 
 	    </div>
 	</div>
@@ -136,11 +158,86 @@
 			<?php endforeach ?>
 
 		<?php else: ?>
-			<p>This User has no routes yet!</p>
+			<p><?php echo $user_info->username; ?> has no routes yet!</p>
 		<?php endif ?>
 
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
+
+
+
+<!-- modal para followers -->
+
+	<!-- modal para as routes -->
+	<div id="followers-modal" class="reveal-modal text-center" data-reveal
+	     aria-labelledby="Followers" aria-hidden="true" role="dialog">
+		<h2 class="text-center" id="Followers"><?php echo $user_info->username; ?>'s Followers</h2>
+
+		<?php if (!count($followers)): ?>
+
+		    <div class="callout panel text-center">
+		        <h2>You must be an antisocial beast, because no one is following you <br>at the moment my friend!</h2>
+		         <p><a href="<?php echo $this->url->get("/find-users"); ?>">Find People</a> and be happy...</p>
+		    </div>
+
+		<?php else: ?>
+
+		    <?php foreach ($followers as $f): ?>
+		        <?php $follower_info = Users::findFirst($f->id_user_who_follows); ?>
+		         <div class="box col3">
+		            <div class="thumbnail">
+		                <a href="<?php echo $this->url->get("/user/" . $follower_info->id . "/" . $this->tag->friendlyTitle($follower_info->username, "-")); ?>">
+		                <img src="http://www.gravatar.com/avatar/<?php
+		                 echo md5(strtolower(trim($follower_info->email))); ?>?s=280">
+		                </a>
+		                <div class="caption text-center BarnieFonte">
+		                    <h3 style="font-size: 1.5em;" class=""><?php echo $follower_info->username; ?></h3>
+		                </div>
+		            </div>
+		        </div>
+		    <?php endforeach ?>
+		<?php endif ?>
+
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+
+<!-- modal para who user is following -->
+
+	<!-- modal para as routes -->
+	<div id="following-modal" class="reveal-modal text-center" data-reveal
+	     aria-labelledby="Following" aria-hidden="true" role="dialog">
+		<h2 class="text-center" id="Following"><?php echo $user_info->username; ?> is Following</h2>
+
+		<?php if (!count($following)): ?>
+
+		    <div class="callout panel text-center">
+		        <h2>You're an antisocial being, because you aren't following anyone <br>at the moment my friend!</h2>
+		         <p><a href="<?php echo $this->url->get("/find-users"); ?>">Find People</a> and be happy...</p>
+		    </div>
+
+		<?php else: ?>
+
+		    <?php foreach ($following as $f): ?>
+		        <div class="box col3">
+		            <div class="thumbnail">
+		                <a href="<?php echo $this->url->get("/user/" . $f->users->id . "/" .
+		            $this->tag->friendlyTitle($f->users->username, "-")); ?>">
+		                <img src="http://www.gravatar.com/avatar/<?php
+		                echo md5(strtolower(trim($f->users->email))); ?>?s=280">
+		                </a>
+		                <div class="caption text-center BarnieFonte">
+		                    <h3 style="font-size: 1.5em;" class=""><?php echo $f->users->username; ?></h3>
+		                </div>
+		            </div>
+		        </div>
+		    <?php endforeach ?>
+		<?php endif ?>
+
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+
 
 <?php if($this->session->has("auth") && $user_info->id != $this->session->get("auth")["id"] ): ?>
 

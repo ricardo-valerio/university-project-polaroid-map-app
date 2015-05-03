@@ -85,7 +85,16 @@ class UserController extends ControllerBase
 					"conditions" => "id_user = " . $user_id,
 					"order"      => "datetime_created DESC"
 				)),
-				"user_follows_user_or_not" => $user_follows_user_or_not
+				"user_follows_user_or_not" => $user_follows_user_or_not,
+				"number_of_followers"      => UserIsFollowing::count("id_user_who_is_followed = ". $this->session->get("auth")["id"] ),
+				"number_of_following"      => UserIsFollowing::count("id_user_who_follows = ". $this->session->get("auth")["id"] ),
+				"followers"                => UserIsFollowing::find(array(
+													"conditions" => "id_user_who_is_followed = ". $this->session->get("auth")["id"],
+													"columns"    => "id_user_who_follows"
+											 )),
+				"following"                => UserIsFollowing::find("id_user_who_follows = ". $this->session->get("auth")["id"] )
+
+
 			));
 
 		}else
@@ -228,6 +237,29 @@ class UserController extends ControllerBase
 		$this->tag->appendTitle(" | UserController - likedAction");
 		$this->view->setTemplateAfter("user-main");
 
+		$this->assets
+			->collection('header_css')
+				->addCss("/css/mason/mason_base.css")
+				->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+		$this->assets
+			->collection('header')
+				->addJs("/js/mason/modernizr-transitions.js");
+
+		$this->assets
+			->collection('footer')
+				->addJs("/js/mason/jquery.masonry.js")
+				->addJs("/js/app-mason-start.js");
+
+		$user_id = $this->session->get("auth")["id"];
+
+
+		return $this->view->setVars(array(
+			"number_of_polaroids_liked" => UserLikesPolaroid::count("id_user = " . $user_id),
+			"number_of_routes_liked" => UserLikesRoute::count("id_user = " . $user_id),
+			"polaroids_liked" => UserLikesPolaroid::find("id_user = " . $user_id),
+			"routes_liked" => UserLikesRoute::find("id_user = " . $user_id)
+		));
 	}
 
 	public function personalInfoAction()
