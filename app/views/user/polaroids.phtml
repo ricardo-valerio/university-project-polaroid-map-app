@@ -11,7 +11,12 @@
 
     <?php foreach ($user_polaroids as $user_polaroid): ?>
         <div class="box col3">
-            <div class="thumbnail">
+            <div style="padding-top: 2px;" class="thumbnail">
+                <div style="padding-left: 14px; padding-right: 14px;" class="row">
+                    <div class="right">
+                        <a href="<?php echo $this->url->get("/find-by-country/". strtolower($user_polaroid->country)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($user_polaroid->country); ?>"></span></a>
+                    </div>
+                </div>
                 <a href="<?php echo $this->url->get("/polaroid/" . $user_polaroid->id . "/" .
             $this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
                 <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">

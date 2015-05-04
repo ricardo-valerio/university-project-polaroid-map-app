@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<?php if ($user_info->bio): ?>
-			<div class="panel radius">
+			<div class="panel radius text-center">
 				<div class="row">
 					<div class="large-12 columns text-center">
 						<?php echo $user_info->bio; ?>
@@ -107,7 +107,12 @@
 
 	    <?php foreach ($user_polaroids as $user_polaroid): ?>
 	        <div class="box col3">
-	            <div class="thumbnail">
+            <div style="padding-top: 2px;" class="thumbnail">
+                <div style="padding-left: 14px; padding-right: 14px;" class="row">
+                    <div class="right">
+                        <a href="<?php echo $this->url->get("/find-by-country/". strtolower($user_polaroid->country)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($user_polaroid->country); ?>"></span></a>
+                    </div>
+                </div>
 	                <a href="<?php echo $this->url->get("/polaroid/" . $user_polaroid->id . "/" .
 	            $this->tag->friendlyTitle($user_polaroid->title, "-")); ?>">
 	                <img class="img-rounded BarnieFonte" src="/polaroid-map-app/public/img/polaroids/<?php echo $user_polaroid->photo_hash_file_name; ?>">
@@ -125,7 +130,7 @@
 
 	    </div>
 	</div>
-
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
 
@@ -173,6 +178,9 @@
 	     aria-labelledby="Followers" aria-hidden="true" role="dialog">
 		<h2 class="text-center" id="Followers"><?php echo $user_info->username; ?>'s Followers</h2>
 
+	<div style="margin-top: 2em;" class="row">
+	    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
+
 		<?php if (!count($followers)): ?>
 
 		    <div class="callout panel text-center">
@@ -197,8 +205,11 @@
 		    <?php endforeach ?>
 		<?php endif ?>
 
-		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		</div>
 	</div>
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
 
 
 <!-- modal para who user is following -->
@@ -207,6 +218,9 @@
 	<div id="following-modal" class="reveal-modal text-center" data-reveal
 	     aria-labelledby="Following" aria-hidden="true" role="dialog">
 		<h2 class="text-center" id="Following"><?php echo $user_info->username; ?> is Following</h2>
+
+	<div style="margin-top: 2em;" class="row">
+	    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
 		<?php if (!count($following)): ?>
 
@@ -232,8 +246,10 @@
 		    <?php endforeach ?>
 		<?php endif ?>
 
-		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		</div>
 	</div>
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
 
 
 
