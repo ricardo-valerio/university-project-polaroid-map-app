@@ -96,7 +96,12 @@
 	public function logoutAction()
 	{
 		if ($this->session->has("auth")) {
+			if ($this->session->has("photo_name")) {
+				$old_image_uploaded = "img/polaroids/" . $this->session->get("photo_name");
+				unlink($old_image_uploaded);
+			}
 			$this->session->remove('auth');
+			$this->session->destroy();
 			return $this->response->redirect("/");
 		}
 		return $this->response->redirect("/sign-in-up");

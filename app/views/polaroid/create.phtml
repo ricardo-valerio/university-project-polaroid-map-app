@@ -12,7 +12,7 @@
   <li style="float: none !important;
 display: inline-block;" class="tab-title active" role="presentational" ><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">First Step</a></li>
   <li style="float: none !important;
-display: inline-block;" class="tab-title" role="presentational" ><a href="#panel2-2" role="tab" tabindex="0"aria-selected="false" controls="panel2-2">Second Step</a></li>
+display: inline-block;" class="tab-title" role="presentational" onclick="LoadMap();" ><a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" controls="panel2-2">Second Step</a></li>
   <li style="float: none !important;
 display: inline-block;" class="tab-title" role="presentational"><a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" controls="panel2-3">Third Step</a></li>
 </ul>
@@ -79,12 +79,12 @@ display: inline-block;" class="tab-title" role="presentational"><a href="#panel2
 
   </section>
 
-  <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3">
+  <section role="tabpanel" aria-hidden="true" class="content text-center" id="panel2-3">
 
 	    <h2>Be Happy!</h2>
 
 		<div class="row text-center">
-			<input type="submit" class="button success expand"
+			<input type="submit" class="button success expand round"
 			       value="Upload Polaroid"/>
 		</div>
   </section>
@@ -95,7 +95,15 @@ display: inline-block;" class="tab-title" role="presentational"><a href="#panel2
 
 <script>
 
-function initialize() {
+function LoadMap() {
+
+	if (window.staticMap) {
+		console.log("window.staticMap exists - returned false");
+		return false;
+	} else {
+		window.staticMap = true;
+		console.log("window.staticMap created");
+	}
 
 	var markers = [];
 	window.map_here = new google.maps.Map(document.getElementById
@@ -159,10 +167,14 @@ function initialize() {
 			for (var i = 0; i < place.address_components.length; i++) {
 				if(place.address_components[i].types[0] == "country"
 				   || place.address_components[i].types[1] == "country")
+				{
 					document.getElementById("polaroid_country").value = place
-						.address_components[i].long_name;
-//				console.log("Country: " + place.address_components[i].long_name);
+						.address_components[i].short_name;
+					console.log("Country Bazinga: " + place.address_components[i].short_name);
+				}
 			}
+
+			console.log(place);
 
 //			console.log("Location: " + place.geometry.location);
 //			console.log("Lat: " + place.geometry.location.lat());
@@ -208,7 +220,7 @@ function initialize() {
 	});
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+// google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
 <script type="text/javascript">

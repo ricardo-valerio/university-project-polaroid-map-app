@@ -229,11 +229,14 @@ class PolaroidController extends ControllerBase
 
 
 				if ($polaroid->save()) {
+
 					// remover a original sem efeitos
 					$old_image_uploaded = "img/polaroids/" . $this->session->get("photo_name");
 					unlink($old_image_uploaded);
 					// remover a variável de sessão com o nome da foto original
 					$this->session->remove("photo_name");
+
+					$this->flashSession->success("Polaroid Uploaded! =)");
 
 					// redireccionar para a página show polaroid da imagem guardada
 					return $this->response->redirect("/polaroid/". $polaroid->id ."/".

@@ -280,9 +280,7 @@ class FindController extends ControllerBase
 
 			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
 				echo "Existe na BD";
-				// vai buscar todos os users e polaroid deste pais
-				// e passa para a view para seres mostrados com um paginador
-				// para cada uma
+				// vai buscar o COUNT de todos os users e polaroid deste pais
 			}else{
 				echo "Não existe na BD";
 				// redirect para o a página inicial com todas as bandeiras
