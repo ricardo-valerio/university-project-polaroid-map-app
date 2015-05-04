@@ -184,6 +184,14 @@ i {
     color: white;
 }
 
+.searchBarPolaroidsResults{
+    color: #635C5C;
+}
+
+.ul1 .li1:hover .searchBarPolaroidsResults {
+    color: white;
+}
+
 .selected {
     background: #444444;
     color: #fff;
