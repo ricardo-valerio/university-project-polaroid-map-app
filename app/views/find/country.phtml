@@ -1,17 +1,59 @@
-<h1 class="headers-provisorios">FindController - countryAction</h1>
-
 <?php $this->flashSession->output(); ?>
 
-<?php if (isset($all_countries)): ?>
+<div style="margin-top: 2em;" class="row">
 
-	<?php foreach ($all_countries as $country): ?>
-		<span class="flag-icon flag-icon-<?php echo strtolower($country->country_short_name); ?>"></span>
-	<?php endforeach ?>
+	<?php if (isset($all_countries)): ?>
 
-<?php else: ?>
+		<table>
+		  <thead>
+		    <tr>
+		      <th width="300">Country</th>
+		      <th width="150">Number of Polaroids</th>
+		      <th width="150">Number of Users</th>
+		    </tr>
+		  </thead>
+		  <tbody>
 
-	<?php echo $country_long_name; ?>
-	<?php echo $number_of_users_in_country; ?>
-	<?php echo $number_of_polaroids_in_country; ?>
+			<?php foreach ($all_countries as $country): ?>
+			    <tr>
+			      <td>
+					<p><a href="<?php echo $this->url->get("/find-by-country/". strtolower($country->country_short_name)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($country->country_short_name); ?>"></span>&nbsp;<?php echo $country->country_long_name ?></a></p>
+			      </td>
+			      <td><?php echo Polaroids::count("country = '". strtolower($country->country_short_name) ."'"); ?></td>
+			      <td><?php echo Users::count("country = '". strtolower($country->country_short_name) ."'"); ?></td>
+			    </tr>
+			<?php endforeach ?>
 
-<?php endif ?>
+		  </tbody>
+		</table>
+
+	<?php else: ?>
+
+		<span class="flag-icon flag-icon-<?php echo strtolower($country_short_name); ?>"></span>
+		<?php echo $country_long_name; ?>
+
+		<div class="row text-center panel">
+			<div class="large-12 columns">
+				<h2>Results:</h2>
+				<ul class="small-block-grid-2">
+					<li>
+						<a href="<?php echo $this->url->get("/find-users-in-country/". $country_short_name);?>">
+							<img class="th" src="http://placehold.it/250x250&amp;text=2312653 Users">
+							<h4><?php echo isset($num_users) ? $num_users : "";?></h4>
+						</a>
+
+					</li>
+					<li>
+						<a href="<?php echo $this->url->get("/find-polaroids-in-country/" . $country_short_name); ?>">
+							<img class="th" src="http://placehold.it/250x250&amp;text=23434 Polaroids">
+							<h4><?php echo isset($num_polaroids) ? $num_polaroids : "";?></h4>
+						</a>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	<?php endif ?>
+
+</div>

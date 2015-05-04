@@ -271,6 +271,7 @@ class FindController extends ControllerBase
 
 	public function countryAction($country = null)
 	{
+		$this->tag->appendTitle(" | FindController - countryAction");
 		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
 
 		$this->assets
@@ -283,9 +284,10 @@ class FindController extends ControllerBase
 
 			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
 				return $this->view->setVars(array(
-							"country_long_name" => CountriesIcons::findFirst("country_short_name = $country_filtered")->country_long_name,
-							"number_of_users_in_country"     => Users::count("country = $country_filtered"),
-							"number_of_polaroids_in_country" => Polaroids::count("country = $country_filtered")
+							"country_short_name" => $country_filtered,
+							"country_long_name" => CountriesIcons::findFirst("country_short_name = '". $country_filtered ."'")->country_long_name,
+							"number_of_users_in_country"     => Users::count("country = '". $country_filtered ."'"),
+							"number_of_polaroids_in_country" => Polaroids::count("country = '". $country_filtered ."'")
 					   ));
 			}else{
 				return $this->response->redirect("/find-by-country");
@@ -297,6 +299,51 @@ class FindController extends ControllerBase
 						"all_countries" => CountriesIcons::find()
 				   ));
 		}
+	}
+
+
+	public function usersInCountryAction($country = NULL)
+	{
+		$this->tag->appendTitle(" | FindController - usersInCountryAction");
+		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
+
+		if ($country_filtered != NULL) {
+
+			echo "Country in url: ", $country_filtered;
+
+			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+				return $this->view->setVars(array(
+							// paginator com users
+					   ));
+			}else{
+				return $this->response->redirect("/find-by-country");
+			}
+		}else{
+			return $this->response->redirect("/find-by-country");
+		}
+
+	}
+
+	public function polaroidsInCountryAction($country = NULL)
+	{
+		$this->tag->appendTitle(" | FindController - polaroidsInCountryAction");
+		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
+
+		if ($country_filtered != NULL) {
+
+			echo "Country in url: ", $country_filtered;
+
+			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+				return $this->view->setVars(array(
+							// paginator com polaroids
+					   ));
+			}else{
+				return $this->response->redirect("/find-by-country");
+			}
+		}else{
+			return $this->response->redirect("/find-by-country");
+		}
+
 	}
 
 }

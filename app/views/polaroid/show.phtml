@@ -32,7 +32,7 @@
 				<p style="  font-size: 1.6em;" class="subheader"><?php echo $polaroid_info->description; ?></p>
 				<p class="right">
 					<?php echo date("F j, Y", strtotime($polaroid_info->datetime_created)); ?>
-					<span class="flag-icon flag-icon-<?php echo strtolower($polaroid_info->country); ?>"></span>
+					<a href="<?php echo $this->url->get("/find-by-country/". strtolower($polaroid_info->country)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($user_info->country); ?>"></span></a>
 				</p>
 			</div>
 		</div>

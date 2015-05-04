@@ -5,6 +5,8 @@ class UserController extends ControllerBase
 
 	public function initialize()
 	{
+		parent::initialize();
+
 		$this->assets
 			->collection('footer')
 				->addJs("/js/app-search-bar.js");

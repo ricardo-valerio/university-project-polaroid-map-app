@@ -63,6 +63,20 @@
 		"params"     => 1
 	));
 
+	$router->add("/find-users-in-country/:params", array(
+
+		"controller" => "find",
+		"action"     => "usersInCountry",
+		"params"     => 1
+	));
+
+	$router->add("/find-polaroids-in-country/:params", array(
+
+		"controller" => "find",
+		"action"     => "polaroidsInCountry",
+		"params"     => 1
+	));
+
 	$router->add("/upload-photo", array(
 
 		"controller" => "polaroid",
