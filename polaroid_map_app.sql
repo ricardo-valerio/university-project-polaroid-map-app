@@ -1,42 +1,285 @@
 /*
- Navicat Premium Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : localhost Terminal
- Source Server Type    : MySQL
- Source Server Version : 50623
- Source Host           : localhost
- Source Database       : polaroid_map_app
+Source Server         : bitnami localhost
+Source Server Version : 50623
+Source Host           : localhost:3306
+Source Database       : polaroid_map_app
 
- Target Server Type    : MySQL
- Target Server Version : 50623
- File Encoding         : utf-8
+Target Server Type    : MYSQL
+Target Server Version : 50623
+File Encoding         : 65001
 
- Date: 04/30/2015 23:27:52 PM
+Date: 2015-05-04 01:25:27
 */
 
-SET NAMES utf8;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
---  Table structure for `countries_icons`
+-- Table structure for `countries_icons`
 -- ----------------------------
 DROP TABLE IF EXISTS `countries_icons`;
 CREATE TABLE `countries_icons` (
   `country_short_name` varchar(10) NOT NULL,
   `country_long_name` varchar(100) NOT NULL,
-  `icon_svg_file_name` varchar(100) NOT NULL,
   PRIMARY KEY (`country_short_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `countries_icons`
+-- Records of countries_icons
 -- ----------------------------
-BEGIN;
-INSERT INTO `countries_icons` VALUES ('AD', 'Andorra', 'BZ.svg'), ('AE', 'United Arab Emirates', 'BZ.svg'), ('AF', 'Afghanistan', 'BZ.svg'), ('AG', 'Antigua and Barbuda', 'BZ.svg'), ('AI', 'Anguilla', 'BZ.svg'), ('AL', 'Albania', 'BZ.svg'), ('AM', 'Armenia', 'BZ.svg'), ('AO', 'Angola', 'BZ.svg'), ('AQ', 'Antarctica', 'BZ.svg'), ('AR', 'Argentina', 'BZ.svg'), ('AS', 'American Samoa', 'BZ.svg'), ('AT', 'Austria', 'BZ.svg'), ('AU', 'Australia', 'BZ.svg'), ('AW', 'Aruba', 'BZ.svg'), ('AX', 'Åland Islands', 'BZ.svg'), ('AZ', 'Azerbaijan', 'BZ.svg'), ('BA', 'Bosnia and Herzegovina', 'BZ.svg'), ('BB', 'Barbados', 'BZ.svg'), ('BD', 'Bangladesh', 'BZ.svg'), ('BE', 'Belgium', 'BZ.svg'), ('BF', 'Burkina Faso', 'BZ.svg'), ('BG', 'Bulgaria', 'BZ.svg'), ('BH', 'Bahrain', 'BZ.svg'), ('BI', 'Burundi', 'BZ.svg'), ('BJ', 'Benin', 'BZ.svg'), ('BL', 'Saint Barthélemy', 'BZ.svg'), ('BM', 'Bermuda', 'BZ.svg'), ('BN', 'Brunei Darussalam', 'BZ.svg'), ('BO', 'Bolivia, Plurinational State of ', 'BZ.svg'), ('BQ', 'Bonaire, Sint Eustatius and Saba', 'BZ.svg'), ('BR', 'Brazil', 'BZ.svg'), ('BS', 'Bahamas', 'BZ.svg'), ('BT', 'Bhutan', 'BZ.svg'), ('BV', 'Bouvet Island', 'BZ.svg'), ('BW', 'Botswana', 'BZ.svg'), ('BY', 'Belarus', 'BZ.svg'), ('BZ', 'Belize', 'BZ.svg'), ('CA', 'Canada', 'BZ.svg'), ('CC', 'Cocos (Keeling) Islands', 'BZ.svg'), ('CD', 'Congo, the Democratic Republic of the ', 'BZ.svg'), ('CF', 'Central African Republic', 'BZ.svg'), ('CG', 'Congo							', 'BZ.svg'), ('CH', 'Switzerland', 'BZ.svg'), ('CI', 'Côte d\'Ivoire', 'BZ.svg'), ('CK', 'Cook Islands					', 'BZ.svg'), ('CL', 'Chile', 'BZ.svg'), ('CM', 'Cameroon', 'BZ.svg'), ('CN', 'China', 'BZ.svg'), ('CO', 'Colombia', 'BZ.svg'), ('CR', 'Costa Rica', 'BZ.svg'), ('CU', 'Cuba', 'BZ.svg'), ('CV', 'Cabo Verde', 'BZ.svg'), ('CW', 'Curaçao', 'BZ.svg'), ('CX', 'Christmas Island', 'BZ.svg'), ('CY', 'Cyprus', 'BZ.svg'), ('CZ', 'Czech Republic', 'BZ.svg'), ('DE', 'Germany', 'BZ.svg'), ('DJ', 'Djibouti', 'BZ.svg'), ('DK', 'Denmark', 'BZ.svg'), ('DM', 'Dominica', 'BZ.svg'), ('DO', 'Dominican Republic', 'BZ.svg'), ('DZ', 'Algeria', 'BZ.svg'), ('EC', 'Ecuador', 'BZ.svg'), ('EE', 'Estonia', 'BZ.svg'), ('EG', 'Egypt', 'BZ.svg'), ('EH', 'Western Sahara', 'BZ.svg'), ('ER', 'Eritrea', 'BZ.svg'), ('ES', 'Spain', 'BZ.svg'), ('ET', 'Ethiopia', 'BZ.svg'), ('FI', 'Finland', 'BZ.svg'), ('FJ', 'Fiji', 'BZ.svg'), ('FK', 'Falkland Islands (Malvinas)', 'BZ.svg'), ('FM', 'Micronesia, Federated States of', 'BZ.svg'), ('FO', 'Faroe Islands', 'BZ.svg'), ('FR', 'France', 'BZ.svg'), ('GA', 'Gabon', 'BZ.svg'), ('GB', 'United Kingdom', 'BZ.svg'), ('GD', 'Grenada', 'BZ.svg'), ('GE', 'Georgia', 'BZ.svg'), ('GF', 'French Guiana', 'BZ.svg'), ('GG', 'Guernsey							', 'BZ.svg'), ('GH', 'Ghana', 'BZ.svg'), ('GI', 'Gibraltar', 'BZ.svg'), ('GL', 'Greenland', 'BZ.svg'), ('GM', 'Gambia', 'BZ.svg'), ('GN', 'Guinea', 'BZ.svg'), ('GP', 'Guadeloupe', 'BZ.svg'), ('GQ', 'Equatorial Guinea', 'BZ.svg'), ('GR', 'Greece', 'BZ.svg'), ('GS', 'South Georgia and the South Sandwich Islands', 'BZ.svg'), ('GT', 'Guatemala								', 'BZ.svg'), ('GU', 'Guam							', 'BZ.svg'), ('GW', 'Guinea-Bissau', 'BZ.svg'), ('GY', 'Guyana', 'BZ.svg'), ('HK', 'Hong Kong', 'BZ.svg'), ('HM', 'Heard Island and McDonald Islands', 'BZ.svg'), ('HN', 'Honduras', 'BZ.svg'), ('HR', 'Croatia', 'BZ.svg'), ('HT', 'Haiti', 'BZ.svg'), ('HU', 'Hungar', 'BZ.svg'), ('ID', 'Indonesia								', 'BZ.svg'), ('IE', 'Ireland', 'BZ.svg'), ('IL', 'Israel', 'BZ.svg'), ('IM', 'Isle of Man', 'BZ.svg'), ('IN', 'India							', 'BZ.svg'), ('IO', 'British Indian Ocean Territory', 'BZ.svg'), ('IQ', 'Iraq', 'BZ.svg'), ('IR', 'Iran, Islamic Republic of', 'BZ.svg'), ('IS', 'Iceland							', 'BZ.svg'), ('IT', 'Italy', 'BZ.svg'), ('JE', 'Jersey', 'BZ.svg'), ('JM', 'Jamaica', 'BZ.svg'), ('JO', 'Jordan', 'BZ.svg'), ('JP', 'Japan', 'BZ.svg'), ('KE', 'Kenya', 'BZ.svg'), ('KG', 'Kyrgyzstan', 'BZ.svg'), ('KH', 'Cambodia', 'BZ.svg'), ('KI', 'Kiribati', 'BZ.svg'), ('KM', 'Comoros', 'BZ.svg'), ('KN', 'Saint Kitts and Nevis', 'BZ.svg'), ('KP', 'Korea, Democratic People\'s Republic of', 'BZ.svg'), ('KR', 'Korea, Republic of					', 'BZ.svg'), ('KW', 'Kuwait', 'BZ.svg'), ('KY', 'Cayman Islands', 'BZ.svg'), ('KZ', 'Kazakhstan', 'BZ.svg'), ('LA', 'Lao People\'s Democratic Republic', 'BZ.svg'), ('LB', 'Lebanon', 'BZ.svg'), ('LC', 'Saint Lucia', 'BZ.svg'), ('LI', 'Liechtenstein', 'BZ.svg'), ('LK', 'Sri Lanka', 'BZ.svg'), ('LR', 'Liberia', 'BZ.svg'), ('LS', 'Lesotho', 'BZ.svg'), ('LT', 'Lithuania', 'BZ.svg'), ('LU', 'Luxembourg', 'BZ.svg'), ('LV', 'Latvia', 'BZ.svg'), ('LY', 'Libya', 'BZ.svg'), ('MA', 'Morocco', 'BZ.svg'), ('MC', 'Monaco', 'BZ.svg'), ('MD', 'Moldova, Republic of				', 'BZ.svg'), ('ME', 'Montenegro', 'BZ.svg'), ('MF', 'Saint Martin (French part)', 'BZ.svg'), ('MG', 'Madagascar', 'BZ.svg'), ('MH', 'Marshall Islands								', 'BZ.svg'), ('MK', 'Macedonia, the former Yugoslav Republic of', 'BZ.svg'), ('ML', 'Mali									', 'BZ.svg'), ('MM', 'Myanmar', 'BZ.svg'), ('MN', 'Mongolia', 'BZ.svg'), ('MO', 'Macao', 'BZ.svg'), ('MP', 'Northern Mariana Islands', 'BZ.svg'), ('MQ', 'Martinique					', 'BZ.svg'), ('MR', 'Mauritania							', 'BZ.svg'), ('MS', 'Montserrat', 'BZ.svg'), ('MT', 'Malta								', 'BZ.svg'), ('MU', 'Mauritius', 'BZ.svg'), ('MV', 'Maldives', 'BZ.svg'), ('MW', 'Malawi', 'BZ.svg'), ('MX', 'Mexico', 'BZ.svg'), ('MY', 'Malaysia', 'BZ.svg'), ('MZ', 'Mozambique', 'BZ.svg'), ('NA', 'Namibia', 'BZ.svg'), ('NC', 'New Caledonia', 'BZ.svg'), ('NE', 'Niger', 'BZ.svg'), ('NF', 'Norfolk Island', 'BZ.svg'), ('NG', 'Nigeria', 'BZ.svg'), ('NI', 'Nicaragua', 'BZ.svg'), ('NL', 'Netherlands', 'BZ.svg'), ('NO', 'Norway', 'BZ.svg'), ('NP', 'Nepal', 'BZ.svg'), ('NR', 'Nauru', 'BZ.svg'), ('NU', 'Niue', 'BZ.svg'), ('NZ', 'New Zealand', 'BZ.svg'), ('OM', 'Oman', 'BZ.svg'), ('PA', 'Panama', 'BZ.svg'), ('PE', 'Peru', 'BZ.svg'), ('PF', 'French Polynesia', 'BZ.svg'), ('PG', 'Papua New Guinea', 'BZ.svg'), ('PH', 'Philippines', 'BZ.svg'), ('PK', 'Pakistan', 'BZ.svg'), ('PL', 'Poland', 'BZ.svg'), ('PM', 'Saint Pierre and Miquelon', 'BZ.svg'), ('PN', 'Pitcairn', 'BZ.svg'), ('PR', 'Puerto Rico', 'BZ.svg'), ('PS', 'Palestine, State of', 'BZ.svg'), ('PT', 'Portugal', 'BZ.svg'), ('PW', 'Palau', 'BZ.svg'), ('PY', 'Paraguay', 'BZ.svg'), ('QA', 'Qatar', 'BZ.svg'), ('RE', 'Réunion', 'BZ.svg'), ('RO', 'Romania', 'BZ.svg'), ('RS', 'Serbia', 'BZ.svg'), ('RU', 'Russian Federation', 'BZ.svg'), ('RW', 'Rwanda', 'BZ.svg'), ('SA', 'Saudi Arabia', 'BZ.svg'), ('SB', 'Solomon Islands', 'BZ.svg'), ('SC', 'Seychelles', 'BZ.svg'), ('SD', 'Sudan', 'BZ.svg'), ('SE', 'Sweden', 'BZ.svg'), ('SG', 'Singapore', 'BZ.svg'), ('SH', 'Saint Helena, Ascension and Tristan da Cunha', 'BZ.svg'), ('SI', 'Slovenia', 'BZ.svg'), ('SJ', 'Svalbard and Jan Mayen', 'BZ.svg'), ('SK', 'Slovakia', 'BZ.svg'), ('SL', 'Sierra Leone', 'BZ.svg'), ('SM', 'San Marino', 'BZ.svg'), ('SN', 'Senegal', 'BZ.svg'), ('SO', 'Somalia', 'BZ.svg'), ('SR', 'Suriname', 'BZ.svg'), ('SS', 'South Sudan', 'BZ.svg'), ('ST', 'Sao Tome and Principe', 'BZ.svg'), ('SV', 'El Salvador', 'BZ.svg'), ('SX', 'Sint Maarten (Dutch part)', 'BZ.svg'), ('SY', 'Syrian Arab Republic', 'BZ.svg'), ('SZ', 'Swaziland', 'BZ.svg'), ('TC', 'Turks and Caicos Islands', 'BZ.svg'), ('TD', 'Chad', 'BZ.svg'), ('TF', 'French Southern Territories', 'BZ.svg'), ('TG', 'Togo', 'BZ.svg'), ('TH', 'Thailand', 'BZ.svg'), ('TJ', 'Tajikistan', 'BZ.svg'), ('TK', 'Tokelau', 'BZ.svg'), ('TL', 'Timor-Leste', 'BZ.svg'), ('TM', 'Turkmenistan', 'BZ.svg'), ('TN', 'Tunisia', 'BZ.svg'), ('TO', 'Tonga', 'BZ.svg'), ('TR', 'Turkey', 'BZ.svg'), ('TT', 'Trinidad and Tobago', 'BZ.svg'), ('TV', 'Tuvalu', 'BZ.svg'), ('TW', 'Taiwan', 'BZ.svg'), ('TZ', 'Tanzania, United Republic of', 'BZ.svg'), ('UA', 'Ukraine', 'BZ.svg'), ('UG', 'Uganda', 'BZ.svg'), ('UM', 'United States Minor Outlying Islands', 'BZ.svg'), ('US', 'United States', 'BZ.svg'), ('UY', 'Uruguay', 'BZ.svg'), ('UZ', 'Uzbekistan', 'BZ.svg'), ('VA', 'Holy See (Vatican City State)', 'BZ.svg'), ('VC', 'Saint Vincent and the Grenadines', 'BZ.svg'), ('VE', 'Venezuela, Bolivarian Republic of', 'BZ.svg'), ('VG', 'Virgin Islands,                       ', 'BZ.svg'), ('VI', 'British Virgin Islands, U.S.', 'BZ.svg'), ('VN', 'Viet Nam', 'BZ.svg'), ('VU', 'Vanuatu', 'BZ.svg'), ('WF', 'Wallis and Futuna', 'BZ.svg'), ('WS', 'Samoa', 'BZ.svg'), ('YE', 'Yemen', 'BZ.svg'), ('YT', 'Mayotte', 'BZ.svg'), ('ZA', 'South Africa', 'BZ.svg'), ('ZM', 'Zambia', 'BZ.svg'), ('ZW', 'Zimbabwe', 'BZ.svg');
-COMMIT;
+INSERT INTO `countries_icons` VALUES ('AD', 'Andorra');
+INSERT INTO `countries_icons` VALUES ('AE', 'United Arab Emirates');
+INSERT INTO `countries_icons` VALUES ('AF', 'Afghanistan');
+INSERT INTO `countries_icons` VALUES ('AG', 'Antigua and Barbuda');
+INSERT INTO `countries_icons` VALUES ('AI', 'Anguilla');
+INSERT INTO `countries_icons` VALUES ('AL', 'Albania');
+INSERT INTO `countries_icons` VALUES ('AM', 'Armenia');
+INSERT INTO `countries_icons` VALUES ('AO', 'Angola');
+INSERT INTO `countries_icons` VALUES ('AQ', 'Antarctica');
+INSERT INTO `countries_icons` VALUES ('AR', 'Argentina');
+INSERT INTO `countries_icons` VALUES ('AS', 'American Samoa');
+INSERT INTO `countries_icons` VALUES ('AT', 'Austria');
+INSERT INTO `countries_icons` VALUES ('AU', 'Australia');
+INSERT INTO `countries_icons` VALUES ('AW', 'Aruba');
+INSERT INTO `countries_icons` VALUES ('AX', 'Åland Islands');
+INSERT INTO `countries_icons` VALUES ('AZ', 'Azerbaijan');
+INSERT INTO `countries_icons` VALUES ('BA', 'Bosnia and Herzegovina');
+INSERT INTO `countries_icons` VALUES ('BB', 'Barbados');
+INSERT INTO `countries_icons` VALUES ('BD', 'Bangladesh');
+INSERT INTO `countries_icons` VALUES ('BE', 'Belgium');
+INSERT INTO `countries_icons` VALUES ('BF', 'Burkina Faso');
+INSERT INTO `countries_icons` VALUES ('BG', 'Bulgaria');
+INSERT INTO `countries_icons` VALUES ('BH', 'Bahrain');
+INSERT INTO `countries_icons` VALUES ('BI', 'Burundi');
+INSERT INTO `countries_icons` VALUES ('BJ', 'Benin');
+INSERT INTO `countries_icons` VALUES ('BL', 'Saint Barthélemy');
+INSERT INTO `countries_icons` VALUES ('BM', 'Bermuda');
+INSERT INTO `countries_icons` VALUES ('BN', 'Brunei Darussalam');
+INSERT INTO `countries_icons` VALUES ('BO', 'Bolivia, Plurinational State of ');
+INSERT INTO `countries_icons` VALUES ('BQ', 'Bonaire, Sint Eustatius and Saba');
+INSERT INTO `countries_icons` VALUES ('BR', 'Brazil');
+INSERT INTO `countries_icons` VALUES ('BS', 'Bahamas');
+INSERT INTO `countries_icons` VALUES ('BT', 'Bhutan');
+INSERT INTO `countries_icons` VALUES ('BV', 'Bouvet Island');
+INSERT INTO `countries_icons` VALUES ('BW', 'Botswana');
+INSERT INTO `countries_icons` VALUES ('BY', 'Belarus');
+INSERT INTO `countries_icons` VALUES ('BZ', 'Belize');
+INSERT INTO `countries_icons` VALUES ('CA', 'Canada');
+INSERT INTO `countries_icons` VALUES ('CC', 'Cocos (Keeling) Islands');
+INSERT INTO `countries_icons` VALUES ('CD', 'Congo, the Democratic Republic of the ');
+INSERT INTO `countries_icons` VALUES ('CF', 'Central African Republic');
+INSERT INTO `countries_icons` VALUES ('CG', 'Congo');
+INSERT INTO `countries_icons` VALUES ('CH', 'Switzerland');
+INSERT INTO `countries_icons` VALUES ('CI', 'Côte d\'Ivoire');
+INSERT INTO `countries_icons` VALUES ('CK', 'Cook Islands');
+INSERT INTO `countries_icons` VALUES ('CL', 'Chile');
+INSERT INTO `countries_icons` VALUES ('CM', 'Cameroon');
+INSERT INTO `countries_icons` VALUES ('CN', 'China');
+INSERT INTO `countries_icons` VALUES ('CO', 'Colombia');
+INSERT INTO `countries_icons` VALUES ('CR', 'Costa Rica');
+INSERT INTO `countries_icons` VALUES ('CU', 'Cuba');
+INSERT INTO `countries_icons` VALUES ('CV', 'Cabo Verde');
+INSERT INTO `countries_icons` VALUES ('CW', 'Curaçao');
+INSERT INTO `countries_icons` VALUES ('CX', 'Christmas Island');
+INSERT INTO `countries_icons` VALUES ('CY', 'Cyprus');
+INSERT INTO `countries_icons` VALUES ('CZ', 'Czech Republic');
+INSERT INTO `countries_icons` VALUES ('DE', 'Germany');
+INSERT INTO `countries_icons` VALUES ('DJ', 'Djibouti');
+INSERT INTO `countries_icons` VALUES ('DK', 'Denmark');
+INSERT INTO `countries_icons` VALUES ('DM', 'Dominica');
+INSERT INTO `countries_icons` VALUES ('DO', 'Dominican Republic');
+INSERT INTO `countries_icons` VALUES ('DZ', 'Algeria');
+INSERT INTO `countries_icons` VALUES ('EC', 'Ecuador');
+INSERT INTO `countries_icons` VALUES ('EE', 'Estonia');
+INSERT INTO `countries_icons` VALUES ('EG', 'Egypt');
+INSERT INTO `countries_icons` VALUES ('EH', 'Western Sahara');
+INSERT INTO `countries_icons` VALUES ('ER', 'Eritrea');
+INSERT INTO `countries_icons` VALUES ('ES', 'Spain');
+INSERT INTO `countries_icons` VALUES ('ET', 'Ethiopia');
+INSERT INTO `countries_icons` VALUES ('FI', 'Finland');
+INSERT INTO `countries_icons` VALUES ('FJ', 'Fiji');
+INSERT INTO `countries_icons` VALUES ('FK', 'Falkland Islands (Malvinas)');
+INSERT INTO `countries_icons` VALUES ('FM', 'Micronesia, Federated States of');
+INSERT INTO `countries_icons` VALUES ('FO', 'Faroe Islands');
+INSERT INTO `countries_icons` VALUES ('FR', 'France');
+INSERT INTO `countries_icons` VALUES ('GA', 'Gabon');
+INSERT INTO `countries_icons` VALUES ('GB', 'United Kingdom');
+INSERT INTO `countries_icons` VALUES ('GD', 'Grenada');
+INSERT INTO `countries_icons` VALUES ('GE', 'Georgia');
+INSERT INTO `countries_icons` VALUES ('GF', 'French Guiana');
+INSERT INTO `countries_icons` VALUES ('GG', 'Guernsey');
+INSERT INTO `countries_icons` VALUES ('GH', 'Ghana');
+INSERT INTO `countries_icons` VALUES ('GI', 'Gibraltar');
+INSERT INTO `countries_icons` VALUES ('GL', 'Greenland');
+INSERT INTO `countries_icons` VALUES ('GM', 'Gambia');
+INSERT INTO `countries_icons` VALUES ('GN', 'Guinea');
+INSERT INTO `countries_icons` VALUES ('GP', 'Guadeloupe');
+INSERT INTO `countries_icons` VALUES ('GQ', 'Equatorial Guinea');
+INSERT INTO `countries_icons` VALUES ('GR', 'Greece');
+INSERT INTO `countries_icons` VALUES ('GS', 'South Georgia and the South Sandwich Islands');
+INSERT INTO `countries_icons` VALUES ('GT', 'Guatemala');
+INSERT INTO `countries_icons` VALUES ('GU', 'Guam');
+INSERT INTO `countries_icons` VALUES ('GW', 'Guinea-Bissau');
+INSERT INTO `countries_icons` VALUES ('GY', 'Guyana');
+INSERT INTO `countries_icons` VALUES ('HK', 'Hong Kong');
+INSERT INTO `countries_icons` VALUES ('HM', 'Heard Island and McDonald Islands');
+INSERT INTO `countries_icons` VALUES ('HN', 'Honduras');
+INSERT INTO `countries_icons` VALUES ('HR', 'Croatia');
+INSERT INTO `countries_icons` VALUES ('HT', 'Haiti');
+INSERT INTO `countries_icons` VALUES ('HU', 'Hungar');
+INSERT INTO `countries_icons` VALUES ('ID', 'Indonesia');
+INSERT INTO `countries_icons` VALUES ('IE', 'Ireland');
+INSERT INTO `countries_icons` VALUES ('IL', 'Israel');
+INSERT INTO `countries_icons` VALUES ('IM', 'Isle of Man');
+INSERT INTO `countries_icons` VALUES ('IN', 'India');
+INSERT INTO `countries_icons` VALUES ('IO', 'British Indian Ocean Territory');
+INSERT INTO `countries_icons` VALUES ('IQ', 'Iraq');
+INSERT INTO `countries_icons` VALUES ('IR', 'Iran, Islamic Republic of');
+INSERT INTO `countries_icons` VALUES ('IS', 'Iceland');
+INSERT INTO `countries_icons` VALUES ('IT', 'Italy');
+INSERT INTO `countries_icons` VALUES ('JE', 'Jersey');
+INSERT INTO `countries_icons` VALUES ('JM', 'Jamaica');
+INSERT INTO `countries_icons` VALUES ('JO', 'Jordan');
+INSERT INTO `countries_icons` VALUES ('JP', 'Japan');
+INSERT INTO `countries_icons` VALUES ('KE', 'Kenya');
+INSERT INTO `countries_icons` VALUES ('KG', 'Kyrgyzstan');
+INSERT INTO `countries_icons` VALUES ('KH', 'Cambodia');
+INSERT INTO `countries_icons` VALUES ('KI', 'Kiribati');
+INSERT INTO `countries_icons` VALUES ('KM', 'Comoros');
+INSERT INTO `countries_icons` VALUES ('KN', 'Saint Kitts and Nevis');
+INSERT INTO `countries_icons` VALUES ('KP', 'Korea, Democratic People\'s Republic of');
+INSERT INTO `countries_icons` VALUES ('KR', 'Korea, Republic of');
+INSERT INTO `countries_icons` VALUES ('KW', 'Kuwait');
+INSERT INTO `countries_icons` VALUES ('KY', 'Cayman Islands');
+INSERT INTO `countries_icons` VALUES ('KZ', 'Kazakhstan');
+INSERT INTO `countries_icons` VALUES ('LA', 'Lao People\'s Democratic Republic');
+INSERT INTO `countries_icons` VALUES ('LB', 'Lebanon');
+INSERT INTO `countries_icons` VALUES ('LC', 'Saint Lucia');
+INSERT INTO `countries_icons` VALUES ('LI', 'Liechtenstein');
+INSERT INTO `countries_icons` VALUES ('LK', 'Sri Lanka');
+INSERT INTO `countries_icons` VALUES ('LR', 'Liberia');
+INSERT INTO `countries_icons` VALUES ('LS', 'Lesotho');
+INSERT INTO `countries_icons` VALUES ('LT', 'Lithuania');
+INSERT INTO `countries_icons` VALUES ('LU', 'Luxembourg');
+INSERT INTO `countries_icons` VALUES ('LV', 'Latvia');
+INSERT INTO `countries_icons` VALUES ('LY', 'Libya');
+INSERT INTO `countries_icons` VALUES ('MA', 'Morocco');
+INSERT INTO `countries_icons` VALUES ('MC', 'Monaco');
+INSERT INTO `countries_icons` VALUES ('MD', 'Moldova, Republic of');
+INSERT INTO `countries_icons` VALUES ('ME', 'Montenegro');
+INSERT INTO `countries_icons` VALUES ('MF', 'Saint Martin (French part)');
+INSERT INTO `countries_icons` VALUES ('MG', 'Madagascar');
+INSERT INTO `countries_icons` VALUES ('MH', 'Marshall Islands');
+INSERT INTO `countries_icons` VALUES ('MK', 'Macedonia, the former Yugoslav Republic of');
+INSERT INTO `countries_icons` VALUES ('ML', 'Mali');
+INSERT INTO `countries_icons` VALUES ('MM', 'Myanmar');
+INSERT INTO `countries_icons` VALUES ('MN', 'Mongolia');
+INSERT INTO `countries_icons` VALUES ('MO', 'Macao');
+INSERT INTO `countries_icons` VALUES ('MP', 'Northern Mariana Islands');
+INSERT INTO `countries_icons` VALUES ('MQ', 'Martinique');
+INSERT INTO `countries_icons` VALUES ('MR', 'Mauritania');
+INSERT INTO `countries_icons` VALUES ('MS', 'Montserrat');
+INSERT INTO `countries_icons` VALUES ('MT', 'Malta');
+INSERT INTO `countries_icons` VALUES ('MU', 'Mauritius');
+INSERT INTO `countries_icons` VALUES ('MV', 'Maldives');
+INSERT INTO `countries_icons` VALUES ('MW', 'Malawi');
+INSERT INTO `countries_icons` VALUES ('MX', 'Mexico');
+INSERT INTO `countries_icons` VALUES ('MY', 'Malaysia');
+INSERT INTO `countries_icons` VALUES ('MZ', 'Mozambique');
+INSERT INTO `countries_icons` VALUES ('NA', 'Namibia');
+INSERT INTO `countries_icons` VALUES ('NC', 'New Caledonia');
+INSERT INTO `countries_icons` VALUES ('NE', 'Niger');
+INSERT INTO `countries_icons` VALUES ('NF', 'Norfolk Island');
+INSERT INTO `countries_icons` VALUES ('NG', 'Nigeria');
+INSERT INTO `countries_icons` VALUES ('NI', 'Nicaragua');
+INSERT INTO `countries_icons` VALUES ('NL', 'Netherlands');
+INSERT INTO `countries_icons` VALUES ('NO', 'Norway');
+INSERT INTO `countries_icons` VALUES ('NP', 'Nepal');
+INSERT INTO `countries_icons` VALUES ('NR', 'Nauru');
+INSERT INTO `countries_icons` VALUES ('NU', 'Niue');
+INSERT INTO `countries_icons` VALUES ('NZ', 'New Zealand');
+INSERT INTO `countries_icons` VALUES ('OM', 'Oman');
+INSERT INTO `countries_icons` VALUES ('PA', 'Panama');
+INSERT INTO `countries_icons` VALUES ('PE', 'Peru');
+INSERT INTO `countries_icons` VALUES ('PF', 'French Polynesia');
+INSERT INTO `countries_icons` VALUES ('PG', 'Papua New Guinea');
+INSERT INTO `countries_icons` VALUES ('PH', 'Philippines');
+INSERT INTO `countries_icons` VALUES ('PK', 'Pakistan');
+INSERT INTO `countries_icons` VALUES ('PL', 'Poland');
+INSERT INTO `countries_icons` VALUES ('PM', 'Saint Pierre and Miquelon');
+INSERT INTO `countries_icons` VALUES ('PN', 'Pitcairn');
+INSERT INTO `countries_icons` VALUES ('PR', 'Puerto Rico');
+INSERT INTO `countries_icons` VALUES ('PS', 'Palestine, State of');
+INSERT INTO `countries_icons` VALUES ('PT', 'Portugal');
+INSERT INTO `countries_icons` VALUES ('PW', 'Palau');
+INSERT INTO `countries_icons` VALUES ('PY', 'Paraguay');
+INSERT INTO `countries_icons` VALUES ('QA', 'Qatar');
+INSERT INTO `countries_icons` VALUES ('RE', 'Réunion');
+INSERT INTO `countries_icons` VALUES ('RO', 'Romania');
+INSERT INTO `countries_icons` VALUES ('RS', 'Serbia');
+INSERT INTO `countries_icons` VALUES ('RU', 'Russian Federation');
+INSERT INTO `countries_icons` VALUES ('RW', 'Rwanda');
+INSERT INTO `countries_icons` VALUES ('SA', 'Saudi Arabia');
+INSERT INTO `countries_icons` VALUES ('SB', 'Solomon Islands');
+INSERT INTO `countries_icons` VALUES ('SC', 'Seychelles');
+INSERT INTO `countries_icons` VALUES ('SD', 'Sudan');
+INSERT INTO `countries_icons` VALUES ('SE', 'Sweden');
+INSERT INTO `countries_icons` VALUES ('SG', 'Singapore');
+INSERT INTO `countries_icons` VALUES ('SH', 'Saint Helena, Ascension and Tristan da Cunha');
+INSERT INTO `countries_icons` VALUES ('SI', 'Slovenia');
+INSERT INTO `countries_icons` VALUES ('SJ', 'Svalbard and Jan Mayen');
+INSERT INTO `countries_icons` VALUES ('SK', 'Slovakia');
+INSERT INTO `countries_icons` VALUES ('SL', 'Sierra Leone');
+INSERT INTO `countries_icons` VALUES ('SM', 'San Marino');
+INSERT INTO `countries_icons` VALUES ('SN', 'Senegal');
+INSERT INTO `countries_icons` VALUES ('SO', 'Somalia');
+INSERT INTO `countries_icons` VALUES ('SR', 'Suriname');
+INSERT INTO `countries_icons` VALUES ('SS', 'South Sudan');
+INSERT INTO `countries_icons` VALUES ('ST', 'Sao Tome and Principe');
+INSERT INTO `countries_icons` VALUES ('SV', 'El Salvador');
+INSERT INTO `countries_icons` VALUES ('SX', 'Sint Maarten (Dutch part)');
+INSERT INTO `countries_icons` VALUES ('SY', 'Syrian Arab Republic');
+INSERT INTO `countries_icons` VALUES ('SZ', 'Swaziland');
+INSERT INTO `countries_icons` VALUES ('TC', 'Turks and Caicos Islands');
+INSERT INTO `countries_icons` VALUES ('TD', 'Chad');
+INSERT INTO `countries_icons` VALUES ('TF', 'French Southern Territories');
+INSERT INTO `countries_icons` VALUES ('TG', 'Togo');
+INSERT INTO `countries_icons` VALUES ('TH', 'Thailand');
+INSERT INTO `countries_icons` VALUES ('TJ', 'Tajikistan');
+INSERT INTO `countries_icons` VALUES ('TK', 'Tokelau');
+INSERT INTO `countries_icons` VALUES ('TL', 'Timor-Leste');
+INSERT INTO `countries_icons` VALUES ('TM', 'Turkmenistan');
+INSERT INTO `countries_icons` VALUES ('TN', 'Tunisia');
+INSERT INTO `countries_icons` VALUES ('TO', 'Tonga');
+INSERT INTO `countries_icons` VALUES ('TR', 'Turkey');
+INSERT INTO `countries_icons` VALUES ('TT', 'Trinidad and Tobago');
+INSERT INTO `countries_icons` VALUES ('TV', 'Tuvalu');
+INSERT INTO `countries_icons` VALUES ('TW', 'Taiwan');
+INSERT INTO `countries_icons` VALUES ('TZ', 'Tanzania, United Republic of');
+INSERT INTO `countries_icons` VALUES ('UA', 'Ukraine');
+INSERT INTO `countries_icons` VALUES ('UG', 'Uganda');
+INSERT INTO `countries_icons` VALUES ('UM', 'United States Minor Outlying Islands');
+INSERT INTO `countries_icons` VALUES ('US', 'United States');
+INSERT INTO `countries_icons` VALUES ('UY', 'Uruguay');
+INSERT INTO `countries_icons` VALUES ('UZ', 'Uzbekistan');
+INSERT INTO `countries_icons` VALUES ('VA', 'Holy See (Vatican City State)');
+INSERT INTO `countries_icons` VALUES ('VC', 'Saint Vincent and the Grenadines');
+INSERT INTO `countries_icons` VALUES ('VE', 'Venezuela, Bolivarian Republic of');
+INSERT INTO `countries_icons` VALUES ('VG', 'Virgin Islands,                       ');
+INSERT INTO `countries_icons` VALUES ('VI', 'British Virgin Islands, U.S.');
+INSERT INTO `countries_icons` VALUES ('VN', 'Viet Nam');
+INSERT INTO `countries_icons` VALUES ('VU', 'Vanuatu');
+INSERT INTO `countries_icons` VALUES ('WF', 'Wallis and Futuna');
+INSERT INTO `countries_icons` VALUES ('WS', 'Samoa');
+INSERT INTO `countries_icons` VALUES ('YE', 'Yemen');
+INSERT INTO `countries_icons` VALUES ('YT', 'Mayotte');
+INSERT INTO `countries_icons` VALUES ('ZA', 'South Africa');
+INSERT INTO `countries_icons` VALUES ('ZM', 'Zambia');
+INSERT INTO `countries_icons` VALUES ('ZW', 'Zimbabwe');
 
 -- ----------------------------
---  Table structure for `polaroids`
+-- Table structure for `polaroids`
 -- ----------------------------
 DROP TABLE IF EXISTS `polaroids`;
 CREATE TABLE `polaroids` (
@@ -57,39 +300,18 @@ CREATE TABLE `polaroids` (
   KEY `id_user_2` (`id_user`),
   KEY `id_user_3` (`id_user`),
   CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `polaroids`
+-- Records of polaroids
 -- ----------------------------
-BEGIN;
-INSERT INTO `polaroids` VALUES ('1', '37.427474|-122.169719', '37.427474', '-122.169719', 'My trip at Standford University', 'look at this place, so awesome!', 'standford-university.jpg', '11', 'USA', '2015-04-03 17:23:47', '2015-04-04 03:08:36', '1'), ('2', '37.7577|-122.4376', '37.7577', '-122.4376', 'Trip in San Francisco', 'I love this city. \"If you\'re going to SF, make sure to wear some flowers in your hair\"', 'san-francisco.jpg', '8', 'USA', '2015-04-03 17:25:26', '2015-04-04 03:08:38', '1'), ('3', '38.693597|-9.205712', '38.693597', '-9.205712', 'Padrão dos Descobrimentos', 'Uau, nunca vi um barquinho em pedra tão lindo caramba!', 'padrao-dos-descobrimentos.jpg', '8', 'Portugal', '2015-04-03 17:26:32', '2015-04-04 03:20:36', '2'), ('4', '38.689633|-9.17711', '38.689633', '-9.17711', 'Museu da Carris', 'Museu Lindo xD', 'museu-da-carris.jpg', '3', 'Portugal', '2015-04-03 18:25:25', '2015-04-04 03:08:40', '2'), ('5', '38.689633|-9.17711', '38.689633', '-9.17711', 'ponte 25 de Abril e o Cristo Rei', 'Uau, que coisa mai linda!', 'ponte-25-abril.jpg', '2', 'Portugal', '2015-04-03 19:53:05', '2015-04-04 03:08:41', '2'), ('6', '38.689633|-9.17711', '38.689633', '-9.17711', 'Cristo Rei', 'Louvado seja Deus xD', 'cristo-rei.jpg', '1', 'Portugal', '2015-04-03 20:07:32', '2015-04-04 03:08:42', '2'), ('7', '38.7127527|-9.1462951', '38.7127527', '-9.1462951', 'Bairro Alto =)', 'Que vista fantástica!', 'bairro-alto.jpg', '42', 'Portugal', '2015-04-12 02:48:37', '2015-04-12 22:38:20', '2'), ('10', '35.77902073064695|-5.798609428527811', '35.779020730647', '-5.7986094285278', 'velhinho com o cão', 'velhote alert(&#34;hello&#34;);', '8ba491ccd6be4e2a9702162cb08ffa80.jpg', '2', 'Morocco', '2015-04-18 07:56:54', '2015-04-18 07:56:54', '2');
-COMMIT;
+INSERT INTO `polaroids` VALUES ('10', '35.77902073064695|-5.798609428527811', '35.779020730647', '-5.7986094285278', 'velhinho com o cão', 'velhote alert(&#34;hello&#34;);', '8ba491ccd6be4e2a9702162cb08ffa80.jpg', '6', 'MA', '2015-04-18 07:56:54', '2015-05-03 18:01:04', '2');
+INSERT INTO `polaroids` VALUES ('11', '42.926450121121256|17.71203498437501', '42.926450121121', '17.712034984375', 'Nikola Tesla', 'Electricity Genius Man', 'ca2177cfb8ca4349a21ce388988810b5.jpeg', '1', 'BO', '2015-05-03 15:57:05', '2015-05-03 23:58:23', '2');
+INSERT INTO `polaroids` VALUES ('12', '37.7749295|-122.41941550000001', '37.7749295', '-122.4194155', 'Calvin & Hobbes Flying', 'Look at Calvin flying inside a box with Hobbes watching those dinos...', 'ab2436565661b9f0de222c83804d71cb8ee13d90.png', '1', 'US', '2015-05-03 16:04:26', '2015-05-04 00:52:30', '2');
+INSERT INTO `polaroids` VALUES ('13', '42.3600825|-71.05888010000001', '42.3600825', '-71.0588801', 'Calvin & Hobbes Studying', 'Studying at home with hobbes', '2e273f78ab854c76977d0ddd1664f0e7.jpg', '1', 'US', '2015-05-03 16:21:06', '2015-05-04 00:52:23', '2');
 
 -- ----------------------------
---  Table structure for `route_has_polaroids`
--- ----------------------------
-DROP TABLE IF EXISTS `route_has_polaroids`;
-CREATE TABLE `route_has_polaroids` (
-  `id_route` int(10) unsigned NOT NULL,
-  `id_polaroid` int(10) unsigned NOT NULL,
-  `datetime_associated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_route`,`id_polaroid`),
-  KEY `id_polaroid` (`id_polaroid`),
-  KEY `id_polaroid_2` (`id_polaroid`),
-  CONSTRAINT `id_route` FOREIGN KEY (`id_route`) REFERENCES `routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `polaroid_id` FOREIGN KEY (`id_polaroid`) REFERENCES `polaroids` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `route_has_polaroids`
--- ----------------------------
-BEGIN;
-INSERT INTO `route_has_polaroids` VALUES ('1', '1', '2015-04-03 17:28:36'), ('1', '2', '2015-04-03 17:28:56'), ('2', '3', '2015-04-03 17:29:04'), ('2', '7', '2015-04-20 19:53:12');
-COMMIT;
-
--- ----------------------------
---  Table structure for `routes`
+-- Table structure for `routes`
 -- ----------------------------
 DROP TABLE IF EXISTS `routes`;
 CREATE TABLE `routes` (
@@ -107,68 +329,32 @@ CREATE TABLE `routes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `routes`
+-- Records of routes
 -- ----------------------------
-BEGIN;
-INSERT INTO `routes` VALUES ('1', 'California Trip', 'This is my California Awesome Trip last summer 2014', '2015-04-03 17:27:38', '2015-04-03 17:27:38', '1', '0'), ('2', 'Os recantos de Lisboa', 'Rota de museus em Lisboa', '2015-04-03 17:28:15', '2015-04-03 17:28:15', '2', '0');
-COMMIT;
+INSERT INTO `routes` VALUES ('1', 'California Trip', 'This is my California Awesome Trip last summer 2014', '2015-04-03 17:27:38', '2015-04-03 17:27:38', '1', '0');
+INSERT INTO `routes` VALUES ('2', 'Os recantos de Lisboa', 'Rota de museus em Lisboa', '2015-04-03 17:28:15', '2015-04-03 17:28:15', '2', '0');
 
 -- ----------------------------
---  Table structure for `user_is_following`
+-- Table structure for `route_has_polaroids`
 -- ----------------------------
-DROP TABLE IF EXISTS `user_is_following`;
-CREATE TABLE `user_is_following` (
-  `id_user_who_follows` int(10) unsigned NOT NULL,
-  `id_user_who_is_followed` int(10) unsigned NOT NULL,
-  KEY `id_user_who_follows` (`id_user_who_follows`),
-  KEY `id_user_who_is_followed` (`id_user_who_is_followed`),
-  CONSTRAINT `id_user_who_follows` FOREIGN KEY (`id_user_who_follows`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `id_user_who_is_followed` FOREIGN KEY (`id_user_who_is_followed`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `user_is_following`
--- ----------------------------
-BEGIN;
-INSERT INTO `user_is_following` VALUES ('1', '2'), ('2', '1');
-COMMIT;
-
--- ----------------------------
---  Table structure for `user_likes_polaroid`
--- ----------------------------
-DROP TABLE IF EXISTS `user_likes_polaroid`;
-CREATE TABLE `user_likes_polaroid` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` int(10) unsigned NOT NULL,
-  `id_polaroid` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_user_2` (`id_user`),
-  KEY `id_polaroid` (`id_polaroid`),
-  CONSTRAINT `id_polaroid_like_fk` FOREIGN KEY (`id_polaroid`) REFERENCES `polaroids` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `user_likes_route`
--- ----------------------------
-DROP TABLE IF EXISTS `user_likes_route`;
-CREATE TABLE `user_likes_route` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) unsigned NOT NULL,
+DROP TABLE IF EXISTS `route_has_polaroids`;
+CREATE TABLE `route_has_polaroids` (
   `id_route` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_user_2` (`id_user`),
-  KEY `id_user_3` (`id_user`),
-  KEY `id_user_4` (`id_user`),
-  KEY `id_route` (`id_route`),
-  CONSTRAINT `fk_id_route_like_fk` FOREIGN KEY (`id_route`) REFERENCES `routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `id_polaroid` int(10) unsigned NOT NULL,
+  `datetime_associated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_route`,`id_polaroid`),
+  KEY `id_polaroid` (`id_polaroid`),
+  KEY `id_polaroid_2` (`id_polaroid`),
+  CONSTRAINT `id_route` FOREIGN KEY (`id_route`) REFERENCES `routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `polaroid_id` FOREIGN KEY (`id_polaroid`) REFERENCES `polaroids` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `users`
+-- Records of route_has_polaroids
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -188,13 +374,78 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `country_id` (`country`),
   KEY `id_country` (`country`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `users`
+-- Records of users
 -- ----------------------------
-BEGIN;
-INSERT INTO `users` VALUES ('1', 'bazinga', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'bazinga@gmail.com', 'bazinga cooper', 'USA', 'bazinga@facebook', 'bazinga@twitter', 'bazinga@g+', '2015-04-03 17:21:26', '2015-04-18 21:22:29', 'Y', 'I\'m Cool dolor sit amet, consectetur adipisicing elit. Nihil perferendis distinctio itaque aut necessitatibus eaque quos minus eum, esse dolorem non, ab pariatur ipsum quis, ipsa aliquid nobis enim voluptate cumque sunt dignissimos.'), ('2', 'nerd', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'jricvalerio@gmail.com', 'nerd sheldon', 'Portugal', 'nerd@facebook', 'nerd@twitter', 'nerd@g+', '2015-04-03 17:21:52', '2015-04-18 21:22:26', 'Y', 'I\'m Awesome...ipsum dolor sit amet, consectetur adipisicing elit. Nihil perferendis distinctio itaque aut necessitatibus eaque quos minus eum, esse dolorem non, ab pariatur ipsum quis, ipsa aliquid nobis enim voluptate cumque sunt dignissimos.'), ('3', 'carlitos123', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'carlitos@gmail.com', 'Carlos Fonseca Pereira da Silva', null, null, null, null, null, '2015-04-18 21:20:48', 'Y', null), ('4', 'ddddd', '$2y$13$FFMvLjuyIdJOBc8hwQd5dO0Nv2L8EyXQdC6ExFs3rO8tYRboFdNT6', 'nerdddd@gmail.com', 'Carlos Fonseca Pereira da Silva', null, null, null, null, null, '2015-04-24 11:08:16', 'Y', null);
-COMMIT;
+INSERT INTO `users` VALUES ('1', 'bazinga', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'bazinga@gmail.com', 'bazinga cooper', 'US', 'bazinga@facebook', 'bazinga@twitter', 'bazinga@g+', '2015-04-03 17:21:26', '2015-05-03 16:10:56', 'Y', 'I\'m Cool dolor sit amet, consectetur adipisicing elit. Nihil perferendis distinctio itaque aut necessitatibus eaque quos minus eum, esse dolorem non, ab pariatur ipsum quis, ipsa aliquid nobis enim voluptate cumque sunt dignissimos.');
+INSERT INTO `users` VALUES ('2', 'nerd', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'jricvalerio@gmail.com', 'nerd sheldon', 'US', 'nerd@facebook', 'nerd@twitter', 'nerd@google+', '2015-04-03 17:21:52', '2015-05-03 15:35:19', 'Y', 'I am an Human Being!');
+INSERT INTO `users` VALUES ('3', 'carlitos123', '$2y$13$FaGXpHrDZpr3y3VGq4udlu0u0cFR413404h9.OIQsCEejkLhWhsu6', 'carlitos@gmail.com', 'Carlos Fonseca Pereira da Silva', 'AU', null, null, null, null, '2015-05-03 16:09:56', 'Y', null);
+INSERT INTO `users` VALUES ('5', 'maegalinha', '$2a$13$qX9kl.kBedbotkVerxp1nuk/gZI6qHTGZh2EaBpXaS9qQDcx.hUga', 'silviavalerio@gmail.com', 'Silvia Valério', 'PT', '', '', '', null, '2015-05-03 10:10:10', 'Y', 'Hi =)');
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- ----------------------------
+-- Table structure for `user_is_following`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_is_following`;
+CREATE TABLE `user_is_following` (
+  `id_user_who_follows` int(10) unsigned NOT NULL,
+  `id_user_who_is_followed` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_user_who_follows`,`id_user_who_is_followed`),
+  KEY `id_user_who_follows` (`id_user_who_follows`),
+  KEY `id_user_who_is_followed` (`id_user_who_is_followed`),
+  CONSTRAINT `id_user_who_follows` FOREIGN KEY (`id_user_who_follows`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_user_who_is_followed` FOREIGN KEY (`id_user_who_is_followed`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_is_following
+-- ----------------------------
+INSERT INTO `user_is_following` VALUES ('1', '2');
+INSERT INTO `user_is_following` VALUES ('2', '1');
+INSERT INTO `user_is_following` VALUES ('2', '3');
+
+-- ----------------------------
+-- Table structure for `user_likes_polaroid`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_likes_polaroid`;
+CREATE TABLE `user_likes_polaroid` (
+  `id_user` int(10) unsigned NOT NULL,
+  `id_polaroid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_user`,`id_polaroid`),
+  KEY `id_user` (`id_user`),
+  KEY `id_user_2` (`id_user`),
+  KEY `id_polaroid` (`id_polaroid`),
+  CONSTRAINT `id_polaroid_like_fk` FOREIGN KEY (`id_polaroid`) REFERENCES `polaroids` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_likes_polaroid
+-- ----------------------------
+INSERT INTO `user_likes_polaroid` VALUES ('2', '10');
+INSERT INTO `user_likes_polaroid` VALUES ('2', '11');
+INSERT INTO `user_likes_polaroid` VALUES ('2', '12');
+INSERT INTO `user_likes_polaroid` VALUES ('2', '13');
+
+-- ----------------------------
+-- Table structure for `user_likes_route`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_likes_route`;
+CREATE TABLE `user_likes_route` (
+  `id_user` int(11) unsigned NOT NULL,
+  `id_route` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_user`,`id_route`),
+  KEY `id_user` (`id_user`),
+  KEY `id_user_2` (`id_user`),
+  KEY `id_user_3` (`id_user`),
+  KEY `id_user_4` (`id_user`),
+  KEY `id_route` (`id_route`),
+  CONSTRAINT `fk_id_route_like_fk` FOREIGN KEY (`id_route`) REFERENCES `routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_id_user_like_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_likes_route
+-- ----------------------------
+INSERT INTO `user_likes_route` VALUES ('2', '1');
