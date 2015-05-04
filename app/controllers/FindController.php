@@ -76,7 +76,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find("title LIKE '%" . $query_filtered . "%'"),
-				"limit" => 10,
+				"limit" => 12,
 				"page"  => $current_page
 			)
 		);
@@ -149,7 +149,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Users::find("full_name LIKE '%" . $query_filtered . "%'"),
-				"limit" => 10,
+				"limit" => 12,
 				"page"  => $current_page
 			)
 		);
@@ -210,7 +210,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Users::find(),
-				"limit" => 10,
+				"limit" => 12,
 				"page"  => $current_page
 			)
 		);
@@ -227,7 +227,7 @@ class FindController extends ControllerBase
 		$paginator = new Phalcon\Paginator\Adapter\Model(
 			array(
 				"data"  => Polaroids::find(),
-				"limit" => 10,
+				"limit" => 12,
 				"page"  => $current_page
 			)
 		);
@@ -274,47 +274,88 @@ class FindController extends ControllerBase
 		$this->tag->appendTitle(" | FindController - countryAction");
 		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
 
-		$this->assets
-				->collection('header_css')
-					->addCss("/css/flagicon/flag-icon.css");
 
 		if ($country_filtered != NULL) {
 
-			echo "Country in url: ", $country_filtered;
+			$this->assets
+					->collection('header_css')
+						->addCss("/css/flagicon/flag-icon.css");
 
 			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+
 				return $this->view->setVars(array(
-							"country_short_name" => $country_filtered,
-							"country_long_name" => CountriesIcons::findFirst("country_short_name = '". $country_filtered ."'")->country_long_name,
-							"number_of_users_in_country"     => Users::count("country = '". $country_filtered ."'"),
-							"number_of_polaroids_in_country" => Polaroids::count("country = '". $country_filtered ."'")
+                            "country_short_name"             => $country_filtered,
+                            "country_long_name"              => CountriesIcons::findFirst("country_short_name = '". $country_filtered ."'")->country_long_name,
+                            "number_of_users_in_country"     => Users::count("country = '". $country_filtered ."'"),
+                            "number_of_polaroids_in_country" => Polaroids::count("country = '". $country_filtered ."'")
 					   ));
 			}else{
 				return $this->response->redirect("/find-by-country");
 			}
 		}else{
-			// ir buscar todos os paises e mostrar todas as bandeiras
-			// de todos os paises para o user poder escolher uma bandeira
-			return $this->view->setVars(array(
-						"all_countries" => CountriesIcons::find()
-				   ));
+
+			$this->assets
+					->collection('header_css')
+						->addCss("/css/mason/mason_base.css")
+						->addCss("/css/flagicon/flag-icon.css")
+						->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+			$this->assets
+					->collection('header')
+						->addJs("/js/mason/modernizr-transitions.js");
+
+			$this->assets
+					->collection('footer')
+						->addJs("/js/mason/jquery.masonry.js")
+						->addJs("/js/app-mason-start.js");
+
+
+			return $this->view->setVar("allCountries", CountriesIcons::find());
 		}
 	}
 
 
-	public function usersInCountryAction($country = NULL)
+	public function usersInCountryAction($country = NULL, $current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - usersInCountryAction");
 		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
 
 		if ($country_filtered != NULL) {
 
-			echo "Country in url: ", $country_filtered;
+			$this->assets
+					->collection('header_css')
+						->addCss("/css/mason/mason_base.css")
+						->addCss("/css/flagicon/flag-icon.css")
+						->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
 
-			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+				$this->assets
+					->collection('header')
+						->addJs("/js/mason/modernizr-transitions.js");
+
+				$this->assets
+					->collection('footer')
+						->addJs("/js/mason/jquery.masonry.js")
+						->addJs("/js/app-mason-start.js");
+
+
+			if (CountriesIcons::findFirst("country_short_name = '" . $country_filtered. "'")) {
+
+				$paginator = new Phalcon\Paginator\Adapter\Model(
+						array(
+							"data"  => Users::find("country = '" . $country_filtered ."'"),
+							"limit" => 12,
+							"page"  => $current_page
+						)
+					);
+
+				$page = $paginator->getPaginate();
+
 				return $this->view->setVars(array(
-							// paginator com users
-					   ));
+							"country_long_name"  => CountriesIcons::findFirst("country_short_name = '". $country_filtered ."'")->country_long_name,
+							"country_short_name" => $country_filtered,
+							"page" 				 => $page
+						));
+
 			}else{
 				return $this->response->redirect("/find-by-country");
 			}
@@ -324,19 +365,47 @@ class FindController extends ControllerBase
 
 	}
 
-	public function polaroidsInCountryAction($country = NULL)
+	public function polaroidsInCountryAction($country = NULL, $current_page = 1)
 	{
 		$this->tag->appendTitle(" | FindController - polaroidsInCountryAction");
 		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
 
 		if ($country_filtered != NULL) {
 
-			echo "Country in url: ", $country_filtered;
+			$this->assets
+					->collection('header_css')
+						->addCss("/css/mason/mason_base.css")
+						->addCss("/css/flagicon/flag-icon.css")
+						->addCss("http://fonts.googleapis.com/css?family=Reenie+Beanie", FALSE);
+
+				$this->assets
+					->collection('header')
+						->addJs("/js/mason/modernizr-transitions.js");
+
+				$this->assets
+					->collection('footer')
+						->addJs("/js/mason/jquery.masonry.js")
+						->addJs("/js/app-mason-start.js");
+
 
 			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
+
+				$paginator = new Phalcon\Paginator\Adapter\Model(
+						array(
+							"data"  => Polaroids::find("country = '" . $country_filtered ."'"),
+							"limit" => 12,
+							"page"  => $current_page
+						)
+					);
+
+				$page = $paginator->getPaginate();
+
 				return $this->view->setVars(array(
-							// paginator com polaroids
-					   ));
+							"country_long_name"  => CountriesIcons::findFirst("country_short_name = '". $country_filtered ."'")->country_long_name,
+							"country_short_name" => $country_filtered,
+							"page" 				 => $page
+						));
+
 			}else{
 				return $this->response->redirect("/find-by-country");
 			}

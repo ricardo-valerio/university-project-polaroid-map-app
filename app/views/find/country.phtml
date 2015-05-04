@@ -1,31 +1,36 @@
 <?php $this->flashSession->output(); ?>
 
+
+	<?php if (isset($country_short_name)): ?>
+
+		<ul class="breadcrumbs">
+			<li><a href="<?php echo $this->url->get("/find-by-country"); ?>">Find By Country</a></li>
+			<li><span class="flag-icon flag-icon-<?php echo strtolower($country_short_name); ?>"></span>&nbsp;<?php echo $country_long_name; ?></li>
+		</ul>
+
+	<?php endif ?>
+
 <div style="margin-top: 2em;" class="row">
 
-	<?php if (isset($all_countries)): ?>
+	<?php if (isset($allCountries)): ?>
 
-		<table>
-		  <thead>
-		    <tr>
-		      <th width="300">Country</th>
-		      <th width="150">Number of Polaroids</th>
-		      <th width="150">Number of Users</th>
-		    </tr>
-		  </thead>
-		  <tbody>
+		<div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
 
-			<?php foreach ($all_countries as $country): ?>
-			    <tr>
-			      <td>
-					<p><a href="<?php echo $this->url->get("/find-by-country/". strtolower($country->country_short_name)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($country->country_short_name); ?>"></span>&nbsp;<?php echo $country->country_long_name ?></a></p>
-			      </td>
-			      <td><?php echo Polaroids::count("country = '". strtolower($country->country_short_name) ."'"); ?></td>
-			      <td><?php echo Users::count("country = '". strtolower($country->country_short_name) ."'"); ?></td>
-			    </tr>
+			<?php foreach ($allCountries as $country): ?>
+		        <div class="box col3">
+		            <div class="thumbnail">
+						<div class="flag-wrapper">
+							<div class="img-thumbnail flag flag-icon-background flag-icon-<?php echo strtolower($country->country_short_name); ?>" title="<?php echo $country->country_short_name; ?>"></div>
+						</div>
+		                <div class="caption text-center BarnieFonte">
+		                    <h3 style="font-size: 1.5em;" class=""><?php echo $country->country_long_name; ?></h3>
+		                </div>
+		            </div>
+		        </div>
+
 			<?php endforeach ?>
 
-		  </tbody>
-		</table>
+		</div>
 
 	<?php else: ?>
 

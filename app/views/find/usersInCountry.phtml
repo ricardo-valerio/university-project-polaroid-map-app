@@ -1,3 +1,53 @@
 <h1 class="headers-provisorios">FindController - usersInCountryAction</h1>
 
 <?php $this->flashSession->output(); ?>
+
+<ul class="breadcrumbs">
+	<li><a href="<?php echo $this->url->get("/find-by-country"); ?>">Find By Country</a></li>
+	<li><a href="<?php echo $this->url->get("/find-by-country/". strtolower($country_short_name)); ?>"><span class="flag-icon flag-icon-<?php echo strtolower($country_short_name); ?>"></span>&nbsp;<?php echo $country_long_name; ?></a></li>
+	<li class="current">Users</li>
+</ul>
+
+<div style="margin-top: 2em;" class="row">
+    <div id="container" class="large-12 columns transitions-enabled large-centered clearfix">
+
+		<?php foreach ($page->items as $item): ?>
+
+		        <div class="box col3">
+		            <div class="thumbnail">
+		                <a href="<?php echo $this->url->get("/user/" . $item->id . "/" .
+		            $this->tag->friendlyTitle($item->username, "-")); ?>">
+		                <img src="http://www.gravatar.com/avatar/<?php
+		                echo md5(strtolower(trim($item->email))); ?>?s=280&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
+		                </a>
+		                <div class="caption text-center BarnieFonte">
+		                    <h3 style="font-size: 1.5em;" class=""><?php echo $item->username; ?></h3>
+		                </div>
+		            </div>
+		        </div>
+
+		<?php endforeach ?>
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="offset-8 small-4 small-centered columns">
+		<ul class="pagination" role="menubar" aria-label="Pagination">
+			<?php if ($page->current != $page->first): ?>
+			<li><a href="<?php echo $this->url->get("/find/users/" . $searched_query); ?>">First</a></li>
+			<li class="arrow"><a href="<?php echo $this->url->get("/find/users/" . $searched_query . "/" . $page->before);?>">&laquo;
+					Previous</a></li>
+			<?php endif ?>
+
+
+			<?php if ($page->current != $page->last): ?>
+				<li class="current"><a href=""><?php echo $page->current; ?></a></li>
+				<li class="arrow"><a href="<?php echo $this->url->get("/find/users/" . $searched_query . "/" . $page->next); ?>">Next &raquo;</a></li>
+				<li><a href="<?php echo $this->url->get("/find/users/" . $searched_query
+						. "/" . $page->last); ?>">Last</a></li>
+			<?php endif ?>
+
+		</ul>
+	</div>
+</div>
