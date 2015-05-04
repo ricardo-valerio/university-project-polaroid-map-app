@@ -271,25 +271,31 @@ class FindController extends ControllerBase
 
 	public function countryAction($country = null)
 	{
-		$this->view->disable();
 		$country_filtered = $this->filter->sanitize($country, array("string", "striptags"));
+
+		$this->assets
+				->collection('header_css')
+					->addCss("/css/flagicon/flag-icon.css");
 
 		if ($country_filtered != NULL) {
 
 			echo "Country in url: ", $country_filtered;
 
 			if (CountriesIcons::findFirst("country_short_name = '$country_filtered'")) {
-				echo "Existe na BD";
-				// vai buscar o COUNT de todos os users e polaroid deste pais
+				return $this->view->setVars(array(
+							"country_long_name" => CountriesIcons::findFirst("country_short_name = $country_filtered")->country_long_name,
+							"number_of_users_in_country"     => Users::count("country = $country_filtered"),
+							"number_of_polaroids_in_country" => Polaroids::count("country = $country_filtered")
+					   ));
 			}else{
-				echo "Não existe na BD";
-				// redirect para o a página inicial com todas as bandeiras
-				// o que irá ser feito no else abaixo
+				return $this->response->redirect("/find-by-country");
 			}
 		}else{
 			// ir buscar todos os paises e mostrar todas as bandeiras
 			// de todos os paises para o user poder escolher uma bandeira
-			echo "O country é null, vou mostrar todas as bandeiras";
+			return $this->view->setVars(array(
+						"all_countries" => CountriesIcons::find()
+				   ));
 		}
 	}
 

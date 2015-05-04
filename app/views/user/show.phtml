@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<img
-			src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user_info->email))); ?>?s=250">
+			src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user_info->email))); ?>?s=250&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
 	</div>
 	<div class="large-8 columns">
 		<div class="panel radius">
@@ -125,7 +125,10 @@
 	    <?php endforeach ?>
 
 	<?php else: ?>
-			<p><?php echo $user_info->username; ?> has no polaroids yet!</p>
+			<p> has no polaroids yet!</p>
+		    <div class="callout panel text-center">
+		        <h2><?php echo $user_info->username; ?> has no polaroids!</h2>
+		    </div>
 	<?php endif ?>
 
 	    </div>
@@ -163,7 +166,9 @@
 			<?php endforeach ?>
 
 		<?php else: ?>
-			<p><?php echo $user_info->username; ?> has no routes yet!</p>
+		    <div class="callout panel text-center">
+		        <h2><?php echo $user_info->username; ?> has no routes!</h2>
+		    </div>
 		<?php endif ?>
 
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
@@ -184,7 +189,7 @@
 		<?php if (!count($followers)): ?>
 
 		    <div class="callout panel text-center">
-		        <h2><?php echo $user_info->username; ?> must be an antisocial beast</h2>
+		        <h2><?php echo $user_info->username; ?> must be an antisocial beast!</h2>
 		    </div>
 
 		<?php else: ?>
@@ -195,7 +200,7 @@
 		            <div class="thumbnail">
 		                <a href="<?php echo $this->url->get("/user/" . $follower_info->id . "/" . $this->tag->friendlyTitle($follower_info->username, "-")); ?>">
 		                <img src="http://www.gravatar.com/avatar/<?php
-		                 echo md5(strtolower(trim($follower_info->email))); ?>?s=280">
+		                 echo md5(strtolower(trim($follower_info->email))); ?>?s=280&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
 		                </a>
 		                <div class="caption text-center BarnieFonte">
 		                    <h3 style="font-size: 1.5em;" class=""><?php echo $follower_info->username; ?></h3>
@@ -236,7 +241,7 @@
 		                <a href="<?php echo $this->url->get("/user/" . $f->users->id . "/" .
 		            $this->tag->friendlyTitle($f->users->username, "-")); ?>">
 		                <img src="http://www.gravatar.com/avatar/<?php
-		                echo md5(strtolower(trim($f->users->email))); ?>?s=280">
+		                echo md5(strtolower(trim($f->users->email))); ?>?s=280&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
 		                </a>
 		                <div class="caption text-center BarnieFonte">
 		                    <h3 style="font-size: 1.5em;" class=""><?php echo $f->users->username; ?></h3>

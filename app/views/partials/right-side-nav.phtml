@@ -10,7 +10,7 @@
 				<img height="96" width="96"
 				     src="http://www.gravatar.com/avatar/<?php
 					     echo md5(strtolower(trim(Users::findFirst
-					     ($this->session->get("auth")["id"])->email)));?>?s=96">
+					     ($this->session->get("auth")["id"])->email)));?>?s=96&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
 			</a>
 		</li>
 		<br/><br/>

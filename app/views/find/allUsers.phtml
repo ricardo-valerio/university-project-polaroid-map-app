@@ -17,7 +17,7 @@
 		            <a href="<?php echo $this->url->get("/user/" . $item->id . "/" .
 		        $this->tag->friendlyTitle($item->username, "-")); ?>">
 		            <img src="http://www.gravatar.com/avatar/<?php
-		            echo md5(strtolower(trim($item->email))); ?>?s=280">
+		            echo md5(strtolower(trim($item->email))); ?>?s=280&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>">
 		            </a>
 		            <div class="caption text-center BarnieFonte">
 		                <h3 style="font-size: 1.5em;" class=""><?php echo $item->username; ?></h3>

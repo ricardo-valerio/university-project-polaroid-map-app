@@ -37,7 +37,7 @@ class AjaxController extends ControllerBase
 					$data["users"][] = array(
 						"id"       => $user->id,
 						"username" => $this->tag->friendlyTitle($user->username, "-"),
-						"avatar"   => "http://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))),
+						"avatar"   => "http://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))). "?s=100&d=".urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png") ,
 						"country"  => strtolower($user->country)
 					);
 				}

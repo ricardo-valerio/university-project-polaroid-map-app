@@ -6,7 +6,7 @@
 			<a href="<?php echo $this->url->get("/user/" .
 				$polaroid_info->users->id . "/" .
 				$polaroid_info->users->username); ?>">
-				<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_info->users->email))); ?>?s=40"
+				<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($polaroid_info->users->email))); ?>?s=40&d=<?php echo urlencode("http://polaroid-map-app.t.proxylocal.com/polaroid-map-app/img/misc/monster.png");?>"
 					alt="<?php echo $polaroid_info->users->username; ?> photo.."/>
 			</a>
 			<a href="<?php echo $this->url->get("/user/" .
