@@ -4,19 +4,19 @@ university project :mortar_board:
 
 ScreenShots
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/0.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/0.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/1.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/1.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/2.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/2.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/3.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/3.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/4.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/4.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/5.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/5.png)
 
-![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/screenshots/6.png)
+![Rv](https://raw.githubusercontent.com/rzZzv/university-project-polaroid-map-app/master/screenshots/6.png)
 
 ---
 
